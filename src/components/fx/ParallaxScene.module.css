@@ -1,0 +1,25 @@
+/* Module partagé ParallaxScene + ParallaxLayer (Immersion v2.1). */
+
+.scene {
+  position: relative;
+}
+
+/* Calque du flux : wrapper transform DÉDIÉ — jamais fusionné avec un élément
+   qui anime déjà son transform (TiltCard, EnterRise…) : les emboîter DANS le
+   layer. Classe volontairement vide : c'est le crochet du will-change. */
+.layer {
+}
+
+/* Calque image en cadre overflow:hidden (mode inset) : remplit le cadre, la
+   sur-échelle calculée (insetScale) absorbe tout le débattement. */
+.inset {
+  position: absolute;
+  inset: 0;
+}
+
+/* Discipline chap. 8 : will-change armé uniquement quand la scène approche
+   du viewport (IntersectionObserver ±160px), relâché sitôt sortie. */
+.scene[data-active="true"] .layer,
+.scene[data-active="true"] .inset {
+  will-change: transform;
+}

@@ -1,0 +1,104 @@
+/* PAS de shell composé ici : pas de padding-inline sur la section (le
+   StickyScrollReveal gère le sien) et pas d'overflow-hidden (casserait le
+   position:sticky). */
+
+.section {
+  position: relative;
+  padding-block: 6rem;
+}
+
+.heading {
+  position: relative;
+  padding-inline: 1.5rem;
+}
+
+.desktop {
+  display: none;
+}
+
+.mobile {
+  margin-inline: auto;
+  margin-top: 3.5rem;
+  max-width: 36rem;
+  padding-inline: 1.5rem;
+}
+
+.panel {
+  position: relative;
+  display: flex;
+  height: 20rem;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.stepContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  text-align: center;
+}
+
+.neural {
+  opacity: 0.4;
+}
+
+.stepIcon {
+  position: relative;
+  width: 4rem;
+  height: 4rem;
+}
+
+/* Un hue par étape — halos dérivés des tokens fx (filter statique, jamais animé). */
+.hueCyan {
+  color: var(--color-fx-cyan);
+  filter: drop-shadow(0 0 24px color-mix(in srgb, var(--color-fx-cyan) 70%, transparent));
+}
+
+.hueHot {
+  color: var(--color-accent-hot);
+  filter: drop-shadow(0 0 24px color-mix(in srgb, var(--color-accent-hot) 70%, transparent));
+}
+
+.hueViolet {
+  color: var(--color-fx-violet);
+  filter: drop-shadow(0 0 24px color-mix(in srgb, var(--color-fx-violet) 70%, transparent));
+}
+
+.huePink {
+  color: var(--color-fx-pink);
+  filter: drop-shadow(0 0 24px color-mix(in srgb, var(--color-fx-pink) 70%, transparent));
+}
+
+.stepTitle {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.stepCount {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  color: var(--color-ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-block: 8rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .desktop {
+    display: block;
+  }
+
+  .mobile {
+    display: none;
+  }
+}

@@ -1,0 +1,11 @@
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--glass-stroke);
+  background: var(--glass-fill);
+  padding: 0.375rem 1rem;
+  font-size: 0.875rem;
+  color: var(--color-ink-muted);
+}

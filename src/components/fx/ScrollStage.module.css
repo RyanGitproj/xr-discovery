@@ -1,0 +1,38 @@
+/* Scène épinglée (Immersion v2.1) : le wrapper donne la longueur du récit,
+   l'écran sticky le joue. */
+
+.wrapper {
+  position: relative;
+  height: calc(var(--stage-screens) * 100svh);
+}
+
+/* JAMAIS de contain/overflow sur .wrapper : un containment ancêtre tue le
+   position:sticky (piège documenté dans StickyScrollReveal). Le containment
+   vit ici, sur l'écran épinglé — et AUCUN backdrop-filter à l'intérieur
+   (contain:paint forme une backdrop root). */
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  contain: layout paint;
+}
+
+/* Calque plein écran, contenu centré. Décoratif par défaut : ne capte rien. */
+.layer {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+/* Calque porteur (texte, CTA) : interactif. */
+.interactive {
+  pointer-events: auto;
+}
+
+/* Discipline chap. 8 : will-change armé près du viewport uniquement. */
+.wrapper[data-active="true"] .layer {
+  will-change: transform, opacity;
+}

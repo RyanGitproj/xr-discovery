@@ -1,0 +1,21 @@
+.button {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-cta);
+  border: 1px solid var(--glass-stroke);
+  background: var(--glass-fill);
+  padding: 0.75rem 1.75rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  transition:
+    color var(--dur-fast),
+    border-color var(--dur-fast);
+}
+
+.button:hover {
+  border-color: var(--edge-lit);
+  color: var(--color-accent-hot);
+}

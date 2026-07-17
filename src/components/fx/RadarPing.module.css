@@ -1,0 +1,68 @@
+/* Point capitale + ondes radar. Animations uniquement sous no-preference :
+   l'état de base EST l'état final (cœur allumé, glow statique, ondes
+   invisibles) — fallback prefers-reduced-motion par construction. Tout est
+   composité (opacity + scale sur des éléments HTML). */
+
+.ping {
+  pointer-events: none;
+  position: absolute;
+  translate: -50% -50%;
+}
+
+.core {
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-fx-cyan);
+  box-shadow: 0 0 14px 4px color-mix(in srgb, var(--color-fx-cyan) 55%, transparent);
+}
+
+.wave {
+  position: absolute;
+  inset: -0.7rem;
+  border: 1px solid var(--color-fx-cyan);
+  border-radius: var(--radius-pill);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .core {
+    animation: ping-in var(--dur-med) var(--ease-out) both;
+    animation-delay: var(--ping-delay, 0s);
+  }
+
+  .wave {
+    animation: ping-wave 2.8s ease-out infinite;
+    animation-delay: calc(var(--ping-delay, 0s) + 0.2s);
+  }
+
+  .wave2 {
+    animation-delay: calc(var(--ping-delay, 0s) + 1.6s);
+  }
+
+  @keyframes ping-in {
+    from {
+      opacity: 0;
+      scale: 0.4;
+    }
+
+    to {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  @keyframes ping-wave {
+    0% {
+      opacity: 0.7;
+      scale: 0.25;
+    }
+
+    70%,
+    100% {
+      opacity: 0;
+      scale: 1.8;
+    }
+  }
+}

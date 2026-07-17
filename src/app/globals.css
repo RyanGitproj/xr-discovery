@@ -1,0 +1,238 @@
+/* v2 — CSS natif intégral (Tailwind retiré). Ordre de cascade explicite :
+   reset < base < components (déclaré dans layers.css, importé en PREMIER —
+   voir son commentaire) ; les CSS Modules, non layerisés, gagnent toujours
+   sur les couches (ils surchargent les primitives fx, ex. rayon de la
+   navbar sur GlassPanel). */
+@import "./layers.css";
+@import "../components/fx/glass-panel.css" layer(components);
+@import "../components/fx/beam-border.css" layer(components);
+@import "../components/fx/fx-ambient.css" layer(components);
+@import "../components/fx/fx-cursor.css" layer(components);
+@import "../components/fx/fx-neon.css" layer(components);
+
+:root {
+  --color-bg-deep: #050a18;
+  --color-bg-raised: #0b1730;
+  --color-ink: #f4f8ff;
+  --color-ink-muted: #9fb4d4;
+  --color-accent: #3aa8ff;
+  --color-accent-hot: #66c2ff;
+  --color-accent-deep: #1b6fd6;
+
+  /* Erreurs formulaire — lisible sur bg-deep sans hurler. */
+  --color-danger: #fca5a5;
+
+  /* Palette néon v1.2 — signature « comète » cyan → violet → rose */
+  --color-fx-cyan: #18ccfc;
+  --color-fx-indigo: #6344f5;
+  --color-fx-violet: #ae48ff;
+  --color-fx-pink: #ff4ecd;
+
+  --radius-card: 20px;
+  --radius-cta: 14px; /* boutons : rectangle arrondi — la pilule fait déborder beam/glow */
+  --radius-pill: 999px;
+  /* Langage de formes v2 : radii intentionnels variés (anti « même radius
+     partout ») — appliqués par overrides locaux de --radius-card. */
+  --radius-soft: 28px;
+  --radius-tight: 12px;
+
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  /* Verre sombre quasi incolore : le décor reste visible et est flouté.
+     Opacité basse assumée — c'est le fond liquide flouté qui fait le verre. */
+  --glass-fill: rgba(9, 19, 40, 0.17);
+  /* Voile blanc TRÈS faible en dégradé (jamais un aplat large) + bordure
+     neutre 1px : la recette iOS 26 sur fond sombre. */
+  --glass-tint: rgba(255, 255, 255, 0.06);
+  --glass-edge: rgba(255, 255, 255, 0.16);
+  --glass-stroke: rgba(122, 180, 255, 0.28);
+  --edge-lit: rgba(58, 168, 255, 0.65);
+  --glass-blur: 12px; /* plage DA 12-20px — 12 retenu après mesure FPS (chap. 8) */
+  --glow-soft: 0 0 40px rgba(58, 168, 255, 0.3);
+  --glow-strong: 0 0 80px rgba(58, 168, 255, 0.45);
+  /* Halo du pack mis en avant (remplace le box-shadow du verre, arête incluse). */
+  --glow-featured:
+    0 0 60px rgba(99, 68, 245, 0.35),
+    0 0 100px rgba(255, 78, 205, 0.18),
+    inset 0 1px 0 rgba(122, 180, 255, 0.14);
+
+  --dur-fast: 180ms; /* micro-interactions */
+  --dur-med: 420ms; /* reveals            */
+  --dur-slow: 1200ms; /* focal, une fois    */
+  --dur-ambient: 22s; /* nappes de fond     */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset minimal (remplace le preflight Tailwind) : uniquement ce sur quoi
+   le code s'appuie — marges/paddings à zéro, border-style par défaut,
+   médias en block, titres neutres, listes et liens nus. */
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    border: 0 solid;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    line-height: 1.5;
+  }
+
+  img,
+  svg,
+  video,
+  canvas,
+  picture {
+    display: block;
+    max-width: 100%;
+  }
+
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+    background: transparent;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  ol,
+  ul {
+    list-style: none;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  summary {
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scrollbar-color: var(--color-accent-deep) var(--color-bg-deep);
+  }
+
+  /* Lenis actif (classe `lenis` posée sur <html> à l'instanciation — la
+     variante lenis-smooth n'existe que PENDANT un défilement) : le
+     scroll-behavior natif doit rester auto, sinon les écritures de position
+     de Lenis seraient re-lissées par le navigateur (double animation) et les
+     ancres perdraient leur saut déterministe (choix a11y : skip-link et
+     navigation clavier atterrissent instantanément). Sans JS, sans Lenis ou
+     sous reduced-motion, le smooth natif est conservé. */
+  @media (prefers-reduced-motion: no-preference) {
+    html:not(.lenis) {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: var(--color-bg-deep);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--color-accent-deep);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* PAS de contain:paint ici : le paint containment forme une backdrop root
+     (Chromium) et le backdrop-filter des cards ne verrait plus le fond
+     liquide global — le verre iOS deviendrait opaque. Le clipping visuel est
+     déjà assuré par overflow-hidden sur les sections. */
+  .fx-section {
+    contain: layout;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Utilitaires génériques conservés après le retrait de Tailwind —
+     utilisés par les primitives fx (TextGenerate, NumberTicker). */
+  .block {
+    display: block;
+  }
+
+  .inline-block {
+    display: inline-block;
+  }
+
+  .inline-flex {
+    display: inline-flex;
+  }
+
+  .will-change-transform {
+    will-change: transform;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Lien d'évitement : hors écran tant qu'il n'a pas le focus clavier. */
+  .skip-link {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 100;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius-pill);
+    background: var(--color-bg-raised);
+    transform: translateY(calc(-100% - 1.5rem));
+  }
+
+  .skip-link:focus-visible {
+    transform: none;
+  }
+}

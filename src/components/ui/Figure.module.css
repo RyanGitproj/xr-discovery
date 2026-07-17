@@ -1,0 +1,75 @@
+.figure {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--glass-stroke);
+  background: var(--glass-fill);
+}
+
+/* Variante intégrée en tête de card : la card porte déjà cadre et rayon. */
+.flush {
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid var(--glass-stroke);
+}
+
+/* Remplit un parent positionné (cadres à ratio imposé, découpes). */
+.fill {
+  position: absolute;
+  inset: 0;
+}
+
+.img {
+  object-fit: cover;
+}
+
+/* Signature « scan holographique » (né sur /fx-lab) : au survol, une nappe
+   de lumière balaie la photo — chaque visuel est une projection, cohérent
+   avec la scène du hero. Transform + opacity uniquement ; coupé sur tactile
+   (Famille B) et sous prefers-reduced-motion. */
+.figure::after {
+  content: "";
+  position: absolute;
+  top: -45%;
+  right: 0;
+  left: 0;
+  height: 45%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in srgb, var(--color-fx-cyan) 18%, transparent) 35%,
+    color-mix(in srgb, var(--color-ink) 26%, transparent) 50%,
+    color-mix(in srgb, var(--color-fx-cyan) 18%, transparent) 65%,
+    transparent
+  );
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .figure {
+    transition: border-color var(--dur-fast);
+  }
+
+  .figure:hover {
+    border-color: var(--edge-lit);
+  }
+
+  .figure:hover::after {
+    animation: scan-sweep 750ms var(--ease-out);
+  }
+}
+
+/* 325 % de sa propre hauteur (45 % du cadre) : la nappe traverse tout le
+   cadre, de -45 % à ~101 %. */
+@keyframes scan-sweep {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(325%);
+    opacity: 1;
+  }
+}

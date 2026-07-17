@@ -1,0 +1,68 @@
+.main {
+  position: relative;
+  display: flex;
+  min-height: 100svh;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding-inline: 1.5rem;
+}
+
+.panel {
+  position: relative;
+  max-width: 36rem;
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.icon {
+  margin-inline: auto;
+  width: 3.5rem;
+  height: 3.5rem;
+  color: var(--color-accent-hot);
+  filter: drop-shadow(0 0 24px color-mix(in srgb, var(--color-accent-hot) 70%, transparent));
+}
+
+.title {
+  margin-top: 1.5rem;
+  font-family: var(--font-display);
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.body {
+  margin-top: 1rem;
+  line-height: 1.625;
+  color: var(--color-ink-muted);
+}
+
+.actions {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.back {
+  font-size: 0.875rem;
+  color: var(--color-ink-muted);
+  transition: color var(--dur-fast);
+}
+
+.back:hover {
+  color: var(--color-ink);
+}
+
+@media (min-width: 640px) {
+  .actions {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 768px) {
+  .panel {
+    padding: 3.5rem;
+  }
+}

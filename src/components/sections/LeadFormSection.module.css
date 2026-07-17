@@ -1,0 +1,21 @@
+.section {
+  composes: shell clipped from "./section.module.css";
+}
+
+.container {
+  composes: container w3xl from "./section.module.css";
+}
+
+.formWrap {
+  margin-top: 3rem;
+}
+
+.panel {
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .panel {
+    padding: 2.5rem;
+  }
+}

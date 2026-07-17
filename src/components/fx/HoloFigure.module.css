@@ -1,0 +1,268 @@
+/* Buste holographique. État de base (hors media query) = état final :
+   figure semi-transparente aux couleurs d'origine, scanlines statiques,
+   split RGB permanent léger — fallback prefers-reduced-motion par
+   construction. Les filter/mask/blend sont STATIQUES (rasterisés une
+   fois) : les animations ne touchent que opacity/translate, les couches
+   restent compositées. */
+
+.root {
+  --holo-src: url("/images/hologramme.webp");
+
+  /* Durée partagée par les keyframes du glitch — doit rester commune
+     pour la synchro ; surchargeable (démo accélérée sur /fx-lab). */
+  --holo-glitch-dur: 3s;
+
+  position: relative;
+  aspect-ratio: 408 / 429;
+  pointer-events: none;
+}
+
+.inner {
+  position: absolute;
+  inset: 0;
+
+  /* Fond enchaîné dans la lumière : la coupe nette du bas du buste (image
+     source) se dissout — l'hologramme semble émerger du faisceau. Masque
+     statique, rasterisé une fois (le float composité ne repeint pas). */
+  mask: linear-gradient(to bottom, black 80%, transparent 98%);
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  background: var(--holo-src) center / contain no-repeat;
+}
+
+/* Couleurs d'origine de l'image conservées (choix DA : l'orange néon fait
+   le point chaud de la page face à la scène cyan). Seuls les fantômes du
+   glitch sont teintés — c'est l'aberration chromatique du split RGB. */
+.figure {
+  composes: layer;
+  opacity: 0.92;
+}
+
+/* Split RGB permanent léger (0.1) : aberration chromatique constante qui
+   flambe modérément pendant l'accroc. */
+.ghostCyan {
+  composes: layer;
+  filter: sepia(1) saturate(3) hue-rotate(160deg) brightness(1.5);
+  translate: -3px 1px;
+  opacity: 0.1;
+}
+
+/* Rose : depuis la base sepia (~40°), +250° → magenta (~290°). */
+.ghostPink {
+  composes: layer;
+  filter: sepia(1) saturate(3) hue-rotate(250deg) brightness(1.3);
+  translate: 3px -1px;
+  opacity: 0.1;
+}
+
+/* Déchirures : bandes horizontales de la figure (clip-path statique) qui
+   sautent latéralement pendant l'accroc — invisibles le reste du temps. */
+.sliceHigh {
+  composes: layer;
+  clip-path: inset(18% 0 66% 0);
+  opacity: 0;
+}
+
+.sliceLow {
+  composes: layer;
+  clip-path: inset(58% 0 26% 0);
+  opacity: 0;
+}
+
+/* Scanlines découpées par l'alpha de la figure : elles épousent le buste,
+   pas sa boîte. Sans support du mask : aucune scanline plutôt qu'un
+   rectangle de lignes flottant autour du personnage. */
+@supports (mask-size: contain) {
+  .scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--color-fx-cyan) 14%, transparent) 0 1px,
+      transparent 1px 4px
+    );
+    mix-blend-mode: screen;
+    mask: var(--holo-src) center / contain no-repeat;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Accroc fréquent, marqué sans excès : fenêtre 88→98 % de 3 s = 300 ms
+     toutes les ~2,6 s. steps(1, end) = coupures franches (esthétique
+     glitch), aucune interpolation hors fenêtre. */
+  .figure {
+    animation: holo-glitch var(--holo-glitch-dur) steps(1, end) infinite;
+  }
+
+  .ghostCyan {
+    animation: holo-ghost-cyan var(--holo-glitch-dur) steps(1, end) infinite;
+  }
+
+  .ghostPink {
+    animation: holo-ghost-pink var(--holo-glitch-dur) steps(1, end) infinite;
+  }
+
+  .sliceHigh {
+    animation: holo-slice-high var(--holo-glitch-dur) steps(1, end) infinite;
+  }
+
+  .sliceLow {
+    animation: holo-slice-low var(--holo-glitch-dur) steps(1, end) infinite;
+  }
+
+  @keyframes holo-glitch {
+    0%,
+    87.9% {
+      opacity: 0.92;
+      translate: 0 0;
+    }
+
+    88% {
+      opacity: 0.55;
+      translate: -3px 1px;
+    }
+
+    90% {
+      opacity: 0.8;
+      translate: 2px 0;
+    }
+
+    92% {
+      opacity: 0.45;
+      translate: -2px -1px;
+    }
+
+    94% {
+      opacity: 0.75;
+      translate: 3px 1px;
+    }
+
+    96% {
+      opacity: 0.6;
+      translate: -1px 0;
+    }
+
+    98%,
+    100% {
+      opacity: 0.92;
+      translate: 0 0;
+    }
+  }
+
+  /* Fantômes : split permanent léger qui flambe modérément pendant
+     l'accroc — opacité seule, l'offset est la translate statique. */
+  @keyframes holo-ghost-cyan {
+    0%,
+    87.9%,
+    98%,
+    100% {
+      opacity: 0.1;
+    }
+
+    88% {
+      opacity: 0.4;
+    }
+
+    90.5% {
+      opacity: 0.15;
+    }
+
+    92.5% {
+      opacity: 0.38;
+    }
+
+    95.5% {
+      opacity: 0.18;
+    }
+  }
+
+  @keyframes holo-ghost-pink {
+    0%,
+    88.4%,
+    98.5%,
+    100% {
+      opacity: 0.1;
+    }
+
+    88.5% {
+      opacity: 0.38;
+    }
+
+    91% {
+      opacity: 0.14;
+    }
+
+    93% {
+      opacity: 0.4;
+    }
+
+    96% {
+      opacity: 0.16;
+    }
+  }
+
+  /* Déchirures : les bandes sautent latéralement en sens opposés, en
+     semi-transparence pour rester élégantes. */
+  @keyframes holo-slice-high {
+    0%,
+    87.9%,
+    96.5%,
+    100% {
+      opacity: 0;
+      translate: 0 0;
+    }
+
+    88% {
+      opacity: 0.75;
+      translate: 5px 0;
+    }
+
+    90.5% {
+      opacity: 0.75;
+      translate: -4px 0;
+    }
+
+    92.5% {
+      opacity: 0;
+      translate: 0 0;
+    }
+
+    94% {
+      opacity: 0.75;
+      translate: 6px 0;
+    }
+  }
+
+  @keyframes holo-slice-low {
+    0%,
+    88.4%,
+    97%,
+    100% {
+      opacity: 0;
+      translate: 0 0;
+    }
+
+    88.5% {
+      opacity: 0.75;
+      translate: -5px 0;
+    }
+
+    91% {
+      opacity: 0.75;
+      translate: 4px 0;
+    }
+
+    93% {
+      opacity: 0;
+      translate: 0 0;
+    }
+
+    94.5% {
+      opacity: 0.7;
+      translate: -4px 0;
+    }
+  }
+}

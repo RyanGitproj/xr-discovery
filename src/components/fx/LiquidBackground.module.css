@@ -1,0 +1,35 @@
+/* Fond liquide global (v2) — monté une seule fois dans le layout, fixé
+   derrière tout le site. Le dégradé CSS statique sert à la fois de premier
+   rendu (avant l'hydratation), de fallback sans WebGL et d'état
+   prefers-reduced-motion : la page est complète sans le canvas. */
+
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 14% 6%, rgba(58, 168, 255, 0.14), transparent 60%),
+    radial-gradient(ellipse 70% 55% at 88% 24%, rgba(99, 68, 245, 0.13), transparent 62%),
+    radial-gradient(ellipse 75% 60% at 46% 96%, rgba(255, 78, 205, 0.09), transparent 65%),
+    var(--color-bg-deep);
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1200ms var(--ease-out);
+}
+
+.isLive {
+  opacity: 1;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .canvas {
+    display: none;
+  }
+}

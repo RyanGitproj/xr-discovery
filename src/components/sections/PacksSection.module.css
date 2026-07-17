@@ -1,0 +1,142 @@
+.section {
+  composes: shell clipped from "./section.module.css";
+}
+
+.container {
+  composes: container w6xl from "./section.module.css";
+}
+
+.kicker {
+  composes: kicker from "./section.module.css";
+}
+
+.title {
+  margin-top: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.875rem;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+.subtitle {
+  margin-inline: auto;
+  margin-top: 1rem;
+  max-width: 42rem;
+  line-height: 1.625;
+  color: var(--color-ink-muted);
+}
+
+.grid {
+  margin-top: 4rem;
+  display: grid;
+  align-items: stretch;
+  gap: 1.5rem;
+}
+
+.tilt {
+  height: 100%;
+  border-radius: var(--radius-card);
+}
+
+.beam {
+  height: 100%;
+}
+
+.panel {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  padding: 1.75rem;
+}
+
+/* Remplace le box-shadow du verre (arête refusionnée dans le token). */
+.panelFeatured {
+  box-shadow: var(--glow-featured);
+}
+
+.badge {
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  translate: -50% 0;
+  border-color: color-mix(in srgb, var(--color-fx-pink) 60%, transparent);
+  font-family: var(--font-display);
+  color: var(--color-fx-pink);
+}
+
+.figure {
+  margin-bottom: 1.5rem;
+}
+
+.packName {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.tagline {
+  margin-top: 0.375rem;
+  font-size: 0.875rem;
+  color: var(--color-ink-muted);
+}
+
+.priceBlock {
+  margin-top: 1.5rem;
+}
+
+.pricePrefix {
+  font-size: 0.875rem;
+  color: var(--color-ink-muted);
+}
+
+.price {
+  margin-top: 0.25rem;
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.priceRegular {
+  color: var(--color-accent-hot);
+}
+
+.features {
+  margin-top: 1.5rem;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  font-size: 0.875rem;
+  line-height: 1.375;
+}
+
+.check {
+  margin-top: 0.125rem;
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.cta {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* translate (pas transform) : coexiste avec le transform animé du Reveal. */
+  .itemFeatured {
+    translate: 0 -0.75rem;
+  }
+}

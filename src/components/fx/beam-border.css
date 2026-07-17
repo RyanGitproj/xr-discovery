@@ -1,0 +1,53 @@
+/* BeamBorder — trait lumineux qui parcourt le contour (zéro JS, chap. 4.1). */
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.beam-border {
+  position: relative;
+  border-radius: var(--radius-card);
+}
+
+.beam-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1.5px; /* épaisseur du trait */
+  border-radius: inherit;
+  /* comète multicolore : cyan → violet → rose (signature v1.2) */
+  background: conic-gradient(
+    from var(--angle),
+    transparent 0deg 285deg,
+    var(--color-fx-cyan) 312deg,
+    var(--color-fx-violet) 336deg,
+    var(--color-fx-pink) 350deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude; /* ne garde que l'anneau */
+  animation: beam-rotate 6s linear infinite;
+  pointer-events: none;
+}
+
+.beam-border--slow::before {
+  animation-duration: 10s;
+}
+
+@keyframes beam-rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .beam-border::before {
+    animation: none;
+    background: var(--glass-stroke); /* liseré statique */
+  }
+}

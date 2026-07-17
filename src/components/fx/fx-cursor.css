@@ -1,0 +1,96 @@
+/* Famille B — effets curseur (chap. 4). Variables CSS pilotées en rAF,
+   zéro re-render React. Tout est inerte sur pointer: coarse (usePointerFine). */
+
+/* ---- GlowCursor : halo global qui suit le curseur ---- */
+
+.glow-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 5;
+  background: radial-gradient(
+    circle,
+    rgba(58, 168, 255, 0.12),
+    rgba(255, 78, 205, 0.05) 45%,
+    transparent 70%
+  );
+}
+
+/* ---- Spotlight : halo radial dans une zone délimitée ---- */
+
+.spotlight-zone {
+  position: relative;
+}
+
+.spotlight-zone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 40%),
+    rgba(58, 168, 255, 0.14),
+    transparent 65%
+  );
+  opacity: var(--spot-o, 0);
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+/* ---- GlowReactive : bordure qui s'illumine à l'approche ---- */
+
+.glow-reactive {
+  position: relative;
+}
+
+.glow-reactive::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: radial-gradient(
+    240px circle at var(--mx, 50%) var(--my, 50%),
+    var(--color-fx-cyan),
+    rgba(174, 72, 255, 0.4) 40%,
+    rgba(255, 78, 205, 0.18) 58%,
+    transparent 72%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: var(--glow-o, 0);
+  transition: opacity 240ms var(--ease-out);
+  pointer-events: none;
+}
+
+/* ---- TiltCard : reflet qui glisse sous le curseur ---- */
+
+.tilt-sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    360px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.09),
+    rgba(24, 204, 252, 0.06) 32%,
+    rgba(255, 78, 205, 0.05) 55%,
+    transparent 68%
+  );
+  opacity: var(--sheen-o, 0);
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+
+/* ---- TiltCard : racine 3D (ex-utilitaires Tailwind) ---- */
+
+.tilt-root {
+  position: relative;
+  transform-style: preserve-3d;
+}

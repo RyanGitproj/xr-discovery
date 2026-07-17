@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1250">
+  <defs>
+    <radialGradient id="nebA" cx=".3" cy=".35" r=".5">
+      <stop offset="0" stop-color="#18ccfc" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#18ccfc" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nebB" cx=".72" cy=".45" r=".5">
+      <stop offset="0" stop-color="#ae48ff" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#ae48ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nebC" cx=".55" cy=".8" r=".45">
+      <stop offset="0" stop-color="#ff4ecd" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#ff4ecd" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="2000" height="1250" fill="#050a18"/>
+  <rect width="2000" height="1250" fill="url(#nebA)"/>
+  <rect width="2000" height="1250" fill="url(#nebB)"/>
+  <rect width="2000" height="1250" fill="url(#nebC)"/>
+  <g stroke="#3aa8ff" opacity=".22">
+    <path d="M0 1050 L2000 1050" stroke-width="2"/>
+    <path d="M0 1120 L2000 1120" stroke-width="2"/>
+    <path d="M0 1200 L2000 1200" stroke-width="2"/>
+    <path d="M200 1250 L560 960 M600 1250 L820 960 M1000 1250 L1000 960 M1400 1250 L1180 960 M1800 1250 L1440 960" stroke-width="2"/>
+  </g>
+  <g fill="#f4f8ff">
+    <circle cx="240" cy="220" r="4"/><circle cx="520" cy="130" r="3"/>
+    <circle cx="860" cy="300" r="3.5"/><circle cx="1240" cy="160" r="4"/>
+    <circle cx="1580" cy="260" r="3"/><circle cx="1820" cy="140" r="3.5"/>
+    <circle cx="420" cy="520" r="3"/><circle cx="1710" cy="560" r="4"/>
+  </g>
+  <g fill="#18ccfc"><circle cx="700" cy="180" r="4"/><circle cx="1440" cy="420" r="4"/></g>
+  <g fill="#ff4ecd"><circle cx="1060" cy="520" r="4"/><circle cx="330" cy="380" r="3.5"/></g>
+</svg>

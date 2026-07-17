@@ -1,0 +1,55 @@
+/* Transparent glass: the background remains visible and is blurred.
+   No white gradient or sheen is layered over the surface. */
+.glass-panel {
+  position: relative;
+  isolation: isolate;
+  border-radius: var(--radius-card);
+  /* Teinte blanche en dégradé court (haut du panneau uniquement) sur le
+     fill sombre : la lumière « pose » sur le verre sans voiler le décor. */
+  background:
+    linear-gradient(180deg, var(--glass-tint), transparent 45%),
+    var(--glass-fill);
+  /* Saturation poussée : les couleurs floutées « chantent » sous le verre (iOS). */
+  backdrop-filter: blur(var(--glass-blur)) saturate(170%);
+  border: 1px solid var(--glass-edge);
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 0 0 1px rgba(58, 168, 255, 0.04);
+}
+
+.glass-panel--thin {
+  --glass-blur: 12px;
+}
+
+/* Legacy variant: surface cards now keep the same translucent blur. */
+.glass-panel--surface {
+  background: var(--glass-fill);
+}
+
+/* Optional refraction for large feature panels on Chromium. */
+@supports (backdrop-filter: url(#liquid-refract)) {
+  .glass-panel--liquid {
+    backdrop-filter: blur(3px) url(#liquid-refract) saturate(140%);
+  }
+}
+
+/* Release the expensive blur only when a card is outside the viewport. */
+.glass-panel.is-offscreen {
+  backdrop-filter: none;
+  background: rgba(9, 19, 40, 0.5);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-panel,
+  .glass-panel--liquid {
+    background: rgb(15, 24, 44);
+    backdrop-filter: none;
+  }
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-panel {
+    background: rgba(11, 23, 48, 0.92);
+  }
+}

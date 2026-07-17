@@ -1,0 +1,47 @@
+/* Faisceau apex→hologramme. État de base = déployé, opacité posée
+   (fallback prefers-reduced-motion) ; jaillissement + respiration sous
+   no-preference uniquement. Transform + opacity sur div HTML : composité. */
+
+.beam {
+  pointer-events: none;
+  position: absolute;
+  transform-origin: 50% 100%;
+  opacity: 0.55;
+  background: linear-gradient(
+    0deg,
+    color-mix(in srgb, var(--color-fx-cyan) 32%, transparent),
+    color-mix(in srgb, var(--color-fx-violet) 10%, transparent) 55%,
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .beam {
+    animation:
+      beam-grow 0.45s var(--ease-out) both,
+      beam-pulse 6s ease-in-out infinite alternate;
+    animation-delay: var(--beam-delay, 0s), calc(var(--beam-delay, 0s) + 0.45s);
+  }
+
+  @keyframes beam-grow {
+    from {
+      opacity: 0.9;
+      transform: scaleY(0);
+    }
+
+    to {
+      opacity: 0.75;
+      transform: scaleY(1);
+    }
+  }
+
+  @keyframes beam-pulse {
+    from {
+      opacity: 0.75;
+    }
+
+    to {
+      opacity: 0.4;
+    }
+  }
+}

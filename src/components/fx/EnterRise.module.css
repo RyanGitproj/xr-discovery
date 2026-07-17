@@ -1,0 +1,21 @@
+/* Apparition chronométrée. Hors media query, aucun style : l'état de base
+   EST l'état final (fallback prefers-reduced-motion par construction). */
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: enter-rise var(--dur-med) var(--ease-out) both;
+    animation-delay: var(--rise-delay, 0s);
+  }
+
+  @keyframes enter-rise {
+    from {
+      opacity: 0;
+      translate: 0 14px;
+    }
+
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+}

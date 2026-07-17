@@ -1,0 +1,7 @@
+/* Ordre des couches — DOIT être la première déclaration CSS du bundle.
+   Importé en tête de globals.css : les bundlers hoistent les @import au-dessus
+   des règles (dont un @layer statement inline) ; or c'est la PREMIÈRE
+   occurrence d'un nom de couche qui fixe l'ordre. Sans ce fichier, les
+   imports fx déclareraient `components` en premier et le reset écraserait
+   leurs paddings/marges. */
+@layer reset, base, components;

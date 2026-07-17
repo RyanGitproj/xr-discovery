@@ -1,0 +1,59 @@
+.section {
+  border-block: 1px solid var(--glass-stroke);
+  background: color-mix(in srgb, var(--color-bg-raised) 40%, transparent);
+  padding-block: 1.5rem;
+}
+
+.list {
+  margin-inline: auto;
+  display: flex;
+  max-width: 72rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  column-gap: 2.5rem;
+  row-gap: 0.75rem;
+  padding-inline: 1.5rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  white-space: nowrap;
+  color: var(--color-ink-muted);
+}
+
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+/* Un hue par marqueur — halos dérivés des tokens fx. */
+.glowAccent {
+  color: var(--color-accent);
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-accent) 60%, transparent));
+}
+
+.glowPink {
+  color: var(--color-fx-pink);
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-fx-pink) 55%, transparent));
+}
+
+.glowViolet {
+  color: var(--color-fx-violet);
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-fx-violet) 55%, transparent));
+}
+
+.glowCyan {
+  color: var(--color-fx-cyan);
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-fx-cyan) 60%, transparent));
+}
+
+.glowHot {
+  color: var(--color-accent-hot);
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-accent-hot) 60%, transparent));
+}

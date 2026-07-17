@@ -1,0 +1,41 @@
+.root {
+  position: relative;
+}
+
+/* translate (pas transform) : holo-cone/holo-float animent le transform. */
+.cone {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  height: 60%;
+  width: 75%;
+  translate: -50% 0;
+}
+
+.emitter {
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  height: 0.375rem;
+  width: 6rem;
+  translate: -50% 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-fx-cyan);
+  opacity: 0.8;
+  box-shadow: 0 0 18px 5px color-mix(in srgb, var(--color-fx-cyan) 50%, transparent);
+}
+
+.float {
+  position: relative;
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+}
+
+.scanlines {
+  position: absolute;
+  inset: 22% 20%;
+  border-radius: 36px;
+}

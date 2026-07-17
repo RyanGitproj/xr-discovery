@@ -1,0 +1,102 @@
+/* Scène « plongée Quest 3 » (Immersion v2.1). */
+
+.section {
+  position: relative;
+  /* PAS d'overflow ici : un clip ancêtre tuerait le sticky du ScrollStage
+     (le clip vit sur l'écran épinglé, dans ScrollStage.module.css). */
+}
+
+/* L'écran épinglé reste transparent : le LiquidBackground global respire
+   derrière la scène — l'univers révélé s'y raccorde (bords fondus #050a18). */
+.stageBg {
+  background: transparent;
+}
+
+/* Calque texte d'intro : tiers supérieur, le casque occupe le centre. */
+.layerTop {
+  place-items: start center;
+  padding-top: 12svh;
+}
+
+.copy {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  padding-inline: 1.5rem;
+  text-align: center;
+}
+
+.kicker {
+  font-family: var(--font-display);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.body {
+  max-width: 34rem;
+  color: var(--color-ink-muted);
+  line-height: 1.625;
+}
+
+.revealTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.ctaRow {
+  margin-top: 0.75rem;
+}
+
+/* Calques images. */
+.imgFull {
+  object-fit: cover;
+}
+
+.imgHeadset {
+  width: min(60vw, 30rem);
+  height: auto;
+}
+
+.imgGlow {
+  width: min(50vw, 26rem);
+  height: auto;
+}
+
+/* Pill de permission gyroscope (iOS) — discrète, jamais une modale. */
+.gyroPill {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 10;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--glass-stroke);
+  background: color-mix(in srgb, var(--color-bg-raised) 80%, transparent);
+  padding: 0.5rem 1rem;
+  font-size: 0.8125rem;
+  color: var(--color-ink);
+}
+
+/* Fallback reduced-motion : toute la scène, à plat, hauteur naturelle. */
+.fallback {
+  display: grid;
+  justify-items: center;
+  gap: 2.5rem;
+  padding: 5rem 1.5rem;
+}
+
+.fallbackImg {
+  width: min(70vw, 26rem);
+  height: auto;
+}

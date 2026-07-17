@@ -1,0 +1,82 @@
+/* Morph de formation de la constellation Madagascar — uniquement la couche
+   position/apparition (transform + opacity). La « vie » du réseau (pulse,
+   comètes) reste portée par les classes globales neural-* de fx-neon.css,
+   déjà neutralisées sous prefers-reduced-motion. Les animations ci-dessous
+   ne sont déclarées que sous no-preference : hors media query, l'état de
+   base EST l'état final (île formée, liens visibles) — le fallback
+   reduced-motion existe par construction. */
+
+.field {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Chaîne de côte : plus lumineuse que le maillage de fond (.neural-link,
+   opacity 0.14) pour que la silhouette de l'île se lise. */
+.coast {
+  opacity: 0.32;
+}
+
+/* Points de côte : allumés en continu, pas de pulse (contrairement aux
+   .neural-node intérieurs) — silhouette stable, paint au repos. */
+.coastNode {
+  opacity: 0.85;
+}
+
+/* Hors écran (classe posée par IntersectionObserver, pattern GlassPanel) :
+   visibility coupe le paint/raster du SVG (mesuré : ~+8 ms/frame sinon,
+   même hors viewport), la pause fige les animations pour que le morph
+   reprenne où il en était au retour — le rootMargin de 160px rend la
+   réapparition invisible. */
+.field:global(.is-offscreen) {
+  visibility: hidden;
+}
+
+.field:global(.is-offscreen) * {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* --mada-form-end est injectée en inline par le composant (source de
+     vérité : projectionTimeline.ts, MADA_FORM_END_S). */
+
+  .dot {
+    animation: converge var(--dur-slow) var(--ease-out) both;
+    animation-delay: var(--m-delay, 0s);
+  }
+
+  .linksIn {
+    animation: fade-in var(--dur-med) var(--ease-out) both;
+    animation-delay: var(--mada-form-end, 1.7s);
+  }
+
+  .signalsIn {
+    animation: fade-in var(--dur-med) var(--ease-out) both;
+    animation-delay: calc(var(--mada-form-end, 1.7s) + 0.25s);
+  }
+
+  @keyframes converge {
+    from {
+      opacity: 0;
+      transform: translate(var(--sx, 0px), var(--sy, 0px));
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+}

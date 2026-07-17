@@ -1,0 +1,59 @@
+.stepTitle {
+  margin-top: 2rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  outline: none;
+}
+
+.fields {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.serverError {
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--color-danger);
+}
+
+.actions {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.actionsMain {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.back {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  border-radius: var(--radius-pill);
+  padding-inline: 1.25rem;
+  font-family: var(--font-display);
+  color: var(--color-ink-muted);
+  transition: color var(--dur-fast);
+}
+
+.back:hover {
+  color: var(--color-ink);
+}
+
+@media (min-width: 640px) {
+  .actions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .whatsapp {
+    margin-left: auto;
+  }
+}

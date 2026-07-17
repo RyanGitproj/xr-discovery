@@ -1,0 +1,63 @@
+.header {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 50;
+}
+
+/* La navbar est un verre pleine largeur : pas de rayon ni de bordures latérales. */
+.panel {
+  border-radius: 0;
+  border-inline: none;
+  border-top: none;
+}
+
+.bar {
+  margin-inline: auto;
+  display: flex;
+  max-width: 72rem;
+  height: 4rem;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 1.5rem;
+  transition: height 300ms var(--ease-out);
+}
+
+.compact {
+  height: 3.25rem;
+}
+
+.logo {
+  display: flex;
+  align-items: baseline;
+  gap: 0.375rem;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.logoMark {
+  color: var(--color-accent-hot);
+}
+
+.nav {
+  display: none;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.navLink {
+  font-size: 0.875rem;
+  color: var(--color-ink-muted);
+  transition: color var(--dur-fast);
+}
+
+.navLink:hover {
+  color: var(--color-ink);
+}
+
+@media (min-width: 768px) {
+  .nav {
+    display: flex;
+  }
+}

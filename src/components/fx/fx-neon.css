@@ -1,0 +1,192 @@
+/* Couche néon / holographique (évolution v1.2 — palette élargie).
+   Toujours transform + opacity pour tout ce qui boucle ; les gradients
+   animés (holo-text--live) sont limités à 1-2 éléments par page. */
+
+/* ---- Texte holographique iridescent ---- */
+
+.holo-text {
+  color: var(--color-accent-hot); /* fallback sans background-clip: text */
+  background-image: linear-gradient(
+    100deg,
+    var(--color-accent-hot) 0%,
+    var(--color-fx-cyan) 28%,
+    var(--color-fx-violet) 55%,
+    var(--color-fx-pink) 78%,
+    var(--color-accent-hot) 100%
+  );
+  background-size: 220% 100%;
+  background-clip: text;
+}
+
+@supports (background-clip: text) {
+  .holo-text {
+    color: transparent;
+  }
+}
+
+.holo-text--live {
+  animation: holo-shift 9s linear infinite;
+}
+
+/* ---- Titre outline néon (style « Entrez dans une autre réalité ») ---- */
+
+.text-outline {
+  color: var(--color-ink); /* fallback sans text-stroke */
+}
+
+@supports (-webkit-text-stroke: 1px #fff) {
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(102, 194, 255, 0.85);
+    text-shadow:
+      0 0 28px rgba(24, 204, 252, 0.3),
+      0 0 64px rgba(255, 78, 205, 0.14);
+  }
+}
+
+/* ---- Orbites du casque ---- */
+
+.orbit-spin {
+  animation: orbit-spin 80s linear infinite;
+}
+
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes holo-shift {
+  to {
+    background-position: -220% 0;
+  }
+}
+
+/* ---- Sparkles : étincelles qui scintillent ---- */
+
+.sparkle {
+  position: absolute;
+  border-radius: var(--radius-pill);
+  opacity: 0;
+  animation: sparkle-twinkle var(--sparkle-dur, 4s) ease-in-out infinite;
+  animation-delay: var(--sparkle-delay, 0s);
+}
+
+@keyframes sparkle-twinkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+}
+
+/* ---- NeuralField : réseau de neurones qui pulse ---- */
+
+.neural-node {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: neural-pulse var(--n-dur, 5s) ease-in-out infinite;
+  animation-delay: var(--n-delay, 0s);
+}
+
+@keyframes neural-pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.neural-link {
+  opacity: 0.14;
+}
+
+/* signal lumineux voyageant le long d'un lien (pathLength=100) */
+.neural-signal {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: beam-travel var(--n-dur, 6s) linear infinite;
+  animation-delay: var(--n-delay, 0s);
+}
+
+/* ---- Hologramme : flottement, scanlines, cône de projection ---- */
+
+.holo-float {
+  animation: holo-float 7s ease-in-out infinite alternate;
+}
+
+@keyframes holo-float {
+  from {
+    transform: translateY(6px);
+  }
+  to {
+    transform: translateY(-8px);
+  }
+}
+
+.holo-scanlines {
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(102, 194, 255, 0.07) 0 1px,
+    transparent 1px 4px
+  );
+  mix-blend-mode: screen;
+}
+
+.holo-cone {
+  pointer-events: none;
+  background: linear-gradient(
+    0deg,
+    rgba(24, 204, 252, 0.3),
+    rgba(174, 72, 255, 0.1) 55%,
+    transparent
+  );
+  clip-path: polygon(40% 100%, 60% 100%, 97% 0%, 3% 0%);
+  animation: holo-cone-pulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes holo-cone-pulse {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 0.75;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .holo-text--live,
+  .holo-float,
+  .holo-cone,
+  .orbit-spin {
+    animation: none;
+  }
+
+  .sparkle {
+    animation: none;
+    opacity: 0.55;
+    transform: scale(0.8);
+  }
+
+  .neural-node {
+    animation: none;
+    opacity: 0.5;
+  }
+
+  .neural-signal {
+    animation: none;
+    stroke-dasharray: none;
+    opacity: 0.15;
+  }
+
+  .holo-cone {
+    opacity: 0.45;
+  }
+}

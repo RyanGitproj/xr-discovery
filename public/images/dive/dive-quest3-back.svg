@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200">
+  <defs>
+    <linearGradient id="strap" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a2742"/>
+      <stop offset="1" stop-color="#0b1730"/>
+    </linearGradient>
+  </defs>
+  <path d="M250 620 C250 360 520 240 800 240 C1080 240 1350 360 1350 620 L1350 700 C1350 740 1310 760 1270 740 L1230 715 C1230 480 1040 380 800 380 C560 380 370 480 370 715 L330 740 C290 760 250 740 250 700 Z" fill="url(#strap)"/>
+  <path d="M250 620 C250 360 520 240 800 240 C1080 240 1350 360 1350 620" fill="none" stroke="#ff4ecd" stroke-width="6" opacity=".55"/>
+  <rect x="560" y="820" width="480" height="120" rx="60" fill="#1a2742"/>
+  <rect x="560" y="820" width="480" height="120" rx="60" fill="none" stroke="#ae48ff" stroke-width="5" opacity=".5"/>
+</svg>

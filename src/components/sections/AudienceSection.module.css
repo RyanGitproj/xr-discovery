@@ -1,0 +1,139 @@
+.section {
+  composes: shell clipped from "./section.module.css";
+}
+
+.container {
+  composes: container w6xl from "./section.module.css";
+}
+
+.grid {
+  margin-top: 3.5rem;
+  display: grid;
+  gap: 1.25rem;
+}
+
+/* Layout éditorial (lg) : 12 colonnes, largeurs inégales, décalages
+   verticaux et radii variés — la grille uniforme est volontairement cassée.
+   L'ordre DOM (c1, c2, besoin, c3, c4) = l'ordre visuel. */
+.a2 {
+  composes: rTight from "./section.module.css";
+}
+
+.aNeed {
+  composes: rSoft from "./section.module.css";
+}
+
+.a4 {
+  composes: rTight from "./section.module.css";
+}
+
+.card {
+  height: 100%;
+  border-radius: var(--radius-card);
+}
+
+.panel {
+  height: 100%;
+  overflow: hidden;
+  padding: 0;
+}
+
+.cardBody {
+  padding: 1.75rem;
+}
+
+.iconBadge {
+  composes: iconBadge from "./section.module.css";
+}
+
+.icon {
+  composes: icon from "./section.module.css";
+}
+
+.cardTitle {
+  composes: cardTitle from "./section.module.css";
+}
+
+.cardText {
+  composes: cardText from "./section.module.css";
+}
+
+.needPanel {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.75rem;
+}
+
+.kicker {
+  composes: kicker from "./section.module.css";
+}
+
+.needTitle {
+  margin-top: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.needText {
+  margin-top: 0.75rem;
+  line-height: 1.625;
+  color: var(--color-ink-muted);
+}
+
+/* Mobile : rythme d'insets alternés — les cards ne font pas toutes la même
+   largeur, l'asymétrie éditoriale existe aussi en une colonne. */
+@media (max-width: 767px) {
+  .a2 {
+    margin-left: 1.75rem;
+  }
+
+  .aNeed {
+    margin-right: 1.75rem;
+  }
+
+  .a4 {
+    margin-left: 1.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .a4 {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+  }
+
+  .a1 {
+    grid-column: 1 / span 7;
+  }
+
+  .a2 {
+    grid-column: 8 / span 5;
+    margin-top: 3rem;
+  }
+
+  .aNeed {
+    grid-column: 1 / span 5;
+    margin-top: 1.5rem;
+  }
+
+  .a3 {
+    grid-column: 6 / span 7;
+  }
+
+  .a4 {
+    grid-column: 3 / span 8;
+  }
+}

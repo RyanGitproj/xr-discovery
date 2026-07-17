@@ -1,0 +1,29 @@
+/* Mosaïque « moments XR » (v2) — grille asymétrique STATIQUE, sans trou :
+   mobile 2 colonnes de tuiles simples ; desktop 3 colonnes avec UNE tuile
+   2×2 (les tuiles étant carrées, une 2×2 reste alignée sur les rangées).
+   1 feature + 5 simples = 9 cellules = 3 rangées pleines. */
+
+.section {
+  padding: 4rem 1.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: dense;
+  gap: 0.875rem;
+  max-width: 72rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .feature {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+}
