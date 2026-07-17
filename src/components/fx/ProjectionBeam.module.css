@@ -6,13 +6,26 @@
   pointer-events: none;
   position: absolute;
   transform-origin: 50% 100%;
-  opacity: 0.55;
+  opacity: 0.7;
   background: linear-gradient(
     0deg,
-    color-mix(in srgb, var(--color-fx-cyan) 32%, transparent),
-    color-mix(in srgb, var(--color-fx-violet) 10%, transparent) 55%,
+    color-mix(in srgb, var(--color-fx-cyan) 46%, transparent),
+    color-mix(in srgb, var(--color-fx-violet) 16%, transparent) 55%,
     transparent
   );
+}
+
+/* Mobile : le faisceau rend physiquement plus petit → on le rend plus
+   lumineux pour qu'il reste lisible et suive bien l'hologramme. */
+@media (max-width: 640px) {
+  .beam {
+    background: linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--color-fx-cyan) 60%, transparent),
+      color-mix(in srgb, var(--color-fx-violet) 22%, transparent) 55%,
+      transparent
+    );
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -25,23 +38,23 @@
 
   @keyframes beam-grow {
     from {
-      opacity: 0.9;
+      opacity: 0.95;
       transform: scaleY(0);
     }
 
     to {
-      opacity: 0.75;
+      opacity: 0.85;
       transform: scaleY(1);
     }
   }
 
   @keyframes beam-pulse {
     from {
-      opacity: 0.75;
+      opacity: 0.85;
     }
 
     to {
-      opacity: 0.4;
+      opacity: 0.55;
     }
   }
 }

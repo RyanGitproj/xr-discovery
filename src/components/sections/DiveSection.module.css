@@ -59,6 +59,27 @@
   margin-top: 0.75rem;
 }
 
+/* Transition « on met le casque » — PLEIN VIEWPORT (remplace l'ancien halo
+   borné). Voile sombre bref (casque sur les yeux) puis embrasement lumineux
+   qui inonde l'écran et fond vers l'univers. Tokenisés, opacity/scale only. */
+.veil {
+  position: absolute;
+  inset: 0;
+  background: var(--color-bg-deep);
+}
+
+.bloom {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 48%,
+    var(--color-ink) 0%,
+    var(--color-fx-cyan) 28%,
+    var(--color-fx-violet) 54%,
+    transparent 74%
+  );
+}
+
 /* Calques images. */
 .imgFull {
   object-fit: cover;

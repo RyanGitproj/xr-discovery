@@ -28,8 +28,9 @@ import styles from "./Hero.module.css";
 
 /** Antananarivo en % du stage — source du faisceau de projection. */
 const TANA = toViewPct(ANTANANARIVO);
-/** Bord haut du faisceau : plonge derrière le bas du buste (2,5 % + 40 % × 1,0515 ≈ 44,6 %). */
-const BEAM_TOP = { x: 50, width: 28, y: 42.5 } as const;
+/** Bord haut du faisceau : remonte dans le buste (bas du buste ≈ 44,6 %) pour
+ * que le faisceau suive l'hologramme au lieu de décrocher sous ses pieds. */
+const BEAM_TOP = { x: 50, width: 34, y: 36 } as const;
 
 /**
  * Section 1 du blueprint, style v1.2 « Entrez dans une autre réalité » :

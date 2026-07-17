@@ -86,31 +86,31 @@ export const prestaImage: ImageSlot = {
  */
 export const diveImages = {
   universe: {
-    src: "/images/dive/dive-universe.svg",
+    src: "/images/dive/dive-universe.webp",
     alt: "",
     width: 2000,
     height: 1250,
   },
   lensGlow: {
-    src: "/images/dive/dive-lens-glow.svg",
+    src: "/images/dive/dive-lens-glow.webp",
     alt: "",
     width: 1200,
     height: 1200,
   },
   headsetBack: {
-    src: "/images/dive/dive-quest3-back.svg",
+    src: "/images/dive/dive-quest3-back.webp",
     alt: "",
     width: 1600,
     height: 1200,
   },
   headsetFront: {
-    src: "/images/dive/dive-quest3-front.svg",
+    src: "/images/dive/dive-quest3-front.webp",
     alt: "",
     width: 1600,
     height: 1200,
   },
   particles: {
-    src: "/images/dive/dive-particles-front.svg",
+    src: "/images/dive/dive-particles-front.webp",
     alt: "",
     width: 1600,
     height: 1000,

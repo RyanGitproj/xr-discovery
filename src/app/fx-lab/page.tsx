@@ -9,6 +9,7 @@ import { EnterRise } from "@/components/fx/EnterRise";
 import { GlassPanel } from "@/components/fx/GlassPanel";
 import { GlowReactive, GlowReactiveGroup } from "@/components/fx/GlowReactive";
 import { GridPulse } from "@/components/fx/GridPulse";
+import { HeadsetScene } from "@/components/fx/HeadsetScene";
 import { HoloFigure } from "@/components/fx/HoloFigure";
 import { HoloHeadset } from "@/components/fx/HoloHeadset";
 import { LampHeader } from "@/components/fx/LampHeader";
@@ -36,7 +37,8 @@ import { VelocityMarquee } from "@/components/fx/VelocityMarquee";
 import { PROJECTION_TIMELINE } from "@/components/fx/projectionTimeline";
 import { Figure } from "@/components/ui/Figure";
 import Image from "next/image";
-import { m, useTransform } from "framer-motion";
+import { m, useMotionValue, useTransform } from "framer-motion";
+import { useState } from "react";
 import { diveImages, galleryImages } from "@/config/images";
 import { ANTANANARIVO } from "@/lib/geo/madagascar";
 import { toViewPct } from "@/lib/geo/madagascarView";
@@ -80,6 +82,36 @@ function DemoCard({ title, note }: { title: string; note: string }) {
     <>
       <p className={styles.cardTitle}>{title}</p>
       <p className={styles.cardNote}>{note}</p>
+    </>
+  );
+}
+
+/** Banc de la scène casque 3D : slider = progression du scroll simulée. */
+function HeadsetLabDemo() {
+  const progress = useMotionValue(0);
+  const tiltX = useMotionValue(0);
+  const tiltY = useMotionValue(0);
+  const [value, setValue] = useState(0);
+  return (
+    <>
+      <div className={cx(styles.demo, styles.headsetDemo)}>
+        <HeadsetScene progress={progress} tiltX={tiltX} tiltY={tiltY} />
+      </div>
+      <label className={styles.headsetSlider}>
+        progression {value.toFixed(2)}
+        <input
+          type="range"
+          min={0}
+          max={1}
+          step={0.01}
+          value={value}
+          onChange={(e) => {
+            const v = Number(e.target.value);
+            setValue(v);
+            progress.set(v);
+          }}
+        />
+      </label>
     </>
   );
 }
@@ -175,6 +207,13 @@ export default function FxLabPage() {
             </GlassPanel>
           </ParallaxLayer>
         </div>
+      </LabSection>
+
+      <LabSection
+        title="HeadsetScene — casque Quest 3 en 3D (R3F)"
+        note="Immersion v2.1 — modèle procédural piloté par la progression du scroll : le casque s'approche, s'incline et pivote 180° pour présenter ses lentilles (mise du casque). Bouge le slider pour parcourir la séquence. Réflexions néon par Lightformers locaux (aucun HDR distant)."
+      >
+        <HeadsetLabDemo />
       </LabSection>
 
       <LabSection

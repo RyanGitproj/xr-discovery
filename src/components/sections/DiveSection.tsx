@@ -1,42 +1,49 @@
 "use client";
 
 import Image from "next/image";
+import { HeadsetSceneLazy } from "@/components/fx/HeadsetSceneLazy";
 import { ScrollStage, useScrollStage } from "@/components/fx/ScrollStage";
 import { ShimmerCTA } from "@/components/fx/ShimmerCTA";
 import { StageLayer } from "@/components/fx/StageLayer";
 import { Pill } from "@/components/ui/Pill";
 import { cx } from "@/lib/cx";
+import { usePointerFine } from "@/lib/motion/usePointerFine";
 import { diveSection } from "@/config/content";
 import { diveImages } from "@/config/images";
 import styles from "./DiveSection.module.css";
 
 /**
- * Storyboard de la plongée (progress 0 → 1 sur 3 écrans épinglés) : le
- * casque approche et les couches s'écartent, zoom dans la visière, le halo
- * devient porte de lumière, l'univers VR se révèle, message final + CTA.
- * Données pures — la mécanique vit dans ScrollStage/StageLayer.
+ * Storyboard de la plongée (progress 0 → 1 sur 3 écrans épinglés). Le casque
+ * est une VRAIE scène 3D (react-three-fiber, `HeadsetSceneLazy`) : il approche,
+ * pivote et présente ses lentilles qui engloutissent l'écran (mise du casque) ;
+ * un voile + un embrasement PLEIN ÉCRAN prennent le relais et fondent vers
+ * l'univers VR. Données pures — la mécanique 2D vit dans StageLayer, la 3D
+ * dans HeadsetScene.
  */
 const STORY = {
-  universe: { at: [0.45, 0.75, 1], scale: [1.15, 1, 1], opacity: [0, 1, 1], tiltRange: 24 },
-  lensGlow: { at: [0.4, 0.55, 0.75], scale: [0.6, 1.8, 3.2], opacity: [0, 0.9, 0] },
-  headsetBack: {
-    at: [0, 0.45, 0.62],
-    y: [88, 24, 0],
-    scale: [0.55, 1.15, 2.2],
-    opacity: [1, 1, 0],
-    tiltRange: 14,
-  },
-  headsetFront: {
-    at: [0, 0.45, 0.68],
-    y: [64, 0, 0],
-    scale: [0.55, 1.15, 2.6],
-    opacity: [1, 1, 0],
-    tiltRange: 14,
-  },
-  particles: { at: [0, 0.45], y: [120, -160], tiltRange: 8 },
+  particles: { at: [0, 0.5], y: [120, -170], tiltRange: 8 },
+  headset: { at: [0, 0.62, 0.72], opacity: [1, 1, 0] },
+  veil: { at: [0.5, 0.6, 0.68], opacity: [0, 0.92, 0] },
+  bloom: { at: [0.56, 0.68, 0.82], scale: [0.7, 1.25, 1.5], opacity: [0, 1, 0] },
+  universe: { at: [0.6, 0.82, 1], scale: [1.12, 1, 1], opacity: [0, 1, 1], tiltRange: 24 },
   intro: { at: [0, 0.14, 0.32], y: [0, 0, -40], opacity: [1, 1, 0] },
-  reveal: { at: [0.74, 0.9], y: [32, 0], opacity: [0, 1] },
+  reveal: { at: [0.78, 0.92], y: [32, 0], opacity: [0, 1] },
 } as const;
+
+/** Scène 3D branchée sur la progression + le gyro du ScrollStage. */
+function HeadsetLayer() {
+  const stage = useScrollStage();
+  const fine = usePointerFine();
+  if (!stage) return null;
+  return (
+    <HeadsetSceneLazy
+      progress={stage.progress}
+      tiltX={stage.tiltX}
+      tiltY={stage.tiltY}
+      dpr={fine ? 1.5 : 1}
+    />
+  );
+}
 
 /** Pill iOS : rendue uniquement tant que la permission gyro est à demander. */
 function GyroPill() {
@@ -75,7 +82,7 @@ function RevealCopy() {
   );
 }
 
-/** Reduced-motion : toute la scène à plat — rien ne manque, rien n'est imposé. */
+/** Reduced-motion : toute la scène à plat (image 2D) — rien n'est imposé. */
 function StaticFallback() {
   return (
     <div className={styles.fallback}>
@@ -96,14 +103,14 @@ function StaticFallback() {
 /**
  * Scène immersive « plongée Quest 3 » (Immersion v2.1) — l'interaction
  * signature de la page. Le scroll reste natif/Lenis : la scène ne fait que
- * lire la progression (déterministe, bidirectionnelle). Images en lazy
- * (chargement natif du navigateur, marge généreuse de Chrome — placeholders
- * SVG légers en attendant les calques Codex).
+ * lire la progression (déterministe, bidirectionnelle). Le casque 3D est
+ * lazy-monté près du viewport (chunk three.js hors first-view).
  */
 export function DiveSection() {
   return (
     <section className={cx("fx-section", styles.section)}>
       <ScrollStage screens={3} fallback={<StaticFallback />} stageClassName={styles.stageBg}>
+        {/* Univers révélé (fond de la fin) */}
         <StageLayer {...STORY.universe}>
           <Image
             src={diveImages.universe.src}
@@ -114,36 +121,13 @@ export function DiveSection() {
             className={styles.imgFull}
           />
         </StageLayer>
-        <StageLayer {...STORY.lensGlow}>
-          <Image
-            src={diveImages.lensGlow.src}
-            alt=""
-            width={diveImages.lensGlow.width}
-            height={diveImages.lensGlow.height}
-            unoptimized
-            className={styles.imgGlow}
-          />
+
+        {/* Casque 3D — s'estompe une fois l'écran englouti */}
+        <StageLayer {...STORY.headset}>
+          <HeadsetLayer />
         </StageLayer>
-        <StageLayer {...STORY.headsetBack}>
-          <Image
-            src={diveImages.headsetBack.src}
-            alt=""
-            width={diveImages.headsetBack.width}
-            height={diveImages.headsetBack.height}
-            unoptimized
-            className={styles.imgHeadset}
-          />
-        </StageLayer>
-        <StageLayer {...STORY.headsetFront}>
-          <Image
-            src={diveImages.headsetFront.src}
-            alt=""
-            width={diveImages.headsetFront.width}
-            height={diveImages.headsetFront.height}
-            unoptimized
-            className={styles.imgHeadset}
-          />
-        </StageLayer>
+
+        {/* Particules d'avant-plan (chassées pendant l'approche) */}
         <StageLayer {...STORY.particles}>
           <Image
             src={diveImages.particles.src}
@@ -154,6 +138,16 @@ export function DiveSection() {
             className={styles.imgFull}
           />
         </StageLayer>
+
+        {/* Transition plein écran : voile sombre puis embrasement */}
+        <StageLayer {...STORY.veil}>
+          <div className={styles.veil} />
+        </StageLayer>
+        <StageLayer {...STORY.bloom}>
+          <div className={styles.bloom} />
+        </StageLayer>
+
+        {/* Textes (vrais nœuds DOM, toujours présents) */}
         <StageLayer {...STORY.intro} decorative={false} className={styles.layerTop}>
           <IntroCopy />
         </StageLayer>

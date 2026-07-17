@@ -1,0 +1,25 @@
+/* Wrapper du Canvas R3F de la scène casque (plein calque). */
+.root {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.root canvas {
+  display: block;
+}
+
+/* Fallback 2D (WebGL absent / chargement / reduced-motion en amont) :
+   l'image Codex du casque, centrée. */
+.fallback2d {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.fallback2d img {
+  width: min(60vw, 30rem);
+  height: auto;
+}
