@@ -13,10 +13,12 @@ const FEATURE_INDEXES = new Set([0]);
 const TILE_DEPTHS = [-0.22, 0.14, -0.12, 0.2, -0.16, 0.18] as const;
 
 /**
- * Mosaïque de moments XR — sans marquee NI reveal : ce contenu image doit
- * être visible inconditionnellement (un observer qui rate son déclenchement
- * laisserait une section vide). Le parallax par tuile ne déplace qu'en
- * transform, le contenu reste rendu tel quel côté serveur.
+ * Mosaïque de moments XR — apparition scrubée par le scroll (classe fx
+ * `scroll-reveal`, scroll-driven animation native) + parallax par tuile.
+ * L'apparition est EMBOÎTÉE dans le ParallaxLayer (jamais fusionnée — le
+ * layer possède son transform, cf. ParallaxLayer). Visibilité garantie :
+ * sans support navigateur, sans JS ou sous reduced-motion, les tuiles sont
+ * visibles d'emblée (aucun état caché par défaut).
  * Photos : src/config/images.ts.
  */
 export function GallerySection() {
@@ -31,12 +33,14 @@ export function GallerySection() {
             touchRange={40}
             className={FEATURE_INDEXES.has(i) ? styles.feature : undefined}
           >
-            <Figure
-              image={image}
-              sizes={
-                FEATURE_INDEXES.has(i) ? "(max-width: 768px) 50vw, 768px" : "(max-width: 768px) 50vw, 384px"
-              }
-            />
+            <div className="scroll-reveal">
+              <Figure
+                image={image}
+                sizes={
+                  FEATURE_INDEXES.has(i) ? "(max-width: 768px) 50vw, 768px" : "(max-width: 768px) 50vw, 384px"
+                }
+              />
+            </div>
           </ParallaxLayer>
         ))}
       </ParallaxScene>

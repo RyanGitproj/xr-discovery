@@ -408,6 +408,35 @@
   }
 }
 
+/* Apparition scrubée par le scroll (scroll-driven animation NATIVE —
+   fondation v2) : fondu + montée PENDANT l'entrée dans le viewport,
+   réversible en remontant, compositor-only, zéro JS. Progressive
+   enhancement : sans support navigateur ou sous reduced-motion, l'état de
+   base reste pleinement visible (aucun état caché par défaut). Si l'élément
+   a aussi un parallax, emboîter cette classe DANS le ParallaxLayer — deux
+   transforms séparés, jamais fusionnés (règle ParallaxLayer). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-reveal {
+      animation: scroll-reveal-in linear both;
+      animation-timeline: view(block);
+      animation-range: entry 0% entry 90%;
+    }
+  }
+}
+
+@keyframes scroll-reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .aurora-blob,
   .grid-pulse,

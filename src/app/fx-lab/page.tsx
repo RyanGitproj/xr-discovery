@@ -460,6 +460,21 @@ export default function FxLabPage() {
         </div>
       </LabSection>
 
+      <LabSection title="Scroll reveal natif" note="v4 — apparition scrubée par le scroll (animation-timeline: view, fondation v2) : fondu + montée pendant l'entrée dans le viewport, réversible en remontant, compositor-only, zéro JS. Sans support navigateur ou sous reduced-motion : visible d'emblée. En scène : mosaïque « moments XR » (emboîté dans les ParallaxLayer).">
+        <div className={styles.grid2}>
+          <div className="scroll-reveal">
+            <div className={cx(styles.demo, styles.demoH40)}>
+              <Sparkles count={8} />
+            </div>
+          </div>
+          <div className="scroll-reveal">
+            <div className={cx(styles.demo, styles.demoH40)}>
+              <Embers count={10} />
+            </div>
+          </div>
+        </div>
+      </LabSection>
+
       <LabSection title="NeuralField" note="v1.2 — réseau de neurones : nœuds qui pulsent, signaux comète le long des liens.">
         <div className={cx(styles.demo, styles.demoH64)}>
           <NeuralField nodes={26} />
