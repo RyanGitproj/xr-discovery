@@ -1,5 +1,9 @@
 .section {
-  composes: shell clipped from "./section.module.css";
+  composes: shell clipped chapter from "./section.module.css";
+  /* Rythme « single view » STRICT : padding vertical plus serré que le
+     token global — l'étape la plus longue doit tenir dans un écran, PC
+     ET mobile. */
+  --section-pad-y: clamp(1.25rem, 3svh, 4rem);
 }
 
 .container {
@@ -7,15 +11,15 @@
 }
 
 .formWrap {
-  margin-top: 3rem;
+  margin-top: clamp(0.75rem, 2svh, 1.5rem);
 }
 
 .panel {
-  padding: 1.5rem;
+  padding: 1.25rem;
 }
 
 @media (min-width: 768px) {
   .panel {
-    padding: 2.5rem;
+    padding: 1.75rem 2rem;
   }
 }

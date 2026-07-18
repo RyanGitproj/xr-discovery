@@ -48,12 +48,9 @@ function PackCard({ pack }: { pack: Pack }) {
   const panel = (
     <GlassPanel className={cx(styles.panel, pack.featured === true && styles.panelFeatured)}>
       {image !== undefined && (
-        <Figure
-          image={image}
-          parallax={-0.18}
-          sizes="(max-width: 1024px) 100vw, 384px"
-          className={styles.figure}
-        />
+        <div className={styles.media}>
+          <Figure image={image} fill parallax={-0.18} sizes="(max-width: 1024px) 100vw, 384px" />
+        </div>
       )}
       <h3 className={styles.packName}>{pack.name}</h3>
       <p className={styles.tagline}>{pack.tagline}</p>

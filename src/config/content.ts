@@ -42,11 +42,8 @@ export const hero = {
     { text: "réalité", variant: "outline", block: true },
   ] satisfies readonly TextSegment[],
   subtitle:
-    "La découverte VR qui se déplace jusqu'à vous : 10 casques dernière génération et des animateurs XR expérimentés pour attirer le public, créer du trafic et faire parler de votre lieu.",
+    "La VR qui se déplace jusqu'à vous : 10 casques dernière génération et des animateurs XR expérimentés pour attirer le public et créer du trafic.",
   ctaPrimary: "Demander un devis",
-  ctaWhatsApp: "Discuter sur WhatsApp",
-  whatsappIntro:
-    "Bonjour XR Technology ! Je souhaite en savoir plus sur l'animation VR pour mon centre / magasin.",
   /** Labels HUD de la scène casque. « 8 univers » = les 8 segments servis
       (guide commercial), pas des contenus immersifs. */
   hud: {
@@ -309,7 +306,6 @@ export const finalCtaSection = {
   subtitle:
     "Racontez-nous votre projet : nous revenons vers vous rapidement avec la solution adaptée.",
   ctaPrimary: "Demander un devis",
-  ctaWhatsApp: "Discuter sur WhatsApp",
 } as const;
 
 export const footerContent = {

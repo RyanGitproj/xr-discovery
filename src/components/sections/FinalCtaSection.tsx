@@ -6,21 +6,16 @@ import { Meteors } from "@/components/fx/Meteors";
 import { Reveal } from "@/components/fx/Reveal";
 import { ShimmerCTA } from "@/components/fx/ShimmerCTA";
 import { Sparkles } from "@/components/fx/Sparkles";
-import { OutlineButton } from "@/components/ui/OutlineButton";
 import { cx } from "@/lib/cx";
-import { finalCtaSection, hero } from "@/config/content";
-import { siteConfig } from "@/config/site";
-import { buildWhatsAppLink } from "@/lib/format/whatsapp";
+import { finalCtaSection } from "@/config/content";
 import styles from "./FinalCtaSection.module.css";
 
 /**
  * Section 9 du blueprint : reprise du bandeau lumineux de l'infographie —
  * Background Beams + GlassPanel géant + ShimmerCTA XXL + MagneticButton
- * (2e et dernière occurrence) + bouton WhatsApp + Meteors.
+ * (2e et dernière occurrence) + Meteors.
  */
 export function FinalCtaSection() {
-  const whatsappHref = buildWhatsAppLink(siteConfig.whatsappNumber, hero.whatsappIntro);
-
   return (
     <section className={`fx-section ${styles.section}`}>
       <BackgroundBeams intensity="active" />
@@ -39,7 +34,6 @@ export function FinalCtaSection() {
                 {finalCtaSection.ctaPrimary}
               </ShimmerCTA>
             </MagneticButton>
-            <OutlineButton href={whatsappHref}>{finalCtaSection.ctaWhatsApp}</OutlineButton>
           </div>
           </GlassPanel>
         </GeoFrame>

@@ -1,5 +1,5 @@
 .section {
-  composes: shell clipped from "./section.module.css";
+  composes: shell clipped chapter from "./section.module.css";
 }
 
 .container {
@@ -7,7 +7,7 @@
 }
 
 .grid {
-  margin-top: 3.5rem;
+  margin-top: var(--stack-gap);
   display: grid;
   gap: 1.25rem;
 }
@@ -37,7 +37,7 @@
 
 .panel {
   height: 100%;
-  padding: 1.75rem;
+  padding: 1.5rem;
 }
 
 .iconBadge {
@@ -63,8 +63,8 @@
 .prestaPanel {
   display: grid;
   align-items: center;
-  gap: 2rem;
-  padding: 1.75rem;
+  gap: 1.5rem;
+  padding: 1.5rem;
 }
 
 .kicker {
@@ -125,7 +125,7 @@
 
   .b2 {
     grid-column: 6 / span 7;
-    margin-top: 2.5rem;
+    margin-top: 1.25rem;
   }
 
   .b3 {
@@ -134,13 +134,20 @@
 
   .b4 {
     grid-column: 8 / span 5;
-    margin-top: 2.5rem;
+    margin-top: 1.25rem;
   }
 }
 
 @media (min-width: 768px) {
   .prestaPanel {
     grid-template-columns: repeat(2, 1fr);
-    padding: 2.5rem;
+    padding: 1.75rem;
+  }
+
+  /* Hauteur en fraction de viewport (le Figure est en fill) : le panneau
+     prestation ne dicte plus sa hauteur par le ratio 16:9. */
+  .prestaVisual {
+    aspect-ratio: auto;
+    height: clamp(9rem, 24svh, 16rem);
   }
 }

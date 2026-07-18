@@ -9,16 +9,18 @@ type OutlineButtonProps = {
   href?: string;
   /** Bouton de défilement vers une section (aucune ancre d'URL). */
   scrollTo?: string;
+  /** Effet de bord additionnel au clic (ex. event dataLayer). */
+  onClick?: () => void;
   className?: string;
   children: React.ReactNode;
 };
 
 /** Bouton secondaire sur verre — canal WhatsApp, CTA des packs. */
-export function OutlineButton({ href, scrollTo, className, children }: OutlineButtonProps) {
+export function OutlineButton({ href, scrollTo, onClick, className, children }: OutlineButtonProps) {
   const classes = cx(styles.button, className);
   if (href !== undefined) {
     return (
-      <a href={href} className={classes}>
+      <a href={href} className={classes} onClick={onClick}>
         {children}
       </a>
     );
@@ -27,7 +29,10 @@ export function OutlineButton({ href, scrollTo, className, children }: OutlineBu
     <button
       type="button"
       className={classes}
-      onClick={scrollTo !== undefined ? () => scrollToSection(scrollTo) : undefined}
+      onClick={() => {
+        onClick?.();
+        if (scrollTo !== undefined) scrollToSection(scrollTo);
+      }}
     >
       {children}
     </button>

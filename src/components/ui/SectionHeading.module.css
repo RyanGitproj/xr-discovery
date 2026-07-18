@@ -30,3 +30,35 @@
     font-size: 2.25rem;
   }
 }
+
+/* Variante compacte : l'en-tête ne consomme qu'un minimum de hauteur. */
+.compact .title {
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.compact .subtitle {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* Écrans bas (laptops 768px) : le sous-titre cède sa ligne au formulaire. */
+@media (max-height: 800px) {
+  .compact .subtitle {
+    display: none;
+  }
+}
+
+/* Mobile : l'en-tête compact se réduit au titre seul — le StepIndicator et
+   le titre d'étape portent déjà le contexte, chaque ligne compte pour que
+   le formulaire tienne dans l'écran. */
+@media (max-width: 639px) {
+  .compact .kicker,
+  .compact .subtitle {
+    display: none;
+  }
+
+  .compact .title {
+    margin-top: 0;
+  }
+}

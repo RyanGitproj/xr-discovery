@@ -18,6 +18,7 @@ import { LiquidBackground } from "@/components/fx/LiquidBackground";
 import { LiquidRefractFilter } from "@/components/fx/LiquidRefractFilter";
 import { MotionProvider } from "@/components/fx/MotionProvider";
 import { SmoothScroll } from "@/components/fx/SmoothScroll";
+import { AttributionCapture } from "@/components/tracking/AttributionCapture";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#contenu" className="skip-link" data-native-anchor>
           Aller au contenu
         </a>
+        <AttributionCapture />
         <LiquidBackground />
         <LiquidRefractFilter />
         <MotionProvider>

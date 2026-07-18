@@ -16,7 +16,7 @@
   margin-inline: auto;
   display: flex;
   max-width: 72rem;
-  height: 4rem;
+  height: var(--header-h);
   align-items: center;
   justify-content: space-between;
   padding-inline: 1.5rem;

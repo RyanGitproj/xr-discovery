@@ -5,8 +5,8 @@ import { LeadForm } from "@/components/forms/LeadForm";
 import styles from "./LeadFormSection.module.css";
 
 /**
- * Section 10 du blueprint : formulaire de qualification multi-étapes,
- * calqué sur la fiche d'appel, dans un GlassPanel. Focus ring en --accent.
+ * Section 10 du blueprint : formulaire court « qui conclut » (2 étapes,
+ * persistance Supabase) dans un GlassPanel. Focus ring en --accent.
  */
 export function LeadFormSection() {
   return (
@@ -15,7 +15,8 @@ export function LeadFormSection() {
         <SectionHeading
           kicker="Votre devis"
           title="Parlez-nous de votre projet"
-          subtitle="4 étapes, 2 minutes — ou continuez directement sur WhatsApp."
+          subtitle="2 étapes, 30 secondes."
+          size="compact"
         />
         <Reveal className={styles.formWrap}>
           <GlassPanel className={styles.panel}>

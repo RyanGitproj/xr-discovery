@@ -1,37 +1,16 @@
 import type { Lead } from "@/lib/validations/lead";
 
 /**
- * Libellés français des 9 questions de qualification (fiche d'appel) +
- * découpage en étapes. Les VALEURS vivent dans lib/validations/lead.ts
- * (schéma unique) — ici uniquement la présentation.
+ * Libellés français du formulaire court « qui conclut » (2 étapes). Les
+ * VALEURS vivent dans lib/validations/lead.ts (schéma unique) — ici
+ * uniquement la présentation.
  */
 
-export const PROJECT_LABELS: Record<Lead["projet"], string> = {
-  "animation-galerie": "Animation en galerie",
-  "temps-fort": "Temps fort commercial",
-  "pop-up-premium": "Pop-up événementiel",
-  autre: "Autre projet",
-};
-
-export const PUBLIC_LABELS: Record<Lead["public"], string> = {
-  familles: "Familles",
-  jeunes: "Ados & jeunes adultes",
-  "clients-enseigne": "Clients d'une enseigne",
-  "grand-public": "Grand public",
-};
-
-export const PARTICIPANTS_LABELS: Record<Lead["participants"], string> = {
-  "moins-100": "Moins de 100",
-  "100-300": "100 à 300",
-  "300-1000": "300 à 1 000",
-  "plus-1000": "Plus de 1 000",
-};
-
-export const DUREE_LABELS: Record<Lead["duree"], string> = {
-  journee: "Une journée",
-  weekend: "Un week-end",
-  semaine: "Une semaine",
-  plus: "Plus longtemps",
+export const TYPE_ORGANISATION_LABELS: Record<Lead["typeOrganisation"], string> = {
+  "centre-commercial": "Centre commercial",
+  "enseigne-retail": "Enseigne & retail",
+  "pop-up-event": "Pop-up & événement",
+  autre: "Autre",
 };
 
 export const OBJECTIF_LABELS: Record<Lead["objectif"], string> = {
@@ -49,25 +28,19 @@ export const BUDGET_LABELS: Record<Lead["budget"], string> = {
   "a-definir": "À définir ensemble",
 };
 
-export const DECIDEUR_LABELS: Record<Lead["decideur"], string> = {
-  decide: "Je décide",
-  recommande: "Je recommande en interne",
-  renseigne: "Je me renseigne",
-};
-
+/** Libellés nus — l'obligatoire est marqué par « * » (prop `required` des
+    champs), jamais par une mention entre parenthèses. */
 export const FIELD_LABELS: Record<keyof Lead, string> = {
-  projet: "Votre projet",
-  public: "Public visé",
-  participants: "Participants estimés",
-  date: "Période envisagée",
-  lieu: "Lieu",
-  duree: "Durée",
+  typeOrganisation: "Vous êtes",
   objectif: "Objectif principal",
   budget: "Budget",
-  decideur: "Votre rôle",
+  periode: "Période envisagée",
   nom: "Votre nom",
   telephone: "Téléphone / WhatsApp",
-  email: "Email (optionnel)",
+  email: "Email",
+  participants: "Participants (approx.)",
+  entreprise: "Entreprise / lieu",
+  fonction: "Votre fonction",
 };
 
 export type FormStep = {
@@ -76,8 +49,9 @@ export type FormStep = {
 };
 
 export const FORM_STEPS: readonly FormStep[] = [
-  { title: "Votre projet", fields: ["projet", "public", "participants"] },
-  { title: "Logistique", fields: ["date", "lieu", "duree"] },
-  { title: "Cadrage", fields: ["objectif", "budget", "decideur"] },
-  { title: "Vos coordonnées", fields: ["nom", "telephone", "email"] },
+  { title: "Votre projet", fields: ["typeOrganisation", "objectif", "budget", "periode"] },
+  {
+    title: "Vos coordonnées",
+    fields: ["nom", "telephone", "email", "participants", "entreprise", "fonction"],
+  },
 ];

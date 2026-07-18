@@ -7,7 +7,7 @@
 }
 
 .panel {
-  padding: 4rem 2rem;
+  padding: clamp(2.5rem, 6svh, 4rem) 2rem;
   text-align: center;
 }
 
@@ -44,7 +44,7 @@
 
 @media (min-width: 768px) {
   .panel {
-    padding: 5rem 4rem;
+    padding: clamp(2.5rem, 6svh, 4rem) 4rem;
   }
 
   .title {

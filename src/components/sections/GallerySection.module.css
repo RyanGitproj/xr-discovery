@@ -1,29 +1,68 @@
-/* Mosaïque « moments XR » (v2) — grille asymétrique STATIQUE, sans trou :
-   mobile 2 colonnes de tuiles simples ; desktop 3 colonnes avec UNE tuile
-   2×2 (les tuiles étant carrées, une 2×2 reste alignée sur les rangées).
-   1 feature + 5 simples = 9 cellules = 3 rangées pleines. */
+/* Mosaïque « moments XR » (v3 single-view) — 6 tuiles en 2 rangées de
+   largeurs inégales (5/4/3 puis 3/4/5 en miroir) sur 12 colonnes :
+   asymétrie éditoriale sans trou, hauteur totale pilotée par le viewport.
+   Les images sont recadrées par object-fit cover (Figure en mode fill) —
+   fini le ratio carré intrinsèque qui imposait 3 rangées d'un écran. */
 
 .section {
-  padding: 4rem 1.5rem;
+  composes: shell chapter from "./section.module.css";
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-auto-flow: dense;
-  gap: 0.875rem;
+  gap: 0.75rem;
   max-width: 72rem;
   margin-inline: auto;
 }
 
+/* Mobile : tuiles paysage compactes (2 colonnes), scroll court. */
+.tile {
+  aspect-ratio: 4 / 3;
+}
+
+/* Le Figure en mode fill s'ancre ici ; l'apparition scroll-reveal reste
+   emboîtée dans le ParallaxLayer (le layer garde son transform). */
+.tileInner {
+  position: relative;
+  height: 100%;
+}
+
 @media (min-width: 768px) {
   .grid {
-    grid-template-columns: repeat(3, 1fr);
+    /* Fit par construction : hauteur = viewport restant sous le header et
+       les paddings de section, capée en rem sur très grands écrans. */
+    height: min(calc(100svh - var(--header-h) - 2 * var(--section-pad-y)), 52rem);
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 1.15fr 1fr;
     gap: 1rem;
   }
 
-  .feature {
-    grid-column: span 2;
-    grid-row: span 2;
+  .tile {
+    aspect-ratio: auto;
+  }
+
+  .t1 {
+    grid-column: span 5;
+  }
+
+  .t2 {
+    grid-column: span 4;
+  }
+
+  .t3 {
+    grid-column: span 3;
+  }
+
+  .t4 {
+    grid-column: span 3;
+  }
+
+  .t5 {
+    grid-column: span 4;
+  }
+
+  .t6 {
+    grid-column: span 5;
   }
 }

@@ -70,6 +70,16 @@
   --dur-slow: 1200ms; /* focal, une fois    */
   --dur-ambient: 22s; /* nappes de fond     */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Rythme vertical « single view » : chaque section vise un viewport.
+     Les espacements verticaux s'expriment en fraction de hauteur d'écran
+     (svh — stable face à la barre d'URL et au clavier mobile), bornés en
+     rem : compression auto sur écrans bas (1366×768), jamais géants en
+     1440p+. */
+  --header-h: 4rem; /* synchro : Header.module.css .bar + ANCHOR_OFFSET_PX (SmoothScroll) */
+  --section-pad-y: clamp(3rem, 7svh, 5.5rem);
+  --stack-gap: clamp(1.75rem, 4svh, 3.5rem); /* heading → grille */
+  --media-h: clamp(8rem, 20svh, 14rem); /* médias de card en mode cover */
 }
 
 /* Reset minimal (remplace le preflight Tailwind) : uniquement ce sur quoi
@@ -91,10 +101,10 @@
   html {
     -webkit-text-size-adjust: 100%;
 
-    /* Les cibles d'ancre s'arrêtent sous la navbar fixe (4rem) — sert le
-       saut natif (reduced-motion / sans JS) ; le chemin Lenis applique le
+    /* Les cibles d'ancre s'arrêtent sous la navbar fixe (--header-h) — sert
+       le saut natif (reduced-motion / sans JS) ; le chemin Lenis applique le
        même décalage via ANCHOR_OFFSET_PX (SmoothScroll). */
-    scroll-padding-top: 4rem;
+    scroll-padding-top: var(--header-h);
   }
 
   body {

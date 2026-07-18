@@ -15,12 +15,9 @@ import { Sparkles } from "@/components/fx/Sparkles";
 import { Spotlight } from "@/components/fx/Spotlight";
 import { TextGenerate } from "@/components/fx/TextGenerate";
 import { PROJECTION_TIMELINE } from "@/components/fx/projectionTimeline";
-import { OutlineButton } from "@/components/ui/OutlineButton";
 import { Pill } from "@/components/ui/Pill";
 import { cx } from "@/lib/cx";
 import { hero } from "@/config/content";
-import { siteConfig } from "@/config/site";
-import { buildWhatsAppLink } from "@/lib/format/whatsapp";
 import { ANTANANARIVO } from "@/lib/geo/madagascar";
 import { toViewPct } from "@/lib/geo/madagascarView";
 import styles from "./Hero.module.css";
@@ -38,8 +35,6 @@ const BEAM_TOP = { x: 50, width: 34, y: 36 } as const;
  * MagneticButton). Le GlowCursor global se masque dans le Spotlight.
  */
 export function Hero() {
-  const whatsappHref = buildWhatsAppLink(siteConfig.whatsappNumber, hero.whatsappIntro);
-
   return (
     <section className={`fx-section ${styles.section}`}>
       <GridPulse className={styles.gridPulse} />
@@ -66,7 +61,6 @@ export function Hero() {
                     {hero.ctaPrimary}
                   </ShimmerCTA>
                 </MagneticButton>
-                <OutlineButton href={whatsappHref}>{hero.ctaWhatsApp}</OutlineButton>
               </div>
             </Reveal>
           </div>

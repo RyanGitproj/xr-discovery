@@ -1,5 +1,5 @@
 .section {
-  composes: shell from "./section.module.css";
+  composes: shell chapter from "./section.module.css";
 }
 
 .container {
@@ -32,7 +32,7 @@
 }
 
 .optionsGroup {
-  margin-top: 3.5rem;
+  margin-top: clamp(1.5rem, 3svh, 2.5rem);
 }
 
 .optionsTitle {
@@ -47,8 +47,12 @@
   gap: 0.75rem;
 }
 
+/* Largeur dérivée de la hauteur autorisée (~42svh à ratio 16:9) : la figure
+   garde son ratio intrinsèque sans jamais pousser la section hors écran. */
 .figure {
-  margin-top: 3.5rem;
+  margin-top: clamp(1.5rem, 3svh, 2.5rem);
+  margin-inline: auto;
+  width: min(100%, calc(42svh * 16 / 9));
 }
 
 @media (min-width: 768px) {
@@ -58,7 +62,7 @@
   }
 
   .quote {
-    font-size: 2.25rem;
-    line-height: 1.625;
+    font-size: clamp(1.5rem, 3.2svh, 2.25rem);
+    line-height: 1.5;
   }
 }

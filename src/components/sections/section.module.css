@@ -1,11 +1,29 @@
 /* Socle commun des sections (v2) — composé par les modules via `composes`.
    Uniquement des tokens de globals.css, aucune valeur en dur. */
 
-/* Mobile dense (4.5rem), desktop aéré (8rem) — le mobile n'est pas un
+/* Padding vertical viewport-fluide (--section-pad-y) : dense sur écrans
+   bas, aéré sur écrans hauts, borné en rem — le mobile n'est pas un
    desktop étiré. */
 .shell {
   position: relative;
-  padding: 4.5rem 1.25rem;
+  padding: var(--section-pad-y) 1.25rem;
+}
+
+/* Chapitre « single view » : sur desktop assez haut, la section occupe le
+   viewport restant sous le header et centre son contenu. Sous 900px de
+   haut (laptops 1366×768), fallback assumé : bande compacte qui scrolle —
+   le contenu n'est jamais étiré ni tronqué. Ne JAMAIS composer sur les
+   sections sticky (Dive, Deployment). */
+.chapter {
+  position: relative;
+}
+
+@media (min-width: 1024px) and (min-height: 900px) {
+  .chapter {
+    display: grid;
+    align-content: center;
+    min-height: calc(100svh - var(--header-h));
+  }
 }
 
 .clipped {
@@ -92,6 +110,6 @@
 
 @media (min-width: 768px) {
   .shell {
-    padding: 8rem 1.5rem;
+    padding-inline: 1.5rem;
   }
 }

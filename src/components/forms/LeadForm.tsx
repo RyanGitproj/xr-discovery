@@ -1,28 +1,23 @@
 "use client";
 
 import { useRef, useState, useTransition } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { submitLead } from "@/actions/submitLead";
 import { StepIndicator } from "@/components/forms/StepIndicator";
-import { RadioCardGroup, TextField } from "@/components/forms/fields";
-import { OutlineButton } from "@/components/ui/OutlineButton";
+import { PhoneField, RadioCardGroup, TextField } from "@/components/forms/fields";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
 import {
   BUDGET_LABELS,
-  DECIDEUR_LABELS,
-  DUREE_LABELS,
   FIELD_LABELS,
   FORM_STEPS,
   OBJECTIF_LABELS,
-  PARTICIPANTS_LABELS,
-  PROJECT_LABELS,
-  PUBLIC_LABELS,
+  TYPE_ORGANISATION_LABELS,
 } from "@/config/leadForm";
-import { siteConfig } from "@/config/site";
-import { leadWhatsAppText } from "@/lib/format/leadMessage";
-import { buildWhatsAppLink } from "@/lib/format/whatsapp";
+import { readAttribution } from "@/lib/tracking/attribution";
+import { pushDataLayerEventOnce } from "@/lib/tracking/gtm";
 import { leadSchema, type Lead } from "@/lib/validations/lead";
+import { cx } from "@/lib/cx";
 import styles from "./LeadForm.module.css";
 
 function toOptions<V extends string>(labels: Record<V, string>): { value: V; label: string }[] {
@@ -30,9 +25,19 @@ function toOptions<V extends string>(labels: Record<V, string>): { value: V; lab
 }
 
 /**
- * Formulaire de qualification multi-étapes (9 questions de la fiche d'appel
- * + coordonnées). Même schéma Zod que le serveur. Conversion double canal :
- * envoi classique OU WhatsApp pré-rempli avec le récap.
+ * Garde anti double-clic : le bouton submit REMPLACE « Continuer » au même
+ * endroit à l'écran — le 2e clic d'un double-clic atterrirait dessus et
+ * déclencherait la validation de l'étape à peine affichée (erreurs
+ * prématurées). Toute soumission dans cette fenêtre après une navigation
+ * d'étape est ignorée (pattern éprouvé sur le funnel CVM/MLR).
+ */
+const NAV_GUARD_MS = 500;
+
+/**
+ * Formulaire court « qui conclut » : 2 étapes — qualification (4 questions)
+ * puis coordonnées (email et téléphone international obligatoires). Même
+ * schéma Zod que le serveur ; l'attribution premier-touchpoint (UTM/pub)
+ * est jointe à la soumission.
  */
 export function LeadForm() {
   const [step, setStep] = useState(0);
@@ -48,18 +53,26 @@ export function LeadForm() {
     formState: { errors },
   } = useForm<Lead>({
     resolver: standardSchemaResolver(leadSchema),
-    mode: "onTouched",
-    defaultValues: { email: "" },
+    // onSubmit (pas onTouched) : avec un resolver, toute validation déclenchée
+    // au blur remonte les erreurs de TOUT le schéma — des champs jamais
+    // touchés s'affichaient en erreur pendant la saisie. Ici rien ne s'affiche
+    // avant « Continuer » (trigger par étape), puis re-validation au change.
+    mode: "onSubmit",
+    defaultValues: { email: "", participants: "", entreprise: "", fonction: "" },
   });
 
   const isLastStep = step === FORM_STEPS.length - 1;
+  const lastNavAt = useRef(0);
+  const navGuardActive = () => Date.now() - lastNavAt.current < NAV_GUARD_MS;
 
   function goTo(nextStep: number) {
+    lastNavAt.current = Date.now();
     setStep(nextStep);
     requestAnimationFrame(() => stepHeadingRef.current?.focus());
   }
 
   async function nextStep() {
+    if (navGuardActive()) return;
     const valid = await trigger(FORM_STEPS[step].fields);
     if (valid) goTo(step + 1);
   }
@@ -67,45 +80,79 @@ export function LeadForm() {
   function onSubmit(lead: Lead) {
     setServerError(null);
     startTransition(async () => {
-      const result = await submitLead(lead);
+      const result = await submitLead(lead, readAttribution());
       if (result !== undefined && !result.ok) setServerError(result.error);
     });
   }
 
-  // Canal WhatsApp : récap de toutes les réponses déjà saisies, même partielles.
-  const values = useWatch({ control });
-  const whatsappHref = buildWhatsAppLink(siteConfig.whatsappNumber, leadWhatsAppText(values));
-
   const fieldError = (field: keyof Lead) => errors[field]?.message;
 
+  /** register + effacement immédiat : en mode onSubmit la validation ne court
+      qu'au « Continuer » — un champ DÉJÀ en erreur re-valide dès sa
+      correction (trigger ciblé, ne touche pas aux autres champs). */
+  const registerField = (field: keyof Lead) =>
+    register(field, {
+      onChange: () => {
+        if (errors[field] !== undefined) void trigger(field);
+      },
+    });
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form
+      onSubmit={(event) => {
+        // Hors dernière étape, Entrée vaut « Continuer » (jamais une
+        // soumission qui validerait des champs pas encore affichés).
+        if (!isLastStep) {
+          event.preventDefault();
+          void nextStep();
+          return;
+        }
+        if (navGuardActive()) {
+          event.preventDefault();
+          return;
+        }
+        void handleSubmit(onSubmit)(event);
+      }}
+      noValidate
+      onFocus={() => pushDataLayerEventOnce("funnel_start", "funnel_start")}
+    >
       <StepIndicator steps={FORM_STEPS.map((s) => s.title)} current={step} />
 
       <h3 ref={stepHeadingRef} tabIndex={-1} className={styles.stepTitle}>
         {FORM_STEPS[step].title}
       </h3>
 
-      <div className={styles.fields}>
+      <div className={cx(styles.fields, step === 1 && styles.fieldsTwoCol)}>
         {step === 0 && (
           <>
             <RadioCardGroup
-              legend={FIELD_LABELS.projet}
-              options={toOptions(PROJECT_LABELS)}
-              registration={register("projet")}
-              error={fieldError("projet")}
+              legend={FIELD_LABELS.typeOrganisation}
+              options={toOptions(TYPE_ORGANISATION_LABELS)}
+              registration={registerField("typeOrganisation")}
+              error={fieldError("typeOrganisation")}
+              required
             />
             <RadioCardGroup
-              legend={FIELD_LABELS.public}
-              options={toOptions(PUBLIC_LABELS)}
-              registration={register("public")}
-              error={fieldError("public")}
+              legend={FIELD_LABELS.objectif}
+              options={toOptions(OBJECTIF_LABELS)}
+              registration={registerField("objectif")}
+              error={fieldError("objectif")}
+              required
             />
             <RadioCardGroup
-              legend={FIELD_LABELS.participants}
-              options={toOptions(PARTICIPANTS_LABELS)}
-              registration={register("participants")}
-              error={fieldError("participants")}
+              legend={FIELD_LABELS.budget}
+              options={toOptions(BUDGET_LABELS)}
+              registration={registerField("budget")}
+              error={fieldError("budget")}
+              required
+              columns={3}
+            />
+            <TextField
+              label={FIELD_LABELS.periode}
+              placeholder="Ex. : week-end du 15 août"
+              registration={registerField("periode")}
+              error={fieldError("periode")}
+              required
             />
           </>
         )}
@@ -113,73 +160,49 @@ export function LeadForm() {
         {step === 1 && (
           <>
             <TextField
-              label={FIELD_LABELS.date}
-              placeholder="Ex. : week-end du 15 août"
-              registration={register("date")}
-              error={fieldError("date")}
-            />
-            <TextField
-              label={FIELD_LABELS.lieu}
-              placeholder="Ex. : centre commercial à Antananarivo"
-              registration={register("lieu")}
-              error={fieldError("lieu")}
-            />
-            <RadioCardGroup
-              legend={FIELD_LABELS.duree}
-              options={toOptions(DUREE_LABELS)}
-              registration={register("duree")}
-              error={fieldError("duree")}
-            />
-          </>
-        )}
-
-        {step === 2 && (
-          <>
-            <RadioCardGroup
-              legend={FIELD_LABELS.objectif}
-              options={toOptions(OBJECTIF_LABELS)}
-              registration={register("objectif")}
-              error={fieldError("objectif")}
-            />
-            <RadioCardGroup
-              legend={FIELD_LABELS.budget}
-              options={toOptions(BUDGET_LABELS)}
-              registration={register("budget")}
-              error={fieldError("budget")}
-              columns={3}
-            />
-            <RadioCardGroup
-              legend={FIELD_LABELS.decideur}
-              options={toOptions(DECIDEUR_LABELS)}
-              registration={register("decideur")}
-              error={fieldError("decideur")}
-              columns={3}
-            />
-          </>
-        )}
-
-        {step === 3 && (
-          <>
-            <TextField
               label={FIELD_LABELS.nom}
               autoComplete="name"
-              registration={register("nom")}
+              registration={registerField("nom")}
               error={fieldError("nom")}
+              required
             />
-            <TextField
+            <PhoneField
               label={FIELD_LABELS.telephone}
-              type="tel"
-              placeholder="+261 34 00 000 00"
-              autoComplete="tel"
-              registration={register("telephone")}
+              name="telephone"
+              control={control}
               error={fieldError("telephone")}
+              required
+              className={styles.spanFullMobile}
             />
             <TextField
               label={FIELD_LABELS.email}
               type="email"
               autoComplete="email"
-              registration={register("email")}
+              registration={registerField("email")}
               error={fieldError("email")}
+              required
+              className={styles.spanFullMobile}
+            />
+            <TextField
+              label={FIELD_LABELS.participants}
+              inputMode="numeric"
+              placeholder="Ex. : 200"
+              registration={registerField("participants")}
+              error={fieldError("participants")}
+            />
+            <TextField
+              label={FIELD_LABELS.entreprise}
+              placeholder="Ex. : centre commercial Analakely"
+              autoComplete="organization"
+              registration={registerField("entreprise")}
+              error={fieldError("entreprise")}
+            />
+            <TextField
+              label={FIELD_LABELS.fonction}
+              placeholder="Ex. : responsable marketing"
+              autoComplete="organization-title"
+              registration={registerField("fonction")}
+              error={fieldError("fonction")}
             />
           </>
         )}
@@ -200,17 +223,12 @@ export function LeadForm() {
           )}
           {isLastStep ? (
             <PrimaryButton type="submit" disabled={pending}>
-              {pending ? "Envoi en cours..." : "Envoyer ma demande"}
+              {pending ? "Envoi en cours..." : "Recevoir mon devis"}
             </PrimaryButton>
           ) : (
             <PrimaryButton onClick={() => void nextStep()}>Continuer</PrimaryButton>
           )}
         </div>
-        {isLastStep && (
-          <OutlineButton href={whatsappHref} className={styles.whatsapp}>
-            Envoyer via WhatsApp
-          </OutlineButton>
-        )}
       </div>
     </form>
   );

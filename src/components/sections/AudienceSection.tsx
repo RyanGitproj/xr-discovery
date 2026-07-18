@@ -60,7 +60,15 @@ function Card({ card, image }: { card: AudienceCard; image?: ImageSlot }) {
       <GeoFrame variant="frame" shape="hud" chamfer={14} className={styles.geo}>
         <GlassPanel className={styles.panel}>
           {image !== undefined && (
-            <Figure image={image} flush parallax={-0.12} sizes="(max-width: 768px) 100vw, 384px" />
+            <div className={styles.media}>
+              <Figure
+                image={image}
+                fill
+                flush
+                parallax={-0.12}
+                sizes="(max-width: 768px) 100vw, 384px"
+              />
+            </div>
           )}
           <div className={styles.cardBody}>
             <span className={styles.iconBadge}>

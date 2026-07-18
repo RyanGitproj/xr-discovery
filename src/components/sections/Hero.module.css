@@ -33,12 +33,13 @@
 }
 
 /* Typo surdimensionnée fluide (tendance 2026 assumée) : bornée par clamp
-   pour ne jamais casser la colonne du split layout. */
+   pour ne jamais casser la colonne du split layout. Taille et marges
+   resserrées pour que le hero tienne dans 100svh, CTA visible sans scroll. */
 .title {
-  margin-top: 1.75rem;
+  margin-top: 1.25rem;
   font-family: var(--font-display);
-  font-size: clamp(3rem, 6.5vw, 5.5rem);
-  line-height: 0.92;
+  font-size: clamp(2.5rem, 5.2vw, 4.25rem);
+  line-height: 0.95;
   font-weight: 700;
   letter-spacing: -0.025em;
   text-wrap: balance;
@@ -46,15 +47,15 @@
 }
 
 .subtitle {
-  margin-top: 1.75rem;
-  max-width: 36rem;
-  font-size: 1.125rem;
-  line-height: 1.625;
+  margin-top: 1.25rem;
+  max-width: 34rem;
+  font-size: 1.0625rem;
+  line-height: 1.55;
   color: var(--color-ink-muted);
 }
 
 .ctas {
-  margin-top: 2.5rem;
+  margin-top: 1.75rem;
 }
 
 .ctaRow {
