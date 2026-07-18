@@ -182,14 +182,17 @@
 }
 
 /* Halo pulsé SANS forme (radial elliptique, pas de box arrondie) : rien ne
-   peut dépasser des découpes du ticket clippé — compatible toute géométrie. */
+   peut dépasser des découpes du ticket clippé — compatible toute géométrie.
+   Ellipses en closest-side / rayons ≤ moitié : le fondu se termine DANS la
+   boîte du ::before (des rayons en % se résolvent sur la dimension ENTIÈRE
+   → une ellipse trop large se fait trancher net sur les bords de la boîte). */
 .shimmer-glow::before {
   content: "";
   position: absolute;
-  inset: -24px -30px;
+  inset: -26px -34px;
   background:
-    radial-gradient(ellipse 62% 72% at 50% 55%, rgba(255, 194, 77, 0.34), transparent 70%),
-    radial-gradient(ellipse 92% 100% at 50% 50%, rgba(232, 40, 24, 0.24), transparent 72%);
+    radial-gradient(ellipse 34% 38% at 50% 54%, rgba(255, 194, 77, 0.34), transparent),
+    radial-gradient(ellipse closest-side at 50% 50%, rgba(232, 40, 24, 0.22), transparent);
   opacity: 0.4;
   animation: glow-pulse 4.4s ease-in-out infinite alternate;
   pointer-events: none;

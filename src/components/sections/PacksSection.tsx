@@ -73,7 +73,7 @@ function PackCard({ pack }: { pack: Pack }) {
           </li>
         ))}
       </ul>
-      <OutlineButton href="#devis" className={styles.cta}>
+      <OutlineButton scrollTo="devis" className={styles.cta}>
         {packsSection.cta}
       </OutlineButton>
     </GlassPanel>

@@ -1,8 +1,13 @@
+"use client";
+
 import { cx } from "@/lib/cx";
+import { scrollToSection } from "@/lib/scrollToSection";
 
 type ShimmerCTAProps = {
-  /** Rend un lien si fourni, sinon un bouton. */
+  /** Rend un lien (canaux externes, ex. WhatsApp). */
   href?: string;
+  /** Rend un bouton qui défile vers la section (aucune ancre d'URL). */
+  scrollTo?: string;
   type?: "button" | "submit";
   size?: "sm" | "md" | "xl";
   /** false : pas de glow pulsé (navbar fixe — budget ambient). */
@@ -20,9 +25,12 @@ const SIZE_CLASSES: Record<NonNullable<ShimmerCTAProps["size"]>, string> = {
 /**
  * CTA principal (Famille A) : reflet qui traverse + glow pulsé lent.
  * Le glow vit sur un wrapper non clippé, le reflet sur le bouton clippé.
+ * Navigation interne : `scrollTo` (défilement fluide sans #hash) ; `href`
+ * réservé aux destinations externes.
  */
 export function ShimmerCTA({
   href,
+  scrollTo,
   type = "button",
   size = "md",
   pulse = true,
@@ -35,7 +43,11 @@ export function ShimmerCTA({
       {children}
     </a>
   ) : (
-    <button type={type} className={classes}>
+    <button
+      type={type}
+      className={classes}
+      onClick={scrollTo ? () => scrollToSection(scrollTo) : undefined}
+    >
       {children}
     </button>
   );

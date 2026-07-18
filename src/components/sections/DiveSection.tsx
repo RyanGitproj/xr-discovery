@@ -81,7 +81,7 @@ function RevealCopy() {
       <p className={styles.revealTitle}>{diveSection.reveal.title}</p>
       <p className={styles.body}>{diveSection.reveal.body}</p>
       <div className={styles.ctaRow}>
-        <ShimmerCTA href={diveSection.ctaHref}>{diveSection.cta}</ShimmerCTA>
+        <ShimmerCTA scrollTo={diveSection.ctaScrollTo}>{diveSection.cta}</ShimmerCTA>
       </div>
     </div>
   );

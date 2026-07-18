@@ -149,7 +149,6 @@ export function GeoFrame({
             points={svgPoints}
             fill="none"
             stroke={`url(#${gradientId})`}
-            vectorEffect="non-scaling-stroke"
           />
           {trace && (
             <polygon
@@ -158,7 +157,6 @@ export function GeoFrame({
               pathLength={100}
               fill="none"
               stroke={`url(#${gradientId})`}
-              vectorEffect="non-scaling-stroke"
             />
           )}
         </svg>

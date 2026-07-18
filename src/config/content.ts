@@ -26,11 +26,12 @@ import type { TextSegment } from "@/components/fx/TextGenerate";
  * ou un engagement absent des infographies (fiche d'appel, bloc 6).
  */
 
+/* Navigation interne par scrollTo (aucune ancre d'URL) : `id` = id de section. */
 export const navLinks = [
-  { label: "Publics", href: "#publics" },
-  { label: "Packs", href: "#packs" },
-  { label: "Déploiement", href: "#deploiement" },
-  { label: "Questions", href: "#questions" },
+  { label: "Publics", id: "publics" },
+  { label: "Packs", id: "packs" },
+  { label: "Déploiement", id: "deploiement" },
+  { label: "Questions", id: "questions" },
 ] as const;
 
 export const hero = {
@@ -85,7 +86,7 @@ export const diveSection = {
     body: "Des expériences immersives choisies pour votre public : vos visiteurs plongent, votre lieu attire, on parle de vous.",
   },
   cta: "Voir les packs",
-  ctaHref: "#packs",
+  ctaScrollTo: "packs",
   gyroCta: "Activer l'effet 3D",
 } as const;
 

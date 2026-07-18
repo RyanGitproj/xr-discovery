@@ -35,7 +35,7 @@ export function FinalCtaSection() {
           <p className={styles.subtitle}>{finalCtaSection.subtitle}</p>
           <div className={styles.ctaRow}>
             <MagneticButton>
-              <ShimmerCTA href="#devis" size="xl">
+              <ShimmerCTA scrollTo="devis" size="xl">
                 {finalCtaSection.ctaPrimary}
               </ShimmerCTA>
             </MagneticButton>

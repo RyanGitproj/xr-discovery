@@ -117,6 +117,7 @@
     font: inherit;
     color: inherit;
     background: transparent;
+    border: none;
   }
 
   button {

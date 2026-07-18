@@ -65,6 +65,14 @@
   opacity: 0.9;
 }
 
+/* Jointures RONDES : un miter déborde du sommet sous les transforms 3D
+   (tilt) — le rond ne peut géométriquement pas dépasser. */
+.edgeLine,
+.edgeTrace {
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
 /* Reflet qui parcourt le contour (pathLength=100 → indépendant de la taille). */
 .edgeTrace {
   stroke-width: var(--geo-trace-width, 2.4);

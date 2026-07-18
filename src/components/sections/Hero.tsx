@@ -62,7 +62,7 @@ export function Hero() {
             <Reveal className={styles.ctas}>
               <div className={styles.ctaRow}>
                 <MagneticButton>
-                  <ShimmerCTA href="#devis" size="xl">
+                  <ShimmerCTA scrollTo="devis" size="xl">
                     {hero.ctaPrimary}
                   </ShimmerCTA>
                 </MagneticButton>
