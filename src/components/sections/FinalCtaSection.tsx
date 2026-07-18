@@ -1,5 +1,5 @@
 import { BackgroundBeams } from "@/components/fx/BackgroundBeams";
-import { BeamBorder } from "@/components/fx/BeamBorder";
+import { GeoFrame } from "@/components/fx/GeoFrame";
 import { GlassPanel } from "@/components/fx/GlassPanel";
 import { MagneticButton } from "@/components/fx/MagneticButton";
 import { Meteors } from "@/components/fx/Meteors";
@@ -27,22 +27,22 @@ export function FinalCtaSection() {
       <Sparkles count={10} />
       <Meteors count={2} />
       <Reveal className={styles.wrap}>
-        <GlassPanel className={styles.panel}>
+        <GeoFrame variant="frame" shape="hud" chamfer={24} trace>
+          <GlassPanel className={styles.panel}>
           <h2 className={cx("holo-text holo-text--live", styles.title)}>
             {finalCtaSection.title}
           </h2>
           <p className={styles.subtitle}>{finalCtaSection.subtitle}</p>
           <div className={styles.ctaRow}>
             <MagneticButton>
-              <BeamBorder className={styles.beam}>
-                <ShimmerCTA href="#devis" size="xl">
-                  {finalCtaSection.ctaPrimary}
-                </ShimmerCTA>
-              </BeamBorder>
+              <ShimmerCTA href="#devis" size="xl">
+                {finalCtaSection.ctaPrimary}
+              </ShimmerCTA>
             </MagneticButton>
             <OutlineButton href={whatsappHref}>{finalCtaSection.ctaWhatsApp}</OutlineButton>
           </div>
-        </GlassPanel>
+          </GlassPanel>
+        </GeoFrame>
       </Reveal>
     </section>
   );

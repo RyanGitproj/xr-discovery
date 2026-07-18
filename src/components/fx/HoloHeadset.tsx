@@ -85,7 +85,7 @@ export function HoloHeadset({ className, projector = true }: HoloHeadsetProps) {
             width="180"
             height="92"
             rx="36"
-            fill="rgba(11, 23, 48, 0.65)"
+            fill="rgba(36, 19, 17, 0.65)"
             stroke={`url(#${gradientId})`}
             strokeWidth="2.5"
           />
@@ -111,7 +111,7 @@ export function HoloHeadset({ className, projector = true }: HoloHeadsetProps) {
             width="14"
             height="42"
             rx="7"
-            fill="rgba(24, 204, 252, 0.22)"
+            fill="rgba(255, 194, 77, 0.22)"
             stroke="var(--color-fx-cyan)"
             strokeWidth="1.5"
           />
@@ -121,7 +121,7 @@ export function HoloHeadset({ className, projector = true }: HoloHeadsetProps) {
             width="14"
             height="42"
             rx="7"
-            fill="rgba(255, 78, 205, 0.2)"
+            fill="rgba(232, 40, 24, 0.2)"
             stroke="var(--color-fx-pink)"
             strokeWidth="1.5"
           />

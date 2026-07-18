@@ -1,3 +1,4 @@
+import { GeoFrame } from "@/components/fx/GeoFrame";
 import { GlassPanel } from "@/components/fx/GlassPanel";
 import { RevealGroup, RevealItem } from "@/components/fx/Reveal";
 import { Spotlight } from "@/components/fx/Spotlight";
@@ -26,13 +27,15 @@ export function BenefitsSection() {
             return (
               <RevealItem key={card.title} className={PLACEMENTS[i]}>
                 <Spotlight className={styles.spot}>
-                  <GlassPanel className={styles.panel}>
-                    <span className={styles.iconBadge}>
-                      <Icon aria-hidden="true" className={styles.icon} />
-                    </span>
-                    <h3 className={styles.cardTitle}>{card.title}</h3>
-                    <p className={styles.cardText}>{card.body}</p>
-                  </GlassPanel>
+                  <GeoFrame variant="frame" shape="hud" chamfer={12} className={styles.geo}>
+                    <GlassPanel className={styles.panel}>
+                      <span className={styles.iconBadge}>
+                        <Icon aria-hidden="true" className={styles.icon} />
+                      </span>
+                      <h3 className={styles.cardTitle}>{card.title}</h3>
+                      <p className={styles.cardText}>{card.body}</p>
+                    </GlassPanel>
+                  </GeoFrame>
                 </Spotlight>
               </RevealItem>
             );

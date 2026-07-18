@@ -1,4 +1,3 @@
-import { BeamBorder } from "@/components/fx/BeamBorder";
 import { EnterRise } from "@/components/fx/EnterRise";
 import { GridPulse } from "@/components/fx/GridPulse";
 import { HoloFigure } from "@/components/fx/HoloFigure";
@@ -35,7 +34,7 @@ const BEAM_TOP = { x: 50, width: 34, y: 36 } as const;
 /**
  * Section 1 du blueprint, style v1.2 « Entrez dans une autre réalité » :
  * titre massif solid + outline néon à gauche, casque holographique en scène
- * à droite (orbites, HUD). FOCAL : le CTA (ShimmerCTA + BeamBorder +
+ * à droite (orbites, HUD). FOCAL : le CTA ticket (ShimmerCTA +
  * MagneticButton). Le GlowCursor global se masque dans le Spotlight.
  */
 export function Hero() {
@@ -63,11 +62,9 @@ export function Hero() {
             <Reveal className={styles.ctas}>
               <div className={styles.ctaRow}>
                 <MagneticButton>
-                  <BeamBorder className={styles.beam}>
-                    <ShimmerCTA href="#devis" size="xl">
-                      {hero.ctaPrimary}
-                    </ShimmerCTA>
-                  </BeamBorder>
+                  <ShimmerCTA href="#devis" size="xl">
+                    {hero.ctaPrimary}
+                  </ShimmerCTA>
                 </MagneticButton>
                 <OutlineButton href={whatsappHref}>{hero.ctaWhatsApp}</OutlineButton>
               </div>

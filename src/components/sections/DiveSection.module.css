@@ -7,7 +7,7 @@
 }
 
 /* L'écran épinglé reste transparent : le LiquidBackground global respire
-   derrière la scène — l'univers révélé s'y raccorde (bords fondus #050a18). */
+   derrière la scène — l'univers révélé s'y raccorde (bords fondus #0d0706). */
 .stageBg {
   background: transparent;
 }
@@ -83,6 +83,14 @@
 /* Calques images. */
 .imgFull {
   object-fit: cover;
+}
+
+/* Le bas de l'univers FOND vers le décor global (pas de coupure nette avec
+   la section suivante) — masque statique sur le calque, quel que soit
+   l'asset. Doublé par la consigne « bords fondus » du brief Codex v3. */
+.universeLayer {
+  mask-image: linear-gradient(180deg, black 78%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, black 78%, transparent 100%);
 }
 
 .imgHeadset {

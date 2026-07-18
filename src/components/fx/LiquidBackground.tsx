@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { Embers } from "./Embers";
 import styles from "./LiquidBackground.module.css";
 
 /**
@@ -104,6 +105,10 @@ export function LiquidBackground() {
   return (
     <div aria-hidden="true" className={styles.root}>
       <canvas ref={canvasRef} className={styles.canvas} />
+      {/* Braises d'ambiance globales (v3) : présence vivante permanente
+          derrière TOUTES les sections — les sections à motifs propres
+          (Sparkles/Meteors/champs) se superposent naturellement devant. */}
+      <Embers count={18} />
     </div>
   );
 }
@@ -173,7 +178,7 @@ void main() {
   );
   vec2 q = p + (warp - 0.5) * 0.52;
 
-  vec3 col = vec3(0.020, 0.039, 0.094); /* --color-bg-deep */
+  vec3 col = vec3(0.051, 0.027, 0.024); /* --color-bg-deep #0d0706 */
 
   // Nappes : dérive ample + respiration liée au scroll (bornée, jamais hors champ).
   vec2 c1 = vec2(aspect * (0.22 + 0.16 * sin(t * 1.10)), 0.80 + 0.13 * cos(t * 0.80) + 0.11 * sin(s * 2.0));
@@ -181,15 +186,15 @@ void main() {
   vec2 c3 = vec2(aspect * (0.50 + 0.20 * sin(t * 0.60 + 2.1)), 0.12 + 0.14 * cos(t * 1.00) + 0.10 * sin(s * 2.4 + 2.6));
   vec2 c4 = vec2(aspect * (0.12 + 0.13 * cos(t * 0.75 + 4.2)), 0.30 + 0.16 * sin(t * 0.85) + 0.12 * sin(s * 1.8 + 4.0));
 
-  col += vec3(0.227, 0.659, 1.000) * 0.26 * glow(q, c1, 0.58); /* accent */
-  col += vec3(0.388, 0.267, 0.961) * 0.24 * glow(q, c2, 0.62); /* fx-indigo */
-  col += vec3(1.000, 0.306, 0.804) * 0.17 * glow(q, c3, 0.55); /* fx-pink */
-  col += vec3(0.094, 0.800, 0.988) * 0.20 * glow(q, c4, 0.50); /* fx-cyan */
+  col += vec3(0.961, 0.400, 0.118) * 0.26 * glow(q, c1, 0.58); /* accent orange #f5661e */
+  col += vec3(0.910, 0.353, 0.110) * 0.24 * glow(q, c2, 0.62); /* orange profond #e85a1c */
+  col += vec3(0.910, 0.157, 0.094) * 0.17 * glow(q, c3, 0.55); /* rouge #e82818 */
+  col += vec3(0.184, 0.749, 0.659) * 0.13 * glow(q, c4, 0.50); /* pointe teal rare #2fbfa8 */
 
   // Lumière du pointeur : discrète, elle lit comme le halo curseur qui
   // se réfracte dans la profondeur.
   vec2 pt = vec2(u_pointer.x * aspect, u_pointer.y);
-  col += vec3(0.227, 0.659, 1.000) * 0.15 * glow(q, pt, 0.42);
+  col += vec3(0.961, 0.400, 0.118) * 0.15 * glow(q, pt, 0.42); /* halo pointeur orange */
 
   // Vignette : bords profonds, texte lisible au centre.
   float vin = smoothstep(1.25, 0.35, length(uv - 0.5) * 1.6);

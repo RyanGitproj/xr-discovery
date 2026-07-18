@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Embers } from "@/components/fx/Embers";
 import { HeadsetSceneLazy } from "@/components/fx/HeadsetSceneLazy";
 import { ScrollStage, useScrollStage } from "@/components/fx/ScrollStage";
 import { ShimmerCTA } from "@/components/fx/ShimmerCTA";
@@ -21,11 +22,15 @@ import styles from "./DiveSection.module.css";
  * dans HeadsetScene.
  */
 const STORY = {
-  particles: { at: [0, 0.5], y: [120, -170], tiltRange: 8 },
+  /* Braises d'avant-plan : le calque translate au scroll pendant que chaque
+     braise monte en propre (double mouvement) ; s'efface à la mise du casque. */
+  embersFront: { at: [0, 0.45, 0.58], y: [80, -60, -140], opacity: [1, 1, 0], tiltRange: 8 },
   headset: { at: [0, 0.62, 0.72], opacity: [1, 1, 0] },
   veil: { at: [0.5, 0.6, 0.68], opacity: [0, 0.92, 0] },
   bloom: { at: [0.56, 0.68, 0.82], scale: [0.7, 1.25, 1.5], opacity: [0, 1, 0] },
   universe: { at: [0.6, 0.82, 1], scale: [1.12, 1, 1], opacity: [0, 1, 1], tiltRange: 24 },
+  /* Braises de l'univers révélé : montent dans la nébuleuse. */
+  embersUniverse: { at: [0.68, 0.85, 1], opacity: [0, 0.8, 0.8], tiltRange: 10 },
   intro: { at: [0, 0.14, 0.32], y: [0, 0, -40], opacity: [1, 1, 0] },
   reveal: { at: [0.78, 0.92], y: [32, 0], opacity: [0, 1] },
 } as const;
@@ -110,8 +115,8 @@ export function DiveSection() {
   return (
     <section className={cx("fx-section", styles.section)}>
       <ScrollStage screens={3} fallback={<StaticFallback />} stageClassName={styles.stageBg}>
-        {/* Univers révélé (fond de la fin) */}
-        <StageLayer {...STORY.universe}>
+        {/* Univers révélé (fond de la fin) — bas fondu, jamais de coupure */}
+        <StageLayer {...STORY.universe} className={styles.universeLayer}>
           <Image
             src={diveImages.universe.src}
             alt=""
@@ -122,21 +127,20 @@ export function DiveSection() {
           />
         </StageLayer>
 
+        {/* Braises montant dans l'univers révélé */}
+        <StageLayer {...STORY.embersUniverse}>
+          <Embers count={20} />
+        </StageLayer>
+
         {/* Casque 3D — s'estompe une fois l'écran englouti */}
         <StageLayer {...STORY.headset}>
           <HeadsetLayer />
         </StageLayer>
 
-        {/* Particules d'avant-plan (chassées pendant l'approche) */}
-        <StageLayer {...STORY.particles}>
-          <Image
-            src={diveImages.particles.src}
-            alt=""
-            fill
-            unoptimized
-            sizes="100vw"
-            className={styles.imgFull}
-          />
+        {/* Braises d'avant-plan (chassées pendant l'approche) — assez
+            présentes pour inviter au scroll, sans voler la scène 3D */}
+        <StageLayer {...STORY.embersFront}>
+          <Embers count={34} />
         </StageLayer>
 
         {/* Transition plein écran : voile sombre puis embrasement */}

@@ -77,7 +77,7 @@ export const reassuranceItems: readonly ReassuranceItem[] = [
  */
 export const diveSection = {
   kicker: "L'expérience",
-  title: "Entrez dans le casque",
+  title: "Mettez le casque",
   intro:
     "Meta Quest 3 — 10 casques autonomes dernière génération, animés par une équipe XR expérimentée.",
   reveal: {

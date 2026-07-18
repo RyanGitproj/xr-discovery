@@ -27,10 +27,6 @@
   color: var(--color-ink-muted);
 }
 
-.beam {
-  border-radius: var(--radius-cta);
-}
-
 .ctaRow {
   margin-top: 2.5rem;
   display: flex;

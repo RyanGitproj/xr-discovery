@@ -8,7 +8,7 @@
 
 .beam-border {
   position: relative;
-  border-radius: var(--radius-card);
+  border-radius: 0; /* v3 : cards angulaires — plus de rayon sur les cadres */
 }
 
 .beam-border::before {

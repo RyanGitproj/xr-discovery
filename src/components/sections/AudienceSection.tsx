@@ -1,3 +1,4 @@
+import { GeoFrame } from "@/components/fx/GeoFrame";
 import { GlassPanel } from "@/components/fx/GlassPanel";
 import { GlowReactive, GlowReactiveGroup } from "@/components/fx/GlowReactive";
 import { RevealGroup, RevealItem } from "@/components/fx/Reveal";
@@ -30,11 +31,13 @@ export function AudienceSection() {
             </RevealItem>
             <RevealItem className={styles.aNeed}>
               <GlowReactive className={styles.card}>
-                <GlassPanel className={styles.needPanel}>
-                  <p className={styles.kicker}>{audienceSection.need.kicker}</p>
-                  <h3 className={styles.needTitle}>{audienceSection.need.title}</h3>
-                  <p className={styles.needText}>{audienceSection.need.body}</p>
-                </GlassPanel>
+                <GeoFrame variant="frame" shape="chamfer" chamfer={26} className={styles.geo}>
+                  <GlassPanel className={styles.needPanel}>
+                    <p className={styles.kicker}>{audienceSection.need.kicker}</p>
+                    <h3 className={styles.needTitle}>{audienceSection.need.title}</h3>
+                    <p className={styles.needText}>{audienceSection.need.body}</p>
+                  </GlassPanel>
+                </GeoFrame>
               </GlowReactive>
             </RevealItem>
             <RevealItem className={styles.a3}>
@@ -54,18 +57,20 @@ function Card({ card, image }: { card: AudienceCard; image?: ImageSlot }) {
   const Icon = card.icon;
   return (
     <GlowReactive className={styles.card}>
-      <GlassPanel className={styles.panel}>
-        {image !== undefined && (
-          <Figure image={image} flush parallax={-0.12} sizes="(max-width: 768px) 100vw, 384px" />
-        )}
-        <div className={styles.cardBody}>
-          <span className={styles.iconBadge}>
-            <Icon aria-hidden="true" className={styles.icon} />
-          </span>
-          <h3 className={styles.cardTitle}>{card.title}</h3>
-          <p className={styles.cardText}>{card.body}</p>
-        </div>
-      </GlassPanel>
+      <GeoFrame variant="frame" shape="hud" chamfer={14} className={styles.geo}>
+        <GlassPanel className={styles.panel}>
+          {image !== undefined && (
+            <Figure image={image} flush parallax={-0.12} sizes="(max-width: 768px) 100vw, 384px" />
+          )}
+          <div className={styles.cardBody}>
+            <span className={styles.iconBadge}>
+              <Icon aria-hidden="true" className={styles.icon} />
+            </span>
+            <h3 className={styles.cardTitle}>{card.title}</h3>
+            <p className={styles.cardText}>{card.body}</p>
+          </div>
+        </GlassPanel>
+      </GeoFrame>
     </GlowReactive>
   );
 }

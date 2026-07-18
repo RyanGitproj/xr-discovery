@@ -1,11 +1,16 @@
 "use client";
 
+// Comparaison typo — Unbounded chargé uniquement sur ce banc (page-scoped).
+import "@fontsource/unbounded/latin-700.css";
+
 import { AuroraField } from "@/components/fx/AuroraField";
 import { BackgroundBeams } from "@/components/fx/BackgroundBeams";
 import { BeamBorder } from "@/components/fx/BeamBorder";
 import { ContainerScroll } from "@/components/fx/ContainerScroll";
 import { DecryptNumber } from "@/components/fx/DecryptNumber";
+import { Embers } from "@/components/fx/Embers";
 import { EnterRise } from "@/components/fx/EnterRise";
+import { GeoFrame } from "@/components/fx/GeoFrame";
 import { GlassPanel } from "@/components/fx/GlassPanel";
 import { GlowReactive, GlowReactiveGroup } from "@/components/fx/GlowReactive";
 import { GridPulse } from "@/components/fx/GridPulse";
@@ -151,6 +156,75 @@ export default function FxLabPage() {
           section réelle. GlowCursor et ScrollProgress sont globaux (layout / navbar).
         </p>
       </header>
+
+      <LabSection
+        title="Typographie v3 — display à valider"
+        note="La réf. mixe un display bold + un grotesque neutre. Candidats display auto-hébergés (@fontsource) ; corps Inter conservé ; accent Baloo 2 pour les mots ronds. À choisir."
+      >
+        <div style={{ display: "grid", gap: "1.75rem" }}>
+          {[
+            { name: "Sora (défaut)", family: "'Sora', sans-serif" },
+            { name: "Unbounded", family: "'Unbounded', sans-serif" },
+            { name: "Space Grotesk (actuel)", family: "'Space Grotesk', sans-serif" },
+          ].map((f) => (
+            <div key={f.name}>
+              <p className={styles.sectionNote}>{f.name}</p>
+              <p
+                style={{
+                  fontFamily: f.family,
+                  fontWeight: 700,
+                  fontSize: "clamp(1.8rem, 4vw, 3rem)",
+                  lineHeight: 1.02,
+                  textTransform: "uppercase",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                Entrez dans une{" "}
+                <span style={{ fontFamily: "'Baloo 2', cursive", textTransform: "none" }}>
+                  autre réalité
+                </span>
+              </p>
+            </div>
+          ))}
+          <p style={{ fontFamily: "'Inter', sans-serif", color: "var(--color-ink-muted)", maxWidth: "42rem" }}>
+            Corps de texte en Inter — la VR clé en main pour votre centre commercial : 10 casques
+            autonomes, animateurs formés, installation et bilan compris.
+          </p>
+        </div>
+      </LabSection>
+
+      <LabSection
+        title="GeoFrame — géométrie HUD (verre + arête tracée)"
+        note="Formes chanfreinées (clip-path) + arête lumineuse SVG suivant le contour. Verre liquide conservé ; CTA en aplat orange « ticket ». `trace` = reflet focal, recharger pour voir courir l'arête."
+      >
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "1.75rem", alignItems: "center" }}>
+          <GeoFrame shape="hud" chamfer={18} trace>
+            <div style={{ padding: "1.5rem 1.75rem", minWidth: "12rem" }}>
+              <p className={styles.cardTitle}>Card HUD</p>
+              <p className={styles.cardNote}>octogone doux + arête tracée</p>
+            </div>
+          </GeoFrame>
+          <GeoFrame shape="chamfer" chamfer={24}>
+            <div style={{ padding: "1.5rem 1.75rem", minWidth: "11rem" }}>
+              <p className={styles.cardTitle}>Chanfrein</p>
+              <p className={styles.cardNote}>un coin coupé, sobre</p>
+            </div>
+          </GeoFrame>
+          <GeoFrame shape="ticket" chamfer={10} notch={7} variant="solid" trace>
+            <span
+              style={{
+                display: "inline-block",
+                padding: "0.9rem 2rem",
+                fontFamily: "var(--font-display)",
+                fontWeight: 700,
+                color: "var(--color-bg-deep)",
+              }}
+            >
+              Pré-commander
+            </span>
+          </GeoFrame>
+        </div>
+      </LabSection>
 
       <LabSection
         title="Figure — scan holographique"
@@ -372,6 +446,17 @@ export default function FxLabPage() {
       <LabSection title="Sparkles" note="v1.2 — étincelles multicolores, positions déterministes, scale + opacity.">
         <div className={cx(styles.demo, styles.demoH56)}>
           <Sparkles count={18} />
+        </div>
+      </LabSection>
+
+      <LabSection title="Embers" note="v3 — braises incandescentes qui montent en scintillant et dérivent (déterministes, pause hors écran). Remplacent les éclats bokeh froids de la scène de plongée. À gauche densité scène (22), à droite nappe d'ambiance (14).">
+        <div className={styles.grid2}>
+          <div className={cx(styles.demo, styles.demoH56)}>
+            <Embers count={22} />
+          </div>
+          <div className={cx(styles.demo, styles.demoH56)}>
+            <Embers count={14} />
+          </div>
         </div>
       </LabSection>
 

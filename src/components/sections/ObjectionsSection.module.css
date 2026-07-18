@@ -14,8 +14,18 @@
 }
 
 .item {
-  border-radius: var(--radius-card);
-  border: 1px solid var(--glass-stroke);
+  /* Angulaire v3 : chanfrein + bord inset (plus de border-radius). */
+  clip-path: polygon(
+    12px 0,
+    calc(100% - 12px) 0,
+    100% 12px,
+    100% calc(100% - 12px),
+    calc(100% - 12px) 100%,
+    12px 100%,
+    0 calc(100% - 12px),
+    0 12px
+  );
+  box-shadow: inset 0 0 0 1px var(--glass-stroke);
   background: color-mix(in srgb, var(--color-bg-raised) 60%, transparent);
 }
 

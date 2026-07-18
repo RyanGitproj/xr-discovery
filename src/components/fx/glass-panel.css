@@ -1,9 +1,12 @@
 /* Transparent glass: the background remains visible and is blurred.
-   No white gradient or sheen is layered over the surface. */
+   No white gradient or sheen is layered over the surface.
+   v3 : cards ANGULAIRES — border-radius à 0 (directive « plus de radius sur
+   les cards ») ; le matériau (flou/bordure/ombre) est inchangé. Les coins
+   chanfreinés se font via GeoFrame, au cas par cas. */
 .glass-panel {
   position: relative;
   isolation: isolate;
-  border-radius: var(--radius-card);
+  border-radius: 0;
   /* Teinte blanche en dégradé court (haut du panneau uniquement) sur le
      fill sombre : la lumière « pose » sur le verre sans voiler le décor. */
   background:
@@ -15,7 +18,7 @@
   box-shadow:
     0 12px 36px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 0 0 1px rgba(58, 168, 255, 0.04);
+    0 0 0 1px rgba(245, 102, 30, 0.04);
 }
 
 .glass-panel--thin {
@@ -37,19 +40,19 @@
 /* Release the expensive blur only when a card is outside the viewport. */
 .glass-panel.is-offscreen {
   backdrop-filter: none;
-  background: rgba(9, 19, 40, 0.5);
+  background: rgba(32, 16, 12, 0.5);
 }
 
 @media (prefers-reduced-transparency: reduce) {
   .glass-panel,
   .glass-panel--liquid {
-    background: rgb(15, 24, 44);
+    background: rgb(36, 19, 17);
     backdrop-filter: none;
   }
 }
 
 @supports not (backdrop-filter: blur(1px)) {
   .glass-panel {
-    background: rgba(11, 23, 48, 0.92);
+    background: rgba(36, 19, 17, 0.92);
   }
 }

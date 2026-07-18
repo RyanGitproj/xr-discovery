@@ -63,10 +63,6 @@
   gap: 1rem;
 }
 
-.beam {
-  border-radius: var(--radius-cta);
-}
-
 /* --- Scène du casque --- */
 
 /* Tous les enfants du stage sont positionnés en % du carré : la géométrie

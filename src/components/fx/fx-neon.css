@@ -37,10 +37,10 @@
 @supports (-webkit-text-stroke: 1px #fff) {
   .text-outline {
     color: transparent;
-    -webkit-text-stroke: 2px rgba(102, 194, 255, 0.85);
+    -webkit-text-stroke: 2px rgba(255, 154, 60, 0.85);
     text-shadow:
-      0 0 28px rgba(24, 204, 252, 0.3),
-      0 0 64px rgba(255, 78, 205, 0.14);
+      0 0 28px rgba(255, 194, 77, 0.3),
+      0 0 64px rgba(232, 40, 24, 0.14);
   }
 }
 
@@ -81,6 +81,48 @@
   50% {
     opacity: 0.9;
     transform: scale(1);
+  }
+}
+
+/* ---- Embers : braises qui montent en scintillant (v3) ---- */
+
+.ember {
+  position: absolute;
+  border-radius: var(--radius-pill);
+  opacity: 0;
+  animation: ember-rise var(--ember-dur, 12s) linear infinite;
+  animation-delay: var(--ember-delay, 0s);
+}
+
+/* Montée + dérive latérale en 3 temps + flicker — transform/opacity only.
+   -110vh : traverse tout l'écran épinglé quelle que soit sa hauteur. */
+@keyframes ember-rise {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.7);
+  }
+
+  12% {
+    opacity: 0.9;
+  }
+
+  38% {
+    opacity: 0.5;
+    transform: translate(var(--ember-drift, 20px), -38vh) scale(1);
+  }
+
+  62% {
+    opacity: 0.85;
+  }
+
+  80% {
+    opacity: 0.35;
+    transform: translate(calc(var(--ember-drift, 20px) * -0.6), -82vh) scale(0.9);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(var(--ember-drift, 20px), -110vh) scale(0.55);
   }
 }
 
@@ -134,7 +176,7 @@
   pointer-events: none;
   background: repeating-linear-gradient(
     0deg,
-    rgba(102, 194, 255, 0.07) 0 1px,
+    rgba(255, 154, 60, 0.07) 0 1px,
     transparent 1px 4px
   );
   mix-blend-mode: screen;
@@ -144,8 +186,8 @@
   pointer-events: none;
   background: linear-gradient(
     0deg,
-    rgba(24, 204, 252, 0.3),
-    rgba(174, 72, 255, 0.1) 55%,
+    rgba(255, 194, 77, 0.3),
+    rgba(245, 67, 28, 0.1) 55%,
     transparent
   );
   clip-path: polygon(40% 100%, 60% 100%, 97% 0%, 3% 0%);
@@ -173,6 +215,11 @@
     animation: none;
     opacity: 0.55;
     transform: scale(0.8);
+  }
+
+  .ember {
+    animation: none;
+    opacity: 0.35;
   }
 
   .neural-node {

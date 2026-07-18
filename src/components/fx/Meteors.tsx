@@ -2,9 +2,9 @@ import { cx } from "@/lib/cx";
 import { pseudoRandom } from "@/lib/pseudoRandom";
 
 const METEOR_COLORS = [
-  { core: "#66c2ff", trail: "rgba(102, 194, 255, 0.6)" },
-  { core: "#ff4ecd", trail: "rgba(255, 78, 205, 0.55)" },
-  { core: "#ae48ff", trail: "rgba(174, 72, 255, 0.55)" },
+  { core: "#ff9a3c", trail: "rgba(255, 154, 60, 0.6)" },
+  { core: "#e82818", trail: "rgba(232, 40, 24, 0.55)" },
+  { core: "#f5431c", trail: "rgba(245, 67, 28, 0.55)" },
 ];
 
 type MeteorsProps = {

@@ -11,22 +11,28 @@
 @import "../components/fx/fx-neon.css" layer(components);
 
 :root {
-  --color-bg-deep: #050a18;
-  --color-bg-raised: #0b1730;
-  --color-ink: #f4f8ff;
-  --color-ink-muted: #9fb4d4;
-  --color-accent: #3aa8ff;
-  --color-accent-hot: #66c2ff;
-  --color-accent-deep: #1b6fd6;
+  /* Palette v3 « INFINITE V.RETAIL » — chaude orange/rouge sur fond sombre
+     chaud (bascule depuis le froid cyan/bleu v1.2). */
+  --color-bg-deep: #0d0706;
+  --color-bg-raised: #241311;
+  --color-ink: #fbf3ec;
+  --color-ink-muted: #c2a79b;
+  --color-accent: #f5661e;
+  --color-accent-hot: #ff9a3c;
+  --color-accent-deep: #a63612;
 
-  /* Erreurs formulaire — lisible sur bg-deep sans hurler. */
+  /* Erreurs formulaire — rose gardé DISTINCT de l'orange de marque. */
   --color-danger: #fca5a5;
 
-  /* Palette néon v1.2 — signature « comète » cyan → violet → rose */
-  --color-fx-cyan: #18ccfc;
-  --color-fx-indigo: #6344f5;
-  --color-fx-violet: #ae48ff;
-  --color-fx-pink: #ff4ecd;
+  /* Palette néon v3 — signature « comète » ambre → orange → rouge, + une
+     pointe turquoise rare. NB : les noms --color-fx-cyan/…/pink sont des
+     labels POSITIONNELS de dégradé (valeurs chaudes) — renommage propre
+     ambre/flamme/rouge noté dans TODO.md. */
+  --color-fx-cyan: #ffc24d;
+  --color-fx-indigo: #e85a1c;
+  --color-fx-violet: #f5431c;
+  --color-fx-pink: #e82818;
+  --color-fx-teal: #2fbfa8;
 
   --radius-card: 20px;
   --radius-cta: 14px; /* boutons : rectangle arrondi — la pilule fait déborder beam/glow */
@@ -36,26 +42,28 @@
   --radius-soft: 28px;
   --radius-tight: 12px;
 
-  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-display: "Sora", "Space Grotesk", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
+  /* Accent titres — mots ronds mis en avant (à composer sur des segments). */
+  --font-accent: "Baloo 2", "Sora", system-ui, sans-serif;
 
   /* Verre sombre quasi incolore : le décor reste visible et est flouté.
      Opacité basse assumée — c'est le fond liquide flouté qui fait le verre. */
-  --glass-fill: rgba(9, 19, 40, 0.17);
+  --glass-fill: rgba(32, 16, 12, 0.2);
   /* Voile blanc TRÈS faible en dégradé (jamais un aplat large) + bordure
      neutre 1px : la recette iOS 26 sur fond sombre. */
   --glass-tint: rgba(255, 255, 255, 0.06);
   --glass-edge: rgba(255, 255, 255, 0.16);
-  --glass-stroke: rgba(122, 180, 255, 0.28);
-  --edge-lit: rgba(58, 168, 255, 0.65);
+  --glass-stroke: rgba(255, 150, 90, 0.24);
+  --edge-lit: rgba(245, 102, 30, 0.62);
   --glass-blur: 12px; /* plage DA 12-20px — 12 retenu après mesure FPS (chap. 8) */
-  --glow-soft: 0 0 40px rgba(58, 168, 255, 0.3);
-  --glow-strong: 0 0 80px rgba(58, 168, 255, 0.45);
+  --glow-soft: 0 0 40px rgba(245, 102, 30, 0.3);
+  --glow-strong: 0 0 80px rgba(245, 102, 30, 0.45);
   /* Halo du pack mis en avant (remplace le box-shadow du verre, arête incluse). */
   --glow-featured:
-    0 0 60px rgba(99, 68, 245, 0.35),
-    0 0 100px rgba(255, 78, 205, 0.18),
-    inset 0 1px 0 rgba(122, 180, 255, 0.14);
+    0 0 60px rgba(232, 90, 28, 0.35),
+    0 0 100px rgba(232, 40, 24, 0.18),
+    inset 0 1px 0 rgba(255, 150, 90, 0.14);
 
   --dur-fast: 180ms; /* micro-interactions */
   --dur-med: 420ms; /* reveals            */
@@ -82,6 +90,11 @@
 
   html {
     -webkit-text-size-adjust: 100%;
+
+    /* Les cibles d'ancre s'arrêtent sous la navbar fixe (4rem) — sert le
+       saut natif (reduced-motion / sans JS) ; le chemin Lenis applique le
+       même décalage via ANCHOR_OFFSET_PX (SmoothScroll). */
+    scroll-padding-top: 4rem;
   }
 
   body {

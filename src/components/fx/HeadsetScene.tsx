@@ -8,9 +8,10 @@ import type { Group } from "three";
 import { Quest3Gltf } from "./Quest3Gltf";
 import styles from "./HeadsetScene.module.css";
 
-const CYAN = "#18ccfc";
-const VIOLET = "#ae48ff";
-const PINK = "#ff4ecd";
+const AMBER = "#ffc24d";
+const ORANGE = "#f5661e";
+const RED = "#e82818";
+const TEAL = "#2fbfa8"; /* contre-jour froid — la pointe turquoise */
 
 type Choreography = {
   progress: MotionValue<number>;
@@ -97,15 +98,15 @@ export function HeadsetScene({ progress, tiltX, tiltY, dpr = 1.5, active = true 
       >
         <PerspectiveCamera makeDefault position={[0, 0, 4]} fov={42} />
         <ambientLight intensity={0.4} />
-        <directionalLight position={[2, 3, 4]} intensity={1.1} color="#d6e6ff" />
-        <pointLight position={[-3.2, -1, 2.5]} intensity={40} distance={14} color={VIOLET} />
-        <pointLight position={[3.2, 1.4, 1.5]} intensity={34} distance={14} color={CYAN} />
+        <directionalLight position={[2, 3, 4]} intensity={1.1} color="#ffe9d6" />
+        <pointLight position={[-3.2, -1, 2.5]} intensity={40} distance={14} color={ORANGE} />
+        <pointLight position={[3.2, 1.4, 1.5]} intensity={34} distance={14} color={TEAL} />
         {/* Cubemap de réflexions rendu UNE fois (frames={1}) — glossy néon
             sur la visière, sans HDR distant. */}
         <Environment resolution={128} frames={1}>
-          <Lightformer intensity={2.4} color={CYAN} position={[-3, 1, 3]} scale={[5, 5, 1]} />
-          <Lightformer intensity={2.4} color={PINK} position={[3, -1, 3]} scale={[5, 5, 1]} />
-          <Lightformer intensity={1.2} color="#ffffff" position={[0, 3, 2]} scale={[3, 2, 1]} />
+          <Lightformer intensity={2.4} color={AMBER} position={[-3, 1, 3]} scale={[5, 5, 1]} />
+          <Lightformer intensity={2.4} color={RED} position={[3, -1, 3]} scale={[5, 5, 1]} />
+          <Lightformer intensity={1.2} color="#fff4e8" position={[0, 3, 2]} scale={[3, 2, 1]} />
         </Environment>
         <Rig progress={progress} tiltX={tiltX} tiltY={tiltY} />
       </Canvas>

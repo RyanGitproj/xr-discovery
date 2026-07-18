@@ -5,7 +5,8 @@ import { cx } from "@/lib/cx";
 import { pseudoRandom } from "@/lib/pseudoRandom";
 import { useOffscreenPause } from "@/lib/motion/useOffscreenPause";
 
-const COLORS = ["#18ccfc", "#ff4ecd", "#ae48ff", "#f4f8ff"];
+/* Palette v3 : ambre, rouge, flamme, blanc chaud + une pointe teal rare. */
+const COLORS = ["#ffc24d", "#e82818", "#f5431c", "#fff4e8", "#2fbfa8"];
 
 type SparklesProps = {
   /** Hero : 12-16 ; CTA final : 8-10. */

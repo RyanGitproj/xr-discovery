@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
-import { BeamBorder } from "@/components/fx/BeamBorder";
 import { DecryptNumber } from "@/components/fx/DecryptNumber";
+import { GeoFrame } from "@/components/fx/GeoFrame";
 import { GlassPanel } from "@/components/fx/GlassPanel";
 import { LampHeader } from "@/components/fx/LampHeader";
 import { Reveal, RevealGroup, RevealItem } from "@/components/fx/Reveal";
@@ -47,7 +47,6 @@ function PackCard({ pack }: { pack: Pack }) {
   const image = packImages[pack.id];
   const panel = (
     <GlassPanel className={cx(styles.panel, pack.featured === true && styles.panelFeatured)}>
-      {pack.badge !== undefined && <Pill className={styles.badge}>{pack.badge}</Pill>}
       {image !== undefined && (
         <Figure
           image={image}
@@ -82,13 +81,17 @@ function PackCard({ pack }: { pack: Pack }) {
 
   return (
     <TiltCard className={styles.tilt}>
-      {pack.featured === true ? (
-        <BeamBorder intensity="active" className={styles.beam}>
-          {panel}
-        </BeamBorder>
-      ) : (
-        panel
-      )}
+      <GeoFrame
+        variant="frame"
+        shape="hud"
+        chamfer={pack.featured === true ? 22 : 14}
+        trace={pack.featured === true}
+        className={styles.geo}
+      >
+        {panel}
+      </GeoFrame>
+      {/* Hors du GeoFrame : à cheval sur le bord, il serait rogné par le clip. */}
+      {pack.badge !== undefined && <Pill className={styles.badge}>{pack.badge}</Pill>}
     </TiltCard>
   );
 }

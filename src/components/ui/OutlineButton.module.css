@@ -1,21 +1,32 @@
+/* Bouton secondaire angulaire v3 : ticket-lite (coins coupés, sans encoches)
+   en verre — bord en inset shadow (un border serait coupé par le clip). */
 .button {
   display: inline-flex;
   min-height: 2.75rem;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border-radius: var(--radius-cta);
-  border: 1px solid var(--glass-stroke);
+  clip-path: polygon(
+    11px 0,
+    calc(100% - 11px) 0,
+    100% 11px,
+    100% calc(100% - 11px),
+    calc(100% - 11px) 100%,
+    11px 100%,
+    0 calc(100% - 11px),
+    0 11px
+  );
+  box-shadow: inset 0 0 0 1px var(--glass-stroke);
   background: var(--glass-fill);
   padding: 0.75rem 1.75rem;
   font-family: var(--font-display);
   font-weight: 600;
   transition:
     color var(--dur-fast),
-    border-color var(--dur-fast);
+    box-shadow var(--dur-fast);
 }
 
 .button:hover {
-  border-color: var(--edge-lit);
+  box-shadow: inset 0 0 0 1px var(--edge-lit);
   color: var(--color-accent-hot);
 }

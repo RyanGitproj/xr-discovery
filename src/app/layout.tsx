@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
+// Display v3 : Sora (grotesque géométrique). Space Grotesk conservé pour la
+// comparaison /fx-lab tant que le choix n'est pas figé.
+import "@fontsource/sora/latin-500.css";
+import "@fontsource/sora/latin-600.css";
+import "@fontsource/sora/latin-700.css";
+import "@fontsource/sora/latin-800.css";
 import "@fontsource/space-grotesk/latin-500.css";
 import "@fontsource/space-grotesk/latin-700.css";
+// Accent titres : Baloo 2 (mots ronds, façon « adventures » de la réf.).
+import "@fontsource/baloo-2/latin-700.css";
+import "@fontsource/baloo-2/latin-800.css";
 import "@fontsource/inter/latin-400.css";
 import "@fontsource/inter/latin-500.css";
 import "./globals.css";
@@ -22,7 +31,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr">
       <body>
-        <a href="#contenu" className="skip-link">
+        {/* data-native-anchor : saut instantané + sémantique de focus native
+            (un skip-link ne doit pas être animé). */}
+        <a href="#contenu" className="skip-link" data-native-anchor>
           Aller au contenu
         </a>
         <LiquidBackground />
