@@ -53,8 +53,8 @@
 
 /* Un hue par étape — halos dérivés des tokens fx (filter statique, jamais animé). */
 .hueCyan {
-  color: var(--color-fx-cyan);
-  filter: drop-shadow(0 0 24px color-mix(in srgb, var(--color-fx-cyan) 70%, transparent));
+  color: var(--color-accent-cool);
+  filter: drop-shadow(0 0 24px color-mix(in srgb, var(--color-accent-cool) 70%, transparent));
 }
 
 .hueHot {
@@ -63,8 +63,8 @@
 }
 
 .hueViolet {
-  color: var(--color-fx-violet);
-  filter: drop-shadow(0 0 24px color-mix(in srgb, var(--color-fx-violet) 70%, transparent));
+  color: var(--color-accent-cool-2);
+  filter: drop-shadow(0 0 24px color-mix(in srgb, var(--color-accent-cool-2) 70%, transparent));
 }
 
 .huePink {

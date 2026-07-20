@@ -5,8 +5,9 @@ import { cx } from "@/lib/cx";
 import { pseudoRandom } from "@/lib/pseudoRandom";
 import { useOffscreenPause } from "@/lib/motion/useOffscreenPause";
 
-/* Palette v3 : ambre, rouge, flamme, blanc chaud + une pointe teal rare. */
-const COLORS = ["#ffc24d", "#e82818", "#f5431c", "#fff4e8", "#2fbfa8"];
+/* Palette v3 : ambre, rouge, flamme, blanc chaud, dominante chaude — plus une
+   pointe de froid (turquoise + violet) pour nuancer sans virer arc-en-ciel. */
+const COLORS = ["#ffc24d", "#e82818", "#f5431c", "#fff4e8", "#2fbfa8", "#c18cff"];
 
 type SparklesProps = {
   /** Hero : 12-16 ; CTA final : 8-10. */

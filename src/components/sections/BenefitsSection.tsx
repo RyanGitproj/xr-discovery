@@ -18,7 +18,7 @@ const PLACEMENTS = [styles.b1, styles.b2, styles.b3, styles.b4];
  */
 export function BenefitsSection() {
   return (
-    <section className={`fx-section ${styles.section}`}>
+    <section data-mood="teal" className={`fx-section ${styles.section}`}>
       <div className={styles.container}>
         <SectionHeading kicker={benefitsSection.kicker} title={benefitsSection.title} />
         <RevealGroup className={styles.grid}>

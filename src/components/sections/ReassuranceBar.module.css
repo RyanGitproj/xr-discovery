@@ -43,14 +43,16 @@
   filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-fx-pink) 55%, transparent));
 }
 
+/* Vrais froids (turquoise, violet) : les 5 marqueurs lisent enfin comme
+   3 chauds + 2 froids, pas 5 nuances d'orange. */
 .glowViolet {
-  color: var(--color-fx-violet);
-  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-fx-violet) 55%, transparent));
+  color: var(--color-accent-cool-2);
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-accent-cool-2) 55%, transparent));
 }
 
 .glowCyan {
-  color: var(--color-fx-cyan);
-  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-fx-cyan) 60%, transparent));
+  color: var(--color-accent-cool);
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-accent-cool) 60%, transparent));
 }
 
 .glowHot {

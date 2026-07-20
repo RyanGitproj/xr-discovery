@@ -89,18 +89,20 @@
   inset: 0;
 }
 
+/* Orbites en vrai froid (turquoise / violet) : la scène casque respire le
+   second accent au lieu d'un double cerclage orange. */
 .orbitOuter {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 1px solid color-mix(in srgb, var(--color-fx-cyan) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-accent-cool) 22%, transparent);
 }
 
 .orbitInner {
   position: absolute;
   inset: 2rem;
   border-radius: 50%;
-  border: 1px dashed color-mix(in srgb, var(--color-fx-violet) 25%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--color-accent-cool-2) 30%, transparent);
 }
 
 .neural {
@@ -127,7 +129,7 @@
   font-family: var(--font-display);
   font-size: 0.75rem;
   letter-spacing: 0.3em;
-  color: var(--color-fx-cyan);
+  color: var(--color-accent-cool);
   text-transform: uppercase;
 }
 
@@ -157,7 +159,7 @@
 
 .hudValueCyan {
   composes: hudValue;
-  color: var(--color-fx-cyan);
+  color: var(--color-accent-cool);
 }
 
 .hudValuePink {

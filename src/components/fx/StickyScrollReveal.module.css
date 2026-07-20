@@ -97,12 +97,38 @@
 
 .num {
   margin-right: 0.5rem;
-  color: var(--color-accent-hot);
+  /* Couleur cyclée par position (rythme chaud/froid en scrollant) — voir le
+     cycle nth-child ci-dessous. */
+  color: var(--num-color, var(--color-accent-hot));
   font-variant-numeric: tabular-nums;
 }
 
+/* L'étape active garde SA couleur de cycle et gagne un halo (au lieu d'être
+   toujours rouge) : le numéro actif reste dans le rythme de couleurs. */
 .numActive {
-  color: var(--color-fx-pink);
+  text-shadow: 0 0 12px currentColor;
+}
+
+/* Cycle chaud/froid des numéros : ambre → turquoise → violet → rouge →
+   orange, sur les deux variantes (sticky desktop + grille reduced-motion). */
+.list .item:nth-child(5n + 2),
+.reducedList li:nth-child(5n + 2) {
+  --num-color: var(--color-accent-cool);
+}
+
+.list .item:nth-child(5n + 3),
+.reducedList li:nth-child(5n + 3) {
+  --num-color: var(--color-accent-cool-2);
+}
+
+.list .item:nth-child(5n + 4),
+.reducedList li:nth-child(5n + 4) {
+  --num-color: var(--color-fx-pink);
+}
+
+.list .item:nth-child(5n + 5),
+.reducedList li:nth-child(5n + 5) {
+  --num-color: var(--color-accent);
 }
 
 .body {

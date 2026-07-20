@@ -6,13 +6,16 @@
 
 .holo-text {
   color: var(--color-accent-hot); /* fallback sans background-clip: text */
+  /* Stops surchargeables (--holo-1..4) : une section « froide » (data-mood)
+     injecte son accent dans --holo-3 pour teinter SON titre, sans toucher
+     les titres chauds. Défauts = comète de marque. */
   background-image: linear-gradient(
     100deg,
-    var(--color-accent-hot) 0%,
-    var(--color-fx-cyan) 28%,
-    var(--color-fx-violet) 55%,
-    var(--color-fx-pink) 78%,
-    var(--color-accent-hot) 100%
+    var(--holo-1, var(--color-accent-hot)) 0%,
+    var(--holo-2, var(--color-fx-cyan)) 28%,
+    var(--holo-3, var(--color-fx-violet)) 55%,
+    var(--holo-4, var(--color-fx-pink)) 78%,
+    var(--holo-1, var(--color-accent-hot)) 100%
   );
   background-size: 220% 100%;
   background-clip: text;

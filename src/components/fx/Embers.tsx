@@ -5,8 +5,9 @@ import { cx } from "@/lib/cx";
 import { pseudoRandom } from "@/lib/pseudoRandom";
 import { useOffscreenPause } from "@/lib/motion/useOffscreenPause";
 
-/* Braises : chaud uniquement (la pointe teal reste aux Sparkles). */
-const COLORS = ["#ffc24d", "#f5661e", "#f5431c", "#e82818"];
+/* Braises : dominante chaude + pointes froides (turquoise, violet) — casse
+   la monotonie orange pour que le second accent froid paraisse natif. */
+const COLORS = ["#ffc24d", "#f5661e", "#f5431c", "#e82818", "#2fbfa8", "#c18cff"];
 
 type EmbersProps = {
   /** Avant-plan de scène : ~34 ; nappe d'ambiance : ~20. */

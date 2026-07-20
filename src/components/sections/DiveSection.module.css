@@ -68,15 +68,18 @@
   background: var(--color-bg-deep);
 }
 
+/* « Boum magique » iridescent : cœur blanc → turquoise → violet (vrais froids)
+   — un éclat d'énergie magique qui tranche sur l'embrasement braise, plutôt
+   qu'un flash chaud de plus. */
 .bloom {
   position: absolute;
   inset: 0;
   background: radial-gradient(
     circle at 50% 48%,
     var(--color-ink) 0%,
-    var(--color-fx-cyan) 28%,
-    var(--color-fx-violet) 54%,
-    transparent 74%
+    var(--color-accent-cool) 30%,
+    var(--color-accent-cool-2) 56%,
+    transparent 76%
   );
 }
 

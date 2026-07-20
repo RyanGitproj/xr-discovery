@@ -18,7 +18,7 @@ import styles from "./FinalCtaSection.module.css";
  */
 export function FinalCtaSection() {
   return (
-    <section className={`fx-section ${styles.section}`}>
+    <section data-mood="violet" className={`fx-section ${styles.section}`}>
       <BackgroundBeams intensity="active" />
       <Sparkles count={10} />
       <Meteors count={2} />

@@ -34,6 +34,13 @@
   --color-fx-pink: #e82818;
   --color-fx-teal: #2fbfa8;
 
+  /* Second accent FROID (nuance chaud/froid, 20/07/2026) — braise reste
+     dominant ; ces teintes cassent la monotonie orange et s'accordent aux
+     reflets cyan/magenta des casques sur les photos. Appliquées en touches
+     via --section-accent (map [data-mood] ci-dessous), jamais en fond. */
+  --color-accent-cool: #2fbfa8; /* turquoise (= --color-fx-teal) */
+  --color-accent-cool-2: #c18cff; /* violet */
+
   /* Code couleur des 8 offres (ids = OFFER_IDS de config/offers.ts — test
      gardien dans offers.test.ts). Braise + accents étendus de même
      intensité ; appliqués en TOUCHES via --offer-accent (map ci-dessous),
@@ -128,6 +135,36 @@
 
 [data-offer-accent="marques-evenementiel"] {
   --offer-accent: var(--color-offer-marques-evenementiel);
+}
+
+/* Humeur d'une section : data-mood pose --section-accent, consommé par le
+   kicker, le titre holo (--holo-3) et les arêtes GeoFrame du sous-arbre.
+   Défaut (pas de data-mood) = accent chaud de marque. */
+[data-mood="warm"] {
+  --section-accent: var(--color-accent);
+}
+
+[data-mood="teal"] {
+  --section-accent: var(--color-accent-cool);
+}
+
+[data-mood="violet"] {
+  --section-accent: var(--color-accent-cool-2);
+}
+
+/* Les sections froides teintent le GROS titre holo vers leur accent : le
+   dégradé lit clairement en turquoise/violet (stops 28→78 % = l'accent, cœur
+   éclairci), avec une accroche braise conservée aux deux extrémités (0/100 %
+   = --holo-1 par défaut, chaud). Les sections chaudes gardent la comète. */
+[data-mood="teal"],
+[data-mood="violet"] {
+  --holo-2: var(--section-accent);
+  --holo-3: color-mix(in srgb, var(--section-accent) 62%, white);
+  --holo-4: var(--section-accent);
+  --geo-edge-c1: var(--section-accent);
+  --geo-edge-c2: color-mix(in srgb, var(--section-accent) 55%, var(--color-accent));
+  --geo-edge-c3: var(--section-accent);
+  --geo-halo: var(--section-accent);
 }
 
 /* Reset minimal (remplace le preflight Tailwind) : uniquement ce sur quoi

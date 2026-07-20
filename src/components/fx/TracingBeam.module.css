@@ -78,8 +78,25 @@
 
 .num {
   margin-right: 0.5rem;
-  color: var(--color-accent-hot);
+  /* Couleur cyclée par position (rythme chaud/froid) — cycle nth-child ci-dessous. */
+  color: var(--num-color, var(--color-accent-hot));
   font-variant-numeric: tabular-nums;
+}
+
+.item:nth-child(5n + 2) {
+  --num-color: var(--color-accent-cool);
+}
+
+.item:nth-child(5n + 3) {
+  --num-color: var(--color-accent-cool-2);
+}
+
+.item:nth-child(5n + 4) {
+  --num-color: var(--color-fx-pink);
+}
+
+.item:nth-child(5n + 5) {
+  --num-color: var(--color-accent);
 }
 
 .body {

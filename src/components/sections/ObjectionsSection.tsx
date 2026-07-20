@@ -11,7 +11,7 @@ import styles from "./ObjectionsSection.module.css";
  */
 export function ObjectionsSection() {
   return (
-    <section id="questions" className={`fx-section ${styles.section}`}>
+    <section id="questions" data-mood="violet" className={`fx-section ${styles.section}`}>
       <div className={styles.container}>
         <SectionHeading kicker={objectionsSection.kicker} title={objectionsSection.title} />
         <RevealGroup className={styles.list}>

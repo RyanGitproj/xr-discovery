@@ -33,7 +33,7 @@ export function DeploymentSection() {
   return (
     // PAS de fx-section ni d'overflow-hidden ici : contain/overflow sur un
     // ancêtre casse le position:sticky du StickyScrollReveal.
-    <section id="deploiement" className={styles.section}>
+    <section id="deploiement" data-mood="teal" className={styles.section}>
       <div className={styles.heading}>
         <SectionHeading kicker={deploymentSection.kicker} title={deploymentSection.title} />
       </div>

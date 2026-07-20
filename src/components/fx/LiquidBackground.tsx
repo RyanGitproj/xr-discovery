@@ -171,6 +171,12 @@ void main() {
   float t = u_time * 0.07;
   float s = u_scroll;
 
+  // Dérive de température au scroll (nuance chaud/froid, 20/07) : le fond se
+  // rafraîchit doucement au cœur du parcours (offres → déploiement) puis
+  // revient au chaud. Gaussienne centrée ~mi-page, amplitude faible — c'est
+  // une nuance d'ambiance, pas une bascule. Chaud (cool≈0) en haut/bas.
+  float cool = exp(-pow((s - 6.0) / 4.5, 2.0));
+
   // Distorsion liquide : le champ entier ondule, le scroll le remue.
   vec2 warp = vec2(
     noise(p * 1.4 + vec2(t, -t * 0.6) + s * 0.45),
@@ -186,10 +192,14 @@ void main() {
   vec2 c3 = vec2(aspect * (0.50 + 0.20 * sin(t * 0.60 + 2.1)), 0.12 + 0.14 * cos(t * 1.00) + 0.10 * sin(s * 2.4 + 2.6));
   vec2 c4 = vec2(aspect * (0.12 + 0.13 * cos(t * 0.75 + 4.2)), 0.30 + 0.16 * sin(t * 0.85) + 0.12 * sin(s * 1.8 + 4.0));
 
+  /* c1 (dominante, haut de page) reste chaude ; c2/c3 tirent vers le froid au
+     cœur du parcours ; c4 (teal) se renforce au milieu. */
   col += vec3(0.961, 0.400, 0.118) * 0.26 * glow(q, c1, 0.58); /* accent orange #f5661e */
-  col += vec3(0.910, 0.353, 0.110) * 0.24 * glow(q, c2, 0.62); /* orange profond #e85a1c */
-  col += vec3(0.910, 0.157, 0.094) * 0.17 * glow(q, c3, 0.55); /* rouge #e82818 */
-  col += vec3(0.184, 0.749, 0.659) * 0.13 * glow(q, c4, 0.50); /* pointe teal rare #2fbfa8 */
+  col += mix(vec3(0.910, 0.353, 0.110), vec3(0.184, 0.749, 0.659), cool * 0.32)
+    * 0.24 * glow(q, c2, 0.62); /* orange profond → turquoise */
+  col += mix(vec3(0.910, 0.157, 0.094), vec3(0.757, 0.549, 1.000), cool * 0.42)
+    * 0.17 * glow(q, c3, 0.55); /* rouge → violet #c18cff */
+  col += vec3(0.184, 0.749, 0.659) * (0.13 + 0.09 * cool) * glow(q, c4, 0.50); /* teal renforcé */
 
   // Lumière du pointeur : discrète, elle lit comme le halo curseur qui
   // se réfracte dans la profondeur.

@@ -5,6 +5,8 @@ const METEOR_COLORS = [
   { core: "#ff9a3c", trail: "rgba(255, 154, 60, 0.6)" },
   { core: "#e82818", trail: "rgba(232, 40, 24, 0.55)" },
   { core: "#f5431c", trail: "rgba(245, 67, 28, 0.55)" },
+  { core: "#2fbfa8", trail: "rgba(47, 191, 168, 0.5)" },
+  { core: "#c18cff", trail: "rgba(193, 140, 255, 0.5)" },
 ];
 
 type MeteorsProps = {
