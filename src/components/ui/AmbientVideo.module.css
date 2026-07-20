@@ -1,0 +1,57 @@
+.root {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+/* Portrait contenu : hauteur bornée en fraction d'écran, ratio réservé par
+   les dimensions intrinsèques (zéro CLS). Coins adoucis, fond sombre le
+   temps du chargement. */
+.video {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: clamp(20rem, 58vh, 34rem);
+  aspect-ratio: 900 / 1126;
+  border-radius: var(--radius-tight);
+  background: var(--color-bg-deep);
+  object-fit: cover;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.42);
+}
+
+/* Bouton son : verre discret, coin de la vidéo. */
+.sound {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-bg-deep) 62%, transparent);
+  box-shadow: inset 0 0 0 1px var(--glass-edge);
+  color: var(--color-ink);
+  cursor: pointer;
+  backdrop-filter: blur(var(--glass-blur));
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.sound:hover {
+  color: var(--color-accent-hot);
+  box-shadow: inset 0 0 0 1px var(--edge-lit);
+}
+
+.sound:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.soundIcon {
+  width: 1.125rem;
+  height: 1.125rem;
+}

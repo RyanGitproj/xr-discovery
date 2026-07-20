@@ -13,6 +13,28 @@ export type ImageSlot = {
   height: number;
 };
 
+export type VideoSlot = {
+  webm: string;
+  mp4: string;
+  /** Frame de démarrage : ratio réservé (zéro CLS) + fallback reduced-motion. */
+  poster: ImageSlot;
+};
+
+/**
+ * Démo casque (portrait) du CTA final — convertie de docs/CASQUE VR3.mp4
+ * (ffmpeg : VP9/WebM + H.264/MP4, 900px, ~5 Mo, lazy après first paint).
+ */
+export const casqueVideo: VideoSlot = {
+  webm: "/videos/casque-vr.webm",
+  mp4: "/videos/casque-vr.mp4",
+  poster: {
+    src: "/videos/casque-vr-poster.webp",
+    alt: "Démonstration du casque VR Meta Quest 3 en action",
+    width: 900,
+    height: 1126,
+  },
+};
+
 /** Logo officiel (lockup mascotte + wordmark, alpha) — navbar et footer. */
 export const logoImage: ImageSlot = {
   src: "/images/logo-xr-vr-discovery.webp",

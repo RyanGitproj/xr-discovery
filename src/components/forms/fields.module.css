@@ -47,6 +47,21 @@
     background-color var(--dur-fast);
 }
 
+/* Option avec icône (secteur) : icône au-dessus du libellé, même langage
+   que les tuiles de la section Offres. */
+.cardWithIcon {
+  flex-direction: column;
+  gap: 0.375rem;
+  padding: 0.75rem 0.625rem;
+}
+
+.cardIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  color: var(--offer-accent, var(--color-accent));
+}
+
 /* --offer-accent : posé par data-offer-accent sur le label (options secteur
    et pack) — fallback = accent de marque, comportement inchangé ailleurs. */
 .card:hover {

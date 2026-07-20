@@ -16,7 +16,8 @@ import {
   PACK_NONE_LABEL,
   SECTEUR_LABELS,
 } from "@/config/leadForm";
-import { getOffer } from "@/config/offers";
+import { MoreHorizontal } from "lucide-react";
+import { OFFERS, getOffer } from "@/config/offers";
 import { formatAriary } from "@/lib/format/ariary";
 import { useOfferSelection } from "@/lib/offers/selection";
 import { readAttribution } from "@/lib/tracking/attribution";
@@ -29,11 +30,18 @@ function toOptions<V extends string>(labels: Record<V, string>): { value: V; lab
   return (Object.keys(labels) as V[]).map((value) => ({ value, label: labels[value] }));
 }
 
-/** Options secteur : chaque offre porte son accent couleur (« autre » reste
-    sur l'accent de marque). */
-const SECTEUR_OPTIONS = toOptions(SECTEUR_LABELS).map((option) =>
-  option.value === "autre" ? option : { ...option, accent: option.value },
-);
+/** Options secteur : chaque offre porte son accent couleur ET son icône
+    (mêmes que les tuiles de la section Offres) ; « autre » reste sur
+    l'accent de marque. */
+const SECTEUR_OPTIONS = [
+  ...OFFERS.map((offer) => ({
+    value: offer.id as Lead["secteur"],
+    label: offer.name,
+    accent: offer.id,
+    icon: offer.icon,
+  })),
+  { value: "autre" as Lead["secteur"], label: SECTEUR_LABELS.autre, icon: MoreHorizontal },
+];
 
 /**
  * Garde anti double-clic : le bouton submit REMPLACE « Continuer » au même
@@ -45,10 +53,11 @@ const SECTEUR_OPTIONS = toOptions(SECTEUR_LABELS).map((option) =>
 const NAV_GUARD_MS = 500;
 
 /**
- * Formulaire court « qui conclut » : 2 étapes — qualification (4 questions)
- * puis coordonnées (email et téléphone international obligatoires). Même
- * schéma Zod que le serveur ; l'attribution premier-touchpoint (UTM/pub)
- * est jointe à la soumission.
+ * Formulaire court « qui conclut » : 3 étapes — secteur + pack (icônes des
+ * offres), projet (objectif, budget, période, participants), puis
+ * coordonnées (email et téléphone international obligatoires). Même schéma
+ * Zod que le serveur ; l'attribution premier-touchpoint (UTM/pub) est
+ * jointe à la soumission.
  */
 export function LeadForm() {
   const [step, setStep] = useState(0);
@@ -175,7 +184,7 @@ export function LeadForm() {
         {FORM_STEPS[step].title}
       </h3>
 
-      <div className={cx(styles.fields, step === 1 && styles.fieldsTwoCol)}>
+      <div className={cx(styles.fields, step === 2 && styles.fieldsTwoCol)}>
         {step === 0 && (
           <>
             <RadioCardGroup
@@ -194,6 +203,11 @@ export function LeadForm() {
                 error={fieldError("pack")}
               />
             )}
+          </>
+        )}
+
+        {step === 1 && (
+          <>
             <RadioCardGroup
               legend={FIELD_LABELS.objectif}
               options={toOptions(OBJECTIF_LABELS)}
@@ -216,10 +230,17 @@ export function LeadForm() {
               error={fieldError("periode")}
               required
             />
+            <TextField
+              label={FIELD_LABELS.participants}
+              inputMode="numeric"
+              placeholder="Ex. : 200"
+              registration={registerField("participants")}
+              error={fieldError("participants")}
+            />
           </>
         )}
 
-        {step === 1 && (
+        {step === 2 && (
           <>
             <TextField
               label={FIELD_LABELS.nom}
@@ -244,13 +265,6 @@ export function LeadForm() {
               error={fieldError("email")}
               required
               className={styles.spanFullMobile}
-            />
-            <TextField
-              label={FIELD_LABELS.participants}
-              inputMode="numeric"
-              placeholder="Ex. : 200"
-              registration={registerField("participants")}
-              error={fieldError("participants")}
             />
             <TextField
               label={FIELD_LABELS.entreprise}

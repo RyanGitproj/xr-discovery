@@ -1,3 +1,4 @@
+import type { LucideIcon } from "lucide-react";
 import type { Control, FieldPath, FieldValues, UseFormRegisterReturn } from "react-hook-form";
 import PhoneInputHookForm from "react-phone-number-input/react-hook-form";
 import "react-phone-number-input/style.css";
@@ -9,6 +10,8 @@ type Option = {
   label: string;
   /** Id d'offre (data-offer-accent, cf. globals.css) : teinte l'état coché. */
   accent?: string;
+  /** Icône au-dessus du libellé (options secteur — mêmes que les tuiles d'offre). */
+  icon?: LucideIcon;
 };
 
 /** Astérisque des champs obligatoires (convention * — jamais de mention
@@ -51,12 +54,18 @@ export function RadioCardGroup({
         {required && <RequiredMark />}
       </legend>
       <div className={cx(styles.grid, columns === 3 && styles.grid3)}>
-        {options.map((option) => (
-          <label key={option.value} data-offer-accent={option.accent} className={styles.option}>
-            <input type="radio" value={option.value} {...registration} className={styles.radio} />
-            <span className={styles.card}>{option.label}</span>
-          </label>
-        ))}
+        {options.map((option) => {
+          const Icon = option.icon;
+          return (
+            <label key={option.value} data-offer-accent={option.accent} className={styles.option}>
+              <input type="radio" value={option.value} {...registration} className={styles.radio} />
+              <span className={cx(styles.card, Icon !== undefined && styles.cardWithIcon)}>
+                {Icon !== undefined && <Icon aria-hidden="true" className={styles.cardIcon} />}
+                {option.label}
+              </span>
+            </label>
+          );
+        })}
       </div>
       {error !== undefined && (
         <p id={errorId} role="alert" className={styles.error}>

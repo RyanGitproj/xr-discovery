@@ -2,9 +2,9 @@ import { OFFER_LABELS } from "@/config/offers";
 import type { Lead } from "@/lib/validations/lead";
 
 /**
- * Libellés français du formulaire court « qui conclut » (2 étapes). Les
- * VALEURS vivent dans lib/validations/lead.ts (schéma unique) — ici
- * uniquement la présentation.
+ * Libellés français du formulaire court « qui conclut » (3 étapes :
+ * secteur/pack → projet → coordonnées). Les VALEURS vivent dans
+ * lib/validations/lead.ts (schéma unique) — ici uniquement la présentation.
  */
 
 export const SECTEUR_LABELS: Record<Lead["secteur"], string> = {
@@ -33,7 +33,7 @@ export const BUDGET_LABELS: Record<Lead["budget"], string> = {
 /** Libellés nus — l'obligatoire est marqué par « * » (prop `required` des
     champs), jamais par une mention entre parenthèses. */
 export const FIELD_LABELS: Record<keyof Lead, string> = {
-  secteur: "Votre secteur",
+  secteur: "Vous êtes",
   pack: "Pack envisagé",
   objectif: "Objectif principal",
   budget: "Budget",
@@ -52,9 +52,7 @@ export type FormStep = {
 };
 
 export const FORM_STEPS: readonly FormStep[] = [
-  { title: "Votre projet", fields: ["secteur", "pack", "objectif", "budget", "periode"] },
-  {
-    title: "Vos coordonnées",
-    fields: ["nom", "telephone", "email", "participants", "entreprise", "fonction"],
-  },
+  { title: "Votre secteur", fields: ["secteur", "pack"] },
+  { title: "Votre projet", fields: ["objectif", "budget", "periode", "participants"] },
+  { title: "Vos coordonnées", fields: ["nom", "telephone", "email", "entreprise", "fonction"] },
 ];

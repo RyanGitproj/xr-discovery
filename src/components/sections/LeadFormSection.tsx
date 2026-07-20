@@ -5,7 +5,7 @@ import { LeadForm } from "@/components/forms/LeadForm";
 import styles from "./LeadFormSection.module.css";
 
 /**
- * Section 10 du blueprint : formulaire court « qui conclut » (2 étapes,
+ * Section 10 du blueprint : formulaire court « qui conclut » (3 étapes,
  * persistance Supabase) dans un GlassPanel. Focus ring en --accent.
  */
 export function LeadFormSection() {
@@ -15,7 +15,7 @@ export function LeadFormSection() {
         <SectionHeading
           kicker="Votre devis"
           title="Parlez-nous de votre projet"
-          subtitle="2 étapes, 30 secondes."
+          subtitle="3 étapes, 30 secondes."
           size="compact"
         />
         <Reveal className={styles.formWrap}>

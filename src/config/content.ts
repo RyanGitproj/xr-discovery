@@ -223,8 +223,9 @@ export const deploymentSection = {
 export const finalCtaSection = {
   title: "Créez l'événement avec la VR",
   subtitle:
-    "Racontez-nous votre projet : nous revenons vers vous rapidement avec la solution adaptée.",
-  ctaPrimary: "Demander un devis",
+    "Une immersion Meta Quest 3 comme si vous y étiez — le formulaire de devis est juste en dessous.",
+  soundOnLabel: "Activer le son",
+  soundOffLabel: "Couper le son",
 } as const;
 
 export const footerContent = {
