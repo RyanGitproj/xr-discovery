@@ -394,6 +394,25 @@
   color: var(--color-ink);
 }
 
+/* Banc TapHint : main centrée, contrôles regroupés (tiltButton dé-positionné). */
+.tapHintDemo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tapHintControls {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tapHintControls .tiltButton {
+  position: static;
+}
+
 @media (min-width: 768px) {
   .grid2 {
     grid-template-columns: repeat(2, 1fr);

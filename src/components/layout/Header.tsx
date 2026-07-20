@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import { GlassPanel } from "@/components/fx/GlassPanel";
 import { ScrollProgress } from "@/components/fx/ScrollProgress";
 import { ShimmerCTA } from "@/components/fx/ShimmerCTA";
 import { navLinks } from "@/config/content";
 import { cx } from "@/lib/cx";
+import { logoImage } from "@/config/images";
 import { scrollToSection, scrollToTop } from "@/lib/scrollToSection";
 import styles from "./Header.module.css";
 
@@ -24,8 +26,15 @@ export function Header() {
       <GlassPanel thin degradeOffscreen={false} className={styles.panel}>
         <div className={cx(styles.bar, compact && styles.compact)}>
           <button type="button" className={styles.logo} onClick={scrollToTop}>
-            <span className={styles.logoMark}>XR</span>
-            <span>VR Discovery</span>
+            <Image
+              src={logoImage.src}
+              alt={logoImage.alt}
+              width={logoImage.width}
+              height={logoImage.height}
+              priority
+              unoptimized
+              className={styles.logoImg}
+            />
           </button>
           <nav aria-label="Navigation principale" className={styles.nav}>
             {navLinks.map((link) => (

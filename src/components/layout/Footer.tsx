@@ -1,6 +1,7 @@
+import Image from "next/image";
 import { GridPulse } from "@/components/fx/GridPulse";
-import { Pill } from "@/components/ui/Pill";
 import { footerContent } from "@/config/content";
+import { logoImage } from "@/config/images";
 import { siteConfig } from "@/config/site";
 import { buildWhatsAppLink } from "@/lib/format/whatsapp";
 import styles from "./Footer.module.css";
@@ -17,24 +18,22 @@ export function Footer() {
       <GridPulse intensity="ambient" patternId="grid-pulse-footer" />
       <div className={styles.grid}>
         <div>
-          <p className={styles.brand}>
-            <span className={styles.brandMark}>XR</span> VR Discovery
-          </p>
+          <Image
+            src={logoImage.src}
+            alt={logoImage.alt}
+            width={logoImage.width}
+            height={logoImage.height}
+            unoptimized
+            className={styles.brandLogo}
+          />
           <p className={styles.baseline}>{footerContent.baseline}</p>
         </div>
         <div>
           <h2 className={styles.colTitle}>{footerContent.universesTitle}</h2>
           <ul className={styles.list}>
             {footerContent.universes.map((universe) => (
-              <li key={universe.label} className={styles.universe}>
-                {universe.current ? (
-                  <span className={styles.current}>{universe.label}</span>
-                ) : (
-                  <>
-                    <span className={styles.muted}>{universe.label}</span>
-                    <Pill className={styles.soon}>bientôt</Pill>
-                  </>
-                )}
+              <li key={universe} className={styles.universe}>
+                <span className={styles.muted}>{universe}</span>
               </li>
             ))}
           </ul>

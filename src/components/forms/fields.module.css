@@ -47,18 +47,20 @@
     background-color var(--dur-fast);
 }
 
+/* --offer-accent : posé par data-offer-accent sur le label (options secteur
+   et pack) — fallback = accent de marque, comportement inchangé ailleurs. */
 .card:hover {
-  border-color: var(--edge-lit);
+  border-color: color-mix(in srgb, var(--offer-accent, var(--color-accent)) 62%, transparent);
 }
 
 .radio:checked + .card {
-  border-color: var(--edge-lit);
-  background: color-mix(in srgb, var(--color-accent) 15%, transparent);
+  border-color: color-mix(in srgb, var(--offer-accent, var(--color-accent)) 62%, transparent);
+  background: color-mix(in srgb, var(--offer-accent, var(--color-accent)) 15%, transparent);
   color: var(--color-ink);
 }
 
 .radio:focus-visible + .card {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--offer-accent, var(--color-accent));
   outline-offset: 2px;
 }
 

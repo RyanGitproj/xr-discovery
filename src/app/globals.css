@@ -34,6 +34,19 @@
   --color-fx-pink: #e82818;
   --color-fx-teal: #2fbfa8;
 
+  /* Code couleur des 8 offres (ids = OFFER_IDS de config/offers.ts — test
+     gardien dans offers.test.ts). Braise + accents étendus de même
+     intensité ; appliqués en TOUCHES via --offer-accent (map ci-dessous),
+     jamais en fond. Contraste ≥ 4,5:1 sur --color-bg-deep (texte). */
+  --color-offer-centres-commerciaux: var(--color-accent-hot);
+  --color-offer-entreprise-rh-cse: #ffc24d;
+  --color-offer-ecoles-colleges: #45d0b4;
+  --color-offer-universite-formation: #c18cff;
+  --color-offer-tourisme-agences: #ff755c;
+  --color-offer-fondations-associations: #ff7fa8;
+  --color-offer-immobilier-showrooms: #f2544a;
+  --color-offer-marques-evenementiel: #e46bde;
+
   --radius-card: 20px;
   --radius-cta: 14px; /* boutons : rectangle arrondi — la pilule fait déborder beam/glow */
   --radius-pill: 999px;
@@ -80,6 +93,41 @@
   --section-pad-y: clamp(3rem, 7svh, 5.5rem);
   --stack-gap: clamp(1.75rem, 4svh, 3.5rem); /* heading → grille */
   --media-h: clamp(8rem, 20svh, 14rem); /* médias de card en mode cover */
+}
+
+/* Accent local d'offre : un composant pose data-offer-accent="<id>" et tout
+   son sous-arbre consomme var(--offer-accent, <fallback>). Même philosophie
+   que les custom properties par instance des primitives fx (cf. Meteors). */
+[data-offer-accent="centres-commerciaux"] {
+  --offer-accent: var(--color-offer-centres-commerciaux);
+}
+
+[data-offer-accent="entreprise-rh-cse"] {
+  --offer-accent: var(--color-offer-entreprise-rh-cse);
+}
+
+[data-offer-accent="ecoles-colleges"] {
+  --offer-accent: var(--color-offer-ecoles-colleges);
+}
+
+[data-offer-accent="universite-formation"] {
+  --offer-accent: var(--color-offer-universite-formation);
+}
+
+[data-offer-accent="tourisme-agences"] {
+  --offer-accent: var(--color-offer-tourisme-agences);
+}
+
+[data-offer-accent="fondations-associations"] {
+  --offer-accent: var(--color-offer-fondations-associations);
+}
+
+[data-offer-accent="immobilier-showrooms"] {
+  --offer-accent: var(--color-offer-immobilier-showrooms);
+}
+
+[data-offer-accent="marques-evenementiel"] {
+  --offer-accent: var(--color-offer-marques-evenementiel);
 }
 
 /* Reset minimal (remplace le preflight Tailwind) : uniquement ce sur quoi

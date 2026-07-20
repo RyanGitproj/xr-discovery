@@ -21,6 +21,7 @@ import { LampHeader } from "@/components/fx/LampHeader";
 import { MadagascarField } from "@/components/fx/MadagascarField";
 import { NeuralField } from "@/components/fx/NeuralField";
 import { Sparkles } from "@/components/fx/Sparkles";
+import { TapHint } from "@/components/fx/TapHint";
 import { MagneticButton } from "@/components/fx/MagneticButton";
 import { Meteors } from "@/components/fx/Meteors";
 import { NumberTicker } from "@/components/fx/NumberTicker";
@@ -146,6 +147,35 @@ function DeviceTiltDemo() {
   );
 }
 
+/** Banc TapHint : rejoue le geste de tap et l'entrée/sortie de la main. */
+function TapHintDemo() {
+  const [visible, setVisible] = useState(true);
+  const [tapCount, setTapCount] = useState(0);
+
+  return (
+    <div className={cx(styles.demo, styles.demoH40, styles.tapHintDemo)}>
+      <TapHint visible={visible} tapCount={tapCount} />
+      <div className={styles.tapHintControls}>
+        <button
+          type="button"
+          className={styles.tiltButton}
+          onClick={() => setTapCount((count) => count + 1)}
+        >
+          Rejouer le tap
+        </button>
+        <button
+          type="button"
+          className={styles.tiltButton}
+          onClick={() => setVisible((v) => !v)}
+        >
+          {visible ? "Masquer" : "Afficher"}
+        </button>
+      </div>
+      <span className={styles.demoLabel}>taps : {tapCount}</span>
+    </div>
+  );
+}
+
 export default function FxLabPage() {
   return (
     <main id="contenu" className={styles.main}>
@@ -195,7 +225,7 @@ export default function FxLabPage() {
 
       <LabSection
         title="GeoFrame — géométrie HUD (verre + arête tracée)"
-        note="Formes chanfreinées (clip-path) + arête lumineuse SVG suivant le contour. Verre liquide conservé ; CTA en aplat orange « ticket ». `trace` = reflet focal, recharger pour voir courir l'arête."
+        note="Formes chanfreinées (clip-path) + arête lumineuse SVG suivant le contour. Verre liquide conservé ; CTA en aplat orange « ticket ». `trace` = reflet focal, recharger pour voir courir l'arête. Couleur surchargeable par custom properties --geo-edge-c1/c2/c3 (stops du gradient) et --geo-halo (drop-shadow) — fallback = comète de marque ; utilisé par les accents d'offre (PackCard)."
       >
         <div style={{ display: "flex", flexWrap: "wrap", gap: "1.75rem", alignItems: "center" }}>
           <GeoFrame shape="hud" chamfer={18} trace>
@@ -458,6 +488,13 @@ export default function FxLabPage() {
             <Embers count={14} />
           </div>
         </div>
+      </LabSection>
+
+      <LabSection
+        title="TapHint"
+        note="v3 — famille C, hint pédagogique : main pointer + anneau d'impulsion à chaque tap. Usage : démo guidée du sélecteur d'offres en boucle « visite des 8 offres » (un tap ≈ 3,5 s, activation réelle des packs ; pause hors écran et au survol des zones interactives ; stop définitif au premier geste, pour la session). Décorative (aria-hidden, pointer-events none), transform + opacity uniquement. Sous prefers-reduced-motion : le parent ne la rend pas."
+      >
+        <TapHintDemo />
       </LabSection>
 
       <LabSection title="Scroll reveal natif" note="v4 — apparition scrubée par le scroll (animation-timeline: view, fondation v2) : fondu + montée pendant l'entrée dans le viewport, réversible en remontant, compositor-only, zéro JS. Sans support navigateur ou sous reduced-motion : visible d'emblée. En scène : mosaïque « moments XR » (emboîté dans les ParallaxLayer).">

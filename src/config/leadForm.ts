@@ -1,3 +1,4 @@
+import { OFFER_LABELS } from "@/config/offers";
 import type { Lead } from "@/lib/validations/lead";
 
 /**
@@ -6,17 +7,18 @@ import type { Lead } from "@/lib/validations/lead";
  * uniquement la présentation.
  */
 
-export const TYPE_ORGANISATION_LABELS: Record<Lead["typeOrganisation"], string> = {
-  "centre-commercial": "Centre commercial",
-  "enseigne-retail": "Enseigne & retail",
-  "pop-up-event": "Pop-up & événement",
-  autre: "Autre",
+export const SECTEUR_LABELS: Record<Lead["secteur"], string> = {
+  ...OFFER_LABELS,
+  autre: "Autre secteur",
 };
 
+/** Option « pack » vide — le visiteur ne s'engage sur aucun format. */
+export const PACK_NONE_LABEL = "Je ne sais pas encore";
+
 export const OBJECTIF_LABELS: Record<Lead["objectif"], string> = {
-  trafic: "Créer du trafic",
-  notoriete: "Faire parler du lieu",
-  lancement: "Réussir un lancement",
+  trafic: "Attirer du public",
+  notoriete: "Faire parler de vous",
+  lancement: "Réussir un événement",
   "contenu-social": "Générer du contenu social",
 };
 
@@ -31,7 +33,8 @@ export const BUDGET_LABELS: Record<Lead["budget"], string> = {
 /** Libellés nus — l'obligatoire est marqué par « * » (prop `required` des
     champs), jamais par une mention entre parenthèses. */
 export const FIELD_LABELS: Record<keyof Lead, string> = {
-  typeOrganisation: "Vous êtes",
+  secteur: "Votre secteur",
+  pack: "Pack envisagé",
   objectif: "Objectif principal",
   budget: "Budget",
   periode: "Période envisagée",
@@ -49,7 +52,7 @@ export type FormStep = {
 };
 
 export const FORM_STEPS: readonly FormStep[] = [
-  { title: "Votre projet", fields: ["typeOrganisation", "objectif", "budget", "periode"] },
+  { title: "Votre projet", fields: ["secteur", "pack", "objectif", "budget", "periode"] },
   {
     title: "Vos coordonnées",
     fields: ["nom", "telephone", "email", "participants", "entreprise", "fonction"],

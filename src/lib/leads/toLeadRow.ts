@@ -17,7 +17,8 @@ export function toLeadRow(lead: Lead, attribution: Attribution | null): LeadRow 
   const adId = orNull(attr.ad_id);
 
   return {
-    type_organisation: lead.typeOrganisation,
+    secteur: lead.secteur,
+    pack: orNull(lead.pack),
     objectif_principal: lead.objectif,
     budget: lead.budget,
     periode: lead.periode,

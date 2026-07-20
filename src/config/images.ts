@@ -13,54 +13,12 @@ export type ImageSlot = {
   height: number;
 };
 
-/** Même ordre que audienceSection.cards (zip par index). */
-export const audienceImages: readonly ImageSlot[] = [
-  {
-    src: "/images/audience-centres-commerciaux.webp",
-    alt: "Visiteurs casqués au cœur d'une galerie commerciale animée",
-    width: 1200,
-    height: 800,
-  },
-  {
-    src: "/images/audience-enseignes-retailers.webp",
-    alt: "Client testant la VR devant une boutique, accompagné d'un animateur XR",
-    width: 1200,
-    height: 800,
-  },
-  {
-    src: "/images/audience-pop-up-events.webp",
-    alt: "Stand pop-up XR illuminé au milieu d'un événement",
-    width: 1200,
-    height: 800,
-  },
-  {
-    src: "/images/audience-activations-grand-public.webp",
-    alt: "Famille souriante découvrant la réalité virtuelle en public",
-    width: 1200,
-    height: 800,
-  },
-];
-
-/** Indexé par Pack.id (packsSection.packs). */
-export const packImages: Record<string, ImageSlot> = {
-  "animation-trafic": {
-    src: "/images/pack-animation-trafic.webp",
-    alt: "Petit groupe en pleine session VR encadré par un animateur",
-    width: 1600,
-    height: 1000,
-  },
-  "temps-fort": {
-    src: "/images/pack-temps-fort-vr.webp",
-    alt: "Foule du week-end autour de l'espace VR en galerie",
-    width: 1600,
-    height: 1000,
-  },
-  "pop-up-premium-360": {
-    src: "/images/pack-pop-up-premium-360.webp",
-    alt: "Espace premium scénographié avec dix casques VR",
-    width: 1600,
-    height: 1000,
-  },
+/** Logo officiel (lockup mascotte + wordmark, alpha) — navbar et footer. */
+export const logoImage: ImageSlot = {
+  src: "/images/logo-xr-vr-discovery.webp",
+  alt: "XR VR Discovery — Antananarivo",
+  width: 800,
+  height: 203,
 };
 
 export const argumentImage: ImageSlot = {
@@ -85,6 +43,12 @@ export const prestaImage: ImageSlot = {
  * décoratifs (aria-hidden posé par StageLayer) : alt vide assumé.
  */
 export const diveImages = {
+  mascotte: {
+    src: "/images/dive/dive-mascotte.webp",
+    alt: "",
+    width: 1024,
+    height: 1024,
+  },
   universe: {
     src: "/images/dive/dive-universe.webp",
     alt: "",

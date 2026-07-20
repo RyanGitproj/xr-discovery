@@ -1,19 +1,24 @@
 "use client";
 
-import { useRef, useState, useTransition } from "react";
-import { useForm } from "react-hook-form";
+import { useEffect, useRef, useState, useTransition } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { submitLead } from "@/actions/submitLead";
 import { StepIndicator } from "@/components/forms/StepIndicator";
 import { PhoneField, RadioCardGroup, TextField } from "@/components/forms/fields";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
+import { offersSection } from "@/config/content";
 import {
   BUDGET_LABELS,
   FIELD_LABELS,
   FORM_STEPS,
   OBJECTIF_LABELS,
-  TYPE_ORGANISATION_LABELS,
+  PACK_NONE_LABEL,
+  SECTEUR_LABELS,
 } from "@/config/leadForm";
+import { getOffer } from "@/config/offers";
+import { formatAriary } from "@/lib/format/ariary";
+import { useOfferSelection } from "@/lib/offers/selection";
 import { readAttribution } from "@/lib/tracking/attribution";
 import { pushDataLayerEventOnce } from "@/lib/tracking/gtm";
 import { leadSchema, type Lead } from "@/lib/validations/lead";
@@ -23,6 +28,12 @@ import styles from "./LeadForm.module.css";
 function toOptions<V extends string>(labels: Record<V, string>): { value: V; label: string }[] {
   return (Object.keys(labels) as V[]).map((value) => ({ value, label: labels[value] }));
 }
+
+/** Options secteur : chaque offre porte son accent couleur (« autre » reste
+    sur l'accent de marque). */
+const SECTEUR_OPTIONS = toOptions(SECTEUR_LABELS).map((option) =>
+  option.value === "autre" ? option : { ...option, accent: option.value },
+);
 
 /**
  * Garde anti double-clic : le bouton submit REMPLACE « Continuer » au même
@@ -50,6 +61,8 @@ export function LeadForm() {
     handleSubmit,
     trigger,
     control,
+    setValue,
+    getValues,
     formState: { errors },
   } = useForm<Lead>({
     resolver: standardSchemaResolver(leadSchema),
@@ -58,8 +71,18 @@ export function LeadForm() {
     // touchés s'affichaient en erreur pendant la saisie. Ici rien ne s'affiche
     // avant « Continuer » (trigger par étape), puis re-validation au change.
     mode: "onSubmit",
-    defaultValues: { email: "", participants: "", entreprise: "", fonction: "" },
+    defaultValues: { pack: "", email: "", participants: "", entreprise: "", fonction: "" },
   });
+
+  // Présélection depuis « Choisir ce pack » (section Offres) : chaque nouveau
+  // clic écrase la sélection, les champs restent modifiables ensuite.
+  // shouldValidate efface une éventuelle erreur « secteur requis » affichée.
+  const selection = useOfferSelection();
+  useEffect(() => {
+    if (selection === null) return;
+    setValue("secteur", selection.secteur, { shouldValidate: true });
+    setValue("pack", selection.pack, { shouldValidate: true });
+  }, [selection, setValue]);
 
   const isLastStep = step === FORM_STEPS.length - 1;
   const lastNavAt = useRef(0);
@@ -97,6 +120,36 @@ export function LeadForm() {
       },
     });
 
+  /** Changement de secteur : un pack déjà coché qui n'appartient pas au
+      nouveau secteur est remis à « je ne sais pas encore » — reset synchrone
+      dans le onChange, aucune course avec le préremplissage. */
+  const registerSecteur = register("secteur", {
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+      const nextSecteur = event.target.value as Lead["secteur"];
+      const currentPack = getValues("pack");
+      const packStillValid =
+        currentPack === "" ||
+        (nextSecteur !== "autre" &&
+          getOffer(nextSecteur).packs.some((pack) => pack.id === currentPack));
+      if (!packStillValid) setValue("pack", "");
+      if (errors.secteur !== undefined) void trigger("secteur");
+    },
+  });
+
+  // Options de pack du secteur courant (aucun secteur ou « autre » : champ masqué).
+  const secteurValue: Lead["secteur"] | undefined = useWatch({ control, name: "secteur" });
+  const packOptions =
+    secteurValue === undefined || secteurValue === "autre"
+      ? null
+      : [
+          ...getOffer(secteurValue).packs.map((pack) => ({
+            value: pack.id,
+            label: `${pack.name} — ${offersSection.pricePrefix} ${formatAriary(pack.price)}`,
+            accent: secteurValue,
+          })),
+          { value: "", label: PACK_NONE_LABEL, accent: secteurValue },
+        ];
+
   return (
     <form
       onSubmit={(event) => {
@@ -126,12 +179,21 @@ export function LeadForm() {
         {step === 0 && (
           <>
             <RadioCardGroup
-              legend={FIELD_LABELS.typeOrganisation}
-              options={toOptions(TYPE_ORGANISATION_LABELS)}
-              registration={registerField("typeOrganisation")}
-              error={fieldError("typeOrganisation")}
+              legend={FIELD_LABELS.secteur}
+              options={SECTEUR_OPTIONS}
+              registration={registerSecteur}
+              error={fieldError("secteur")}
               required
+              columns={3}
             />
+            {packOptions !== null && (
+              <RadioCardGroup
+                legend={FIELD_LABELS.pack}
+                options={packOptions}
+                registration={registerField("pack")}
+                error={fieldError("pack")}
+              />
+            )}
             <RadioCardGroup
               legend={FIELD_LABELS.objectif}
               options={toOptions(OBJECTIF_LABELS)}
@@ -192,7 +254,7 @@ export function LeadForm() {
             />
             <TextField
               label={FIELD_LABELS.entreprise}
-              placeholder="Ex. : centre commercial Analakely"
+              placeholder="Ex. : votre entreprise, école ou lieu"
               autoComplete="organization"
               registration={registerField("entreprise")}
               error={fieldError("entreprise")}

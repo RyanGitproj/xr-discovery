@@ -1,0 +1,30 @@
+.root {
+  position: relative;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  pointer-events: none;
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--color-accent-hot);
+  border-radius: var(--radius-pill);
+}
+
+.press {
+  display: block;
+  /* Légère inclinaison : geste naturel, pas un curseur système. */
+  rotate: -12deg;
+}
+
+.pointer {
+  display: block;
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--color-accent-hot);
+  /* Remplissage sombre : la main reste lisible par-dessus le verre clair. */
+  fill: var(--color-bg-deep);
+}

@@ -1,15 +1,13 @@
 import {
   BarChart3,
-  Building2,
   Camera,
   Headset,
   MapPin,
-  Megaphone,
   MessagesSquare,
   Paintbrush,
   PartyPopper,
   ShieldCheck,
-  Store,
+  SlidersHorizontal,
   Truck,
   Users,
   Wrench,
@@ -17,19 +15,19 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { TextSegment } from "@/components/fx/TextGenerate";
+import { OFFERS } from "@/config/offers";
 
 /**
- * Contenu de la landing « Centres commerciaux & retail » (univers pilote).
- * SOURCE DE VÉRITÉ : les infographies XR dans docs/content/ (guide commercial,
- * fiche d'appel, fiche offre retail). RÈGLES : aucun texte ni prix en dur dans
- * les sections ; prix toujours « à partir de » ; ne jamais avancer un chiffre
- * ou un engagement absent des infographies (fiche d'appel, bloc 6).
+ * Contenu de la landing multi-offres (8 univers — voir config/offers.ts pour
+ * le catalogue). SOURCE DE VÉRITÉ : les brochures docs/Offres/*.pdf et les
+ * infographies XR dans docs/content/. RÈGLES : aucun texte ni prix en dur
+ * dans les sections ; prix toujours « à partir de » ; ne jamais avancer un
+ * chiffre ou un engagement absent de ces sources.
  */
 
 /* Navigation interne par scrollTo (aucune ancre d'URL) : `id` = id de section. */
 export const navLinks = [
-  { label: "Publics", id: "publics" },
-  { label: "Packs", id: "packs" },
+  { label: "Offres", id: "offres" },
   { label: "Déploiement", id: "deploiement" },
   { label: "Questions", id: "questions" },
 ] as const;
@@ -42,7 +40,7 @@ export const hero = {
     { text: "réalité", variant: "outline", block: true },
   ] satisfies readonly TextSegment[],
   subtitle:
-    "La VR qui se déplace jusqu'à vous : 10 casques dernière génération et des animateurs XR expérimentés pour attirer le public et créer du trafic.",
+    "La VR qui se déplace jusqu'à vous : 10 casques dernière génération et des animateurs XR expérimentés pour créer l'événement, quel que soit votre univers.",
   ctaPrimary: "Demander un devis",
   /** Labels HUD de la scène casque. « 8 univers » = les 8 segments servis
       (guide commercial), pas des contenus immersifs. */
@@ -63,7 +61,7 @@ export const reassuranceItems: readonly ReassuranceItem[] = [
   { icon: Truck, label: "Déplacements sur site" },
   { icon: Headset, label: "10 casques VR dernière génération" },
   { icon: Users, label: "Animateurs XR expérimentés" },
-  { icon: Store, label: "Formats retail & pop-up" },
+  { icon: SlidersHorizontal, label: "Formats adaptés à chaque univers" },
 ];
 
 /**
@@ -82,48 +80,16 @@ export const diveSection = {
     title: "Un autre monde s'ouvre à vos visiteurs",
     body: "Des expériences immersives choisies pour votre public : vos visiteurs plongent, votre lieu attire, on parle de vous.",
   },
-  cta: "Voir les packs",
-  ctaScrollTo: "packs",
+  cta: "Découvrir les offres",
+  ctaScrollTo: "offres",
   gyroCta: "Activer l'effet 3D",
 } as const;
 
-export type AudienceCard = {
+export type IconCard = {
   icon: LucideIcon;
   title: string;
   body: string;
 };
-
-export const audienceSection = {
-  kicker: "À qui s'adresse l'offre",
-  title: "Pensé pour les lieux qui vivent du passage",
-  cards: [
-    {
-      icon: Building2,
-      title: "Centres commerciaux",
-      body: "Générez de l'affluence dans votre galerie avec une animation qui se voit de loin et fait revenir le public.",
-    },
-    {
-      icon: Store,
-      title: "Enseignes & retailers",
-      body: "Divertissez vos clients et renforcez l'image innovante de votre marque, directement sur votre point de vente.",
-    },
-    {
-      icon: PartyPopper,
-      title: "Pop-up events",
-      body: "Un format événementiel prêt à l'emploi : l'installation est simple et l'expérience crée du partage.",
-    },
-    {
-      icon: Megaphone,
-      title: "Activations grand public",
-      body: "Une animation famille / grand public qui capte l'attention et fait parler de votre opération.",
-    },
-  ] satisfies readonly AudienceCard[],
-  need: {
-    kicker: "Le besoin",
-    title: "Créer du trafic et faire parler de votre lieu",
-    body: "Générer de l'affluence, divertir le public, créer du partage et renforcer une image innovante : c'est exactement ce pour quoi l'animation VR mobile est conçue.",
-  },
-} as const;
 
 export const benefitsSection = {
   kicker: "Ce que XR VR apporte",
@@ -137,7 +103,7 @@ export const benefitsSection = {
     {
       icon: PartyPopper,
       title: "Fun & sensations",
-      body: "Des expériences fun et à sensations, pensées pour les familles comme pour le grand public.",
+      body: "Des expériences fun, immersives et à sensations, choisies pour votre public : visiteurs, collaborateurs, élèves ou clients.",
     },
     {
       icon: Camera,
@@ -149,7 +115,7 @@ export const benefitsSection = {
       title: "Simple et encadré",
       body: "Installation simple sur votre site et gestion des flux de participants par nos animateurs XR.",
     },
-  ] satisfies readonly AudienceCard[],
+  ] satisfies readonly IconCard[],
   presta: {
     kicker: "La prestation",
     title: "Clé en main, de bout en bout",
@@ -157,61 +123,14 @@ export const benefitsSection = {
   },
 } as const;
 
-export type Pack = {
-  id: string;
-  name: string;
-  tagline: string;
-  /** Prix « à partir de », en ariary. */
-  price: number;
-  features: readonly string[];
-  featured?: boolean;
-  badge?: string;
-};
-
-export const packsSection = {
-  kicker: "Nos packs",
-  title: "Trois formats pour créer l'événement",
-  subtitle: "Tarifs « à partir de » — sur devis selon lieu, durée et options.",
-  packs: [
-    {
-      id: "animation-trafic",
-      name: "Animation Trafic",
-      tagline: "L'animation découverte qui anime votre lieu.",
-      price: 1_600_000,
-      features: [
-        "3 h d'animation",
-        "4 casques VR",
-        "1 animateur XR",
-        "Expériences fun & découverte",
-      ],
-    },
-    {
-      id: "temps-fort",
-      name: "Temps Fort VR",
-      tagline: "Le format des temps forts et des week-ends.",
-      price: 3_300_000,
-      featured: true,
-      badge: "Idéal week-ends",
-      features: [
-        "Demi-journée d'animation",
-        "6 casques VR",
-        "2 animateurs XR",
-        "Trafic, photos & souvenirs",
-      ],
-    },
-    {
-      id: "pop-up-premium-360",
-      name: "Pop-up Premium 360",
-      tagline: "La journée complète, format premium.",
-      price: 6_900_000,
-      features: [
-        "Journée complète d'animation",
-        "10 casques VR",
-        "2 animateurs XR",
-        "Animation retail + mini récap vidéo",
-      ],
-    },
-  ] satisfies readonly Pack[],
+/** Section Offres : le catalogue (8 offres × 3 packs) vit dans config/offers.ts. */
+export const offersSection = {
+  kicker: "Nos offres",
+  title: "Huit univers, trois formats chacun",
+  subtitle:
+    "Choisissez votre secteur — chaque offre se décline en trois packs. Tarifs « à partir de », sur devis selon lieu, durée et options.",
+  selectorLabel: "Choisissez votre secteur",
+  hint: "Cliquez sur un secteur — les packs s'adaptent.",
   pricePrefix: "à partir de",
   cta: "Choisir ce pack",
 } as const;
@@ -219,12 +138,12 @@ export const packsSection = {
 export const argumentSection = {
   kicker: "Pourquoi ça marche",
   quote:
-    "La VR crée l'effet « wow » qui capte l'attention dès la première seconde, génère de l'affluence, prolonge le temps de visite et rend votre lieu mémorable et visible.",
+    "La VR crée l'effet « wow » qui capte l'attention dès la première seconde, rassemble vos publics et rend votre lieu, votre marque ou votre événement mémorable.",
   optionsTitle: "Options recommandées",
   options: [
-    "Branding enseigne",
+    "Branding personnalisé",
     "Borne photo",
-    "Influence & vidéo",
+    "Captation 360°",
     "Animateur supplémentaire",
     "Mini récap social media",
   ],
@@ -237,7 +156,7 @@ export const objectionsSection = {
     {
       question: "Est-ce accessible à tout le monde ?",
       answer:
-        "Oui : le format est pensé famille et grand public, accessible à un large public. Nos animateurs XR accueillent chaque participant et accompagnent la découverte.",
+        "Oui : aucune connaissance technique n'est nécessaire — visiteurs, collaborateurs, élèves ou clients, chacun est accueilli, équipé et guidé par un animateur XR.",
     },
     {
       question: "Le format est-il sécurisé ?",
@@ -252,7 +171,7 @@ export const objectionsSection = {
     {
       question: "Quand programmer l'animation ?",
       answer:
-        "Le format est idéal pour les temps forts et les week-ends : anniversaires du centre, lancements, fêtes, opérations commerciales. Les formats retail & pop-up s'adaptent à votre calendrier.",
+        "À chaque temps fort son format : week-ends et lancements en retail, team buildings et séminaires, journées pédagogiques, salons, portes ouvertes… Chaque offre s'adapte à votre calendrier.",
     },
     {
       question: "Comment sont fixés les tarifs ?",
@@ -268,7 +187,7 @@ export type DeployStep = {
   body: string;
 };
 
-/** Les 5 étapes « Déploiement XR » de l'infographie retail, à l'identique. */
+/** Les 5 étapes « Déploiement XR » — déroulé commun aux 8 offres (brochures). */
 export const deploymentSection = {
   kicker: "Déploiement XR",
   title: "Cinq étapes, zéro friction",
@@ -290,8 +209,8 @@ export const deploymentSection = {
     },
     {
       icon: Users,
-      title: "Animation grand public",
-      body: "Accueil, découverte, gestion des flux — fun garanti.",
+      title: "Animation encadrée",
+      body: "Accueil, découverte, gestion des flux — l'expérience est guidée de bout en bout.",
     },
     {
       icon: BarChart3,
@@ -302,7 +221,7 @@ export const deploymentSection = {
 } as const;
 
 export const finalCtaSection = {
-  title: "Attirez le public avec la VR",
+  title: "Créez l'événement avec la VR",
   subtitle:
     "Racontez-nous votre projet : nous revenons vers vous rapidement avec la solution adaptée.",
   ctaPrimary: "Demander un devis",
@@ -312,16 +231,8 @@ export const footerContent = {
   baseline:
     "La découverte VR qui se déplace jusqu'à vous : animations immersives, culture & éducation, marketing immersif et captation 360, en expériences clés en main.",
   universesTitle: "Nos 8 univers",
-  universes: [
-    { label: "Centres commerciaux & retail", current: true },
-    { label: "Entreprises, RH & CSE", current: false },
-    { label: "Marques & salons", current: false },
-    { label: "Immobilier & showrooms", current: false },
-    { label: "Tourisme & agences", current: false },
-    { label: "Fondations & associations", current: false },
-    { label: "Universités & formation", current: false },
-    { label: "Écoles & collèges", current: false },
-  ],
+  /** Dérivé du catalogue — les 8 offres sont toutes servies par la landing. */
+  universes: OFFERS.map((offer) => offer.name),
   contactTitle: "Contact",
   mentions: "© 2026 XR Technology — Antananarivo, Madagascar",
 } as const;

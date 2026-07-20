@@ -23,9 +23,9 @@ import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.baseUrl),
-  title: "XR VR Discovery — Animation VR pour centres commerciaux à Antananarivo",
+  title: "XR VR Discovery — Animation VR clé en main à Antananarivo",
   description:
-    "XR Technology installe une animation VR clé en main dans votre centre commercial : 10 casques autonomes, animateurs formés, packs à partir de 1 600 000 Ar. Attirez le public, créez du trafic.",
+    "XR Technology déplace la VR jusqu'à vous : 10 casques dernière génération, animateurs XR et 8 offres — retail, entreprises, écoles, universités, tourisme, fondations, immobilier, évènementiel. Packs à partir de 750 000 Ar.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

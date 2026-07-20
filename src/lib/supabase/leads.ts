@@ -8,7 +8,8 @@ import type { SupabaseClient } from "@supabase/supabase-js";
  * lead_status). Optionnels absents = null (jamais de chaîne vide en base).
  */
 export type LeadRow = {
-  type_organisation: string;
+  secteur: string;
+  pack: string | null;
   objectif_principal: string;
   budget: string;
   periode: string;

@@ -56,8 +56,11 @@
   height: 100%;
   pointer-events: none;
   overflow: visible;
-  /* Halo néon statique (rasterisé une fois — pas d'animation de filter). */
-  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--color-accent) 55%, transparent));
+  /* Halo néon statique (rasterisé une fois — pas d'animation de filter).
+     --geo-halo : surcharge par accent d'offre, fallback accent de marque. */
+  filter: drop-shadow(
+    0 0 3px color-mix(in srgb, var(--geo-halo, var(--color-accent)) 55%, transparent)
+  );
 }
 
 .edgeLine {

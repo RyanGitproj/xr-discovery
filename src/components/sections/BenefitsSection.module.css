@@ -40,6 +40,10 @@
   padding: 1.5rem;
 }
 
+.cardHeader {
+  composes: cardHeader from "./section.module.css";
+}
+
 .iconBadge {
   composes: iconBadge from "./section.module.css";
 }

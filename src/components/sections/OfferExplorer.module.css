@@ -1,0 +1,144 @@
+/* Affordance explicite : le libellé porte l'action ET son effet. */
+.hint {
+  margin-top: var(--stack-gap);
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-ink-muted);
+}
+
+/* Ancre de la main TapHint (démo guidée) : positionnée en x/y absolus. */
+.selectorWrap {
+  position: relative;
+}
+
+/* Sélecteur : 8 tuiles toutes visibles — 2 colonnes mobile, 4 desktop
+   (jamais de scroller horizontal : la découvrabilité prime). */
+.selector {
+  margin-top: 0.875rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.625rem;
+}
+
+/* La main est centrée sur le point (x, y) : le translate CSS compose avec
+   le transform animé par framer (déplacements entre tuiles). */
+.demoHand {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  translate: -50% -50%;
+  pointer-events: none;
+}
+
+/* Tuile angulaire (langage v3, cf. iconBadge) : le bord vit en inset
+   box-shadow — un border serait rogné par le clip-path. */
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.875rem 0.5rem;
+  clip-path: polygon(
+    10px 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    10px 100%,
+    0 calc(100% - 10px),
+    0 10px
+  );
+  background: var(--glass-fill);
+  box-shadow: inset 0 0 0 1px var(--glass-stroke);
+  color: var(--color-ink-muted);
+  cursor: pointer;
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    translate var(--dur-fast) var(--ease-out);
+}
+
+.tile:hover {
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px var(--glass-edge);
+}
+
+/* Lift au survol (pointeurs à hover seulement) : renforce « c'est cliquable ». */
+@media (hover: hover) {
+  .tile:hover {
+    translate: 0 -2px;
+  }
+}
+
+.tileActive {
+  color: var(--color-ink);
+  background: color-mix(in srgb, var(--offer-accent, var(--color-accent)) 10%, var(--glass-tint));
+  box-shadow: inset 0 0 0 1px var(--offer-accent, var(--color-accent));
+}
+
+.tileIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--offer-accent, var(--color-accent));
+}
+
+.tileName {
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.tilePrice {
+  font-size: 0.6875rem;
+  color: var(--color-ink-muted);
+}
+
+.tilePriceValue {
+  font-weight: 600;
+  color: var(--offer-accent, var(--color-accent-hot));
+}
+
+/* Accroche brochure de l'offre active — le contexte que portait l'ancien
+   bloc « besoin » de la section Audience. */
+.tagline {
+  margin-inline: auto;
+  margin-top: 2rem;
+  max-width: 42rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 500;
+  text-wrap: balance;
+}
+
+.packs {
+  margin-top: 1.75rem;
+  display: grid;
+  align-items: stretch;
+  gap: 1.5rem;
+}
+
+.packItem {
+  height: 100%;
+}
+
+@media (min-width: 1024px) {
+  .selector {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .packs {
+    grid-template-columns: repeat(3, 1fr);
+    /* Dégage le badge du pack vedette (posé à -1rem au-dessus de la card). */
+    padding-top: 1.25rem;
+  }
+
+  /* translate (pas transform) : coexiste avec le transform animé du switch. */
+  .packItemFeatured {
+    translate: 0 -0.75rem;
+  }
+}

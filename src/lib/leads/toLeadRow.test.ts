@@ -3,7 +3,8 @@ import type { Lead } from "@/lib/validations/lead";
 import { toLeadRow } from "./toLeadRow";
 
 const LEAD: Lead = {
-  typeOrganisation: "enseigne-retail",
+  secteur: "centres-commerciaux",
+  pack: "",
   objectif: "lancement",
   budget: "a-definir",
   periode: "Décembre",
@@ -18,7 +19,8 @@ const LEAD: Lead = {
 describe("toLeadRow", () => {
   it("mappe camelCase → snake_case et optionnels vides → null", () => {
     const row = toLeadRow(LEAD, null);
-    expect(row.type_organisation).toBe("enseigne-retail");
+    expect(row.secteur).toBe("centres-commerciaux");
+    expect(row.pack).toBeNull();
     expect(row.objectif_principal).toBe("lancement");
     expect(row.budget).toBe("a-definir");
     expect(row.email).toBe("mia@exemple.mg");
@@ -29,6 +31,10 @@ describe("toLeadRow", () => {
 
   it("convertit participants en nombre quand renseigné", () => {
     expect(toLeadRow({ ...LEAD, participants: "200" }, null).participants).toBe(200);
+  });
+
+  it("reporte le pack quand il est renseigné", () => {
+    expect(toLeadRow({ ...LEAD, pack: "temps-fort" }, null).pack).toBe("temps-fort");
   });
 
   it("is_organic = true sans aucun marqueur payant", () => {

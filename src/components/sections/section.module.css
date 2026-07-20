@@ -69,6 +69,7 @@
 
 .iconBadge {
   display: flex;
+  flex: none; /* jamais écrasé par un titre long dans la rangée cardHeader */
   width: 2.75rem;
   height: 2.75rem;
   align-items: center;
@@ -94,15 +95,22 @@
   color: var(--color-accent);
 }
 
+/* Icône + titre CÔTE À CÔTE (mobile ET desktop) : le badge empilé au-dessus
+   du titre mangeait la hauteur utile des cards à image (retour Ryan 18/07). */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 .cardTitle {
-  margin-top: 1.25rem;
   font-family: var(--font-display);
   font-size: 1.125rem;
   font-weight: 600;
 }
 
 .cardText {
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
   font-size: 0.875rem;
   line-height: 1.625;
   color: var(--color-ink-muted);

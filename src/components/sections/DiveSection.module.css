@@ -80,6 +80,21 @@
   );
 }
 
+/* Mascotte officielle en filigrane derrière le casque 3D — intensité pilotée
+   par le storyboard (0.35), fondue avant le voile. */
+.mascotteLayer {
+  place-items: center;
+}
+
+.mascotte {
+  height: min(72svh, 40rem);
+  width: auto;
+  max-width: 92vw;
+  object-fit: contain;
+  /* Léger décalage : le buste porte le casque 3D centré. */
+  transform: translateY(4svh);
+}
+
 /* Calques images. */
 .imgFull {
   object-fit: cover;
@@ -125,7 +140,23 @@
   padding: 5rem 1.5rem;
 }
 
+/* Le filigrane mascotte existe aussi à plat (page complète sans motion). */
+.fallbackVisual {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.fallbackMascotte {
+  position: absolute;
+  height: min(60svh, 34rem);
+  width: auto;
+  max-width: 88vw;
+  opacity: 0.35;
+}
+
 .fallbackImg {
+  position: relative;
   width: min(70vw, 26rem);
   height: auto;
 }

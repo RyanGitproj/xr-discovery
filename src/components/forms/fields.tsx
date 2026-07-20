@@ -7,6 +7,8 @@ import styles from "./fields.module.css";
 type Option = {
   value: string;
   label: string;
+  /** Id d'offre (data-offer-accent, cf. globals.css) : teinte l'état coché. */
+  accent?: string;
 };
 
 /** Astérisque des champs obligatoires (convention * — jamais de mention
@@ -50,7 +52,7 @@ export function RadioCardGroup({
       </legend>
       <div className={cx(styles.grid, columns === 3 && styles.grid3)}>
         {options.map((option) => (
-          <label key={option.value} className={styles.option}>
+          <label key={option.value} data-offer-accent={option.accent} className={styles.option}>
             <input type="radio" value={option.value} {...registration} className={styles.radio} />
             <span className={styles.card}>{option.label}</span>
           </label>

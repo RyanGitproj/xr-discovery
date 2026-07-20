@@ -29,10 +29,12 @@ export function BenefitsSection() {
                 <Spotlight className={styles.spot}>
                   <GeoFrame variant="frame" shape="hud" chamfer={12} className={styles.geo}>
                     <GlassPanel className={styles.panel}>
-                      <span className={styles.iconBadge}>
-                        <Icon aria-hidden="true" className={styles.icon} />
-                      </span>
-                      <h3 className={styles.cardTitle}>{card.title}</h3>
+                      <div className={styles.cardHeader}>
+                        <span className={styles.iconBadge}>
+                          <Icon aria-hidden="true" className={styles.icon} />
+                        </span>
+                        <h3 className={styles.cardTitle}>{card.title}</h3>
+                      </div>
                       <p className={styles.cardText}>{card.body}</p>
                     </GlassPanel>
                   </GeoFrame>

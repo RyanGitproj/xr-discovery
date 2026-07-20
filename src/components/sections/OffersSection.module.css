@@ -1,0 +1,27 @@
+.section {
+  composes: shell clipped chapter from "./section.module.css";
+}
+
+.container {
+  composes: container w6xl from "./section.module.css";
+}
+
+.kicker {
+  composes: kicker from "./section.module.css";
+}
+
+.title {
+  margin-top: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.875rem;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+.subtitle {
+  margin-inline: auto;
+  margin-top: 1rem;
+  max-width: 42rem;
+  line-height: 1.625;
+  color: var(--color-ink-muted);
+}

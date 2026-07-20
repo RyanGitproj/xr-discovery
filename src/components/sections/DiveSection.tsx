@@ -22,6 +22,9 @@ import styles from "./DiveSection.module.css";
  * dans HeadsetScene.
  */
 const STORY = {
+  /* Mascotte officielle en filigrane derrière le casque 3D (~35 %, décision
+     Ryan 18/07) — fondue AVANT le voile de mise du casque. */
+  mascotte: { at: [0, 0.5, 0.62], opacity: [0.35, 0.35, 0], tiltRange: 6 },
   /* Braises d'avant-plan : le calque translate au scroll pendant que chaque
      braise monte en propre (double mouvement) ; s'efface à la mise du casque. */
   embersFront: { at: [0, 0.45, 0.58], y: [80, -60, -140], opacity: [1, 1, 0], tiltRange: 8 },
@@ -92,14 +95,24 @@ function StaticFallback() {
   return (
     <div className={styles.fallback}>
       <IntroCopy />
-      <Image
-        src={diveImages.headsetFront.src}
-        alt=""
-        width={diveImages.headsetFront.width}
-        height={diveImages.headsetFront.height}
-        unoptimized
-        className={styles.fallbackImg}
-      />
+      <div className={styles.fallbackVisual}>
+        <Image
+          src={diveImages.mascotte.src}
+          alt=""
+          width={diveImages.mascotte.width}
+          height={diveImages.mascotte.height}
+          unoptimized
+          className={styles.fallbackMascotte}
+        />
+        <Image
+          src={diveImages.headsetFront.src}
+          alt=""
+          width={diveImages.headsetFront.width}
+          height={diveImages.headsetFront.height}
+          unoptimized
+          className={styles.fallbackImg}
+        />
+      </div>
       <RevealCopy />
     </div>
   );
@@ -115,6 +128,18 @@ export function DiveSection() {
   return (
     <section className={cx("fx-section", styles.section)}>
       <ScrollStage screens={3} fallback={<StaticFallback />} stageClassName={styles.stageBg}>
+        {/* Mascotte en filigrane — tout au fond, derrière le casque 3D */}
+        <StageLayer {...STORY.mascotte} className={styles.mascotteLayer}>
+          <Image
+            src={diveImages.mascotte.src}
+            alt=""
+            width={diveImages.mascotte.width}
+            height={diveImages.mascotte.height}
+            unoptimized
+            className={styles.mascotte}
+          />
+        </StageLayer>
+
         {/* Univers révélé (fond de la fin) — bas fondu, jamais de coupure */}
         <StageLayer {...STORY.universe} className={styles.universeLayer}>
           <Image
