@@ -177,6 +177,16 @@ void main() {
   // une nuance d'ambiance, pas une bascule. Chaud (cool≈0) en haut/bas.
   float cool = exp(-pow((s - 6.0) / 4.5, 2.0));
 
+  // Viewport étroit (mobile) : les nappes froides, plus larges que l'écran,
+  // se diluaient en teinte noyée dans l'orange (retour Ryan 21/07). On
+  // resserre leurs halos, on renforce leur amplitude et on garantit un
+  // plancher de froid ÉLEVÉ et permanent sur petit écran (visible sur TOUTE
+  // la hauteur, pas seulement au pic mi-page — 2e retour Ryan). La braise
+  // reste dominante : la nappe c1 ne refroidit jamais.
+  float narrow = smoothstep(0.85, 0.5, aspect);
+  cool = max(cool, narrow * 0.52);
+  float coolR = mix(1.0, 0.62, narrow);
+
   // Distorsion liquide : le champ entier ondule, le scroll le remue.
   vec2 warp = vec2(
     noise(p * 1.4 + vec2(t, -t * 0.6) + s * 0.45),
@@ -195,11 +205,12 @@ void main() {
   /* c1 (dominante, haut de page) reste chaude ; c2/c3 tirent vers le froid au
      cœur du parcours ; c4 (teal) se renforce au milieu. */
   col += vec3(0.961, 0.400, 0.118) * 0.26 * glow(q, c1, 0.58); /* accent orange #f5661e */
-  col += mix(vec3(0.910, 0.353, 0.110), vec3(0.184, 0.749, 0.659), cool * 0.32)
-    * 0.24 * glow(q, c2, 0.62); /* orange profond → turquoise */
-  col += mix(vec3(0.910, 0.157, 0.094), vec3(0.757, 0.549, 1.000), cool * 0.42)
-    * 0.17 * glow(q, c3, 0.55); /* rouge → violet #c18cff */
-  col += vec3(0.184, 0.749, 0.659) * (0.13 + 0.09 * cool) * glow(q, c4, 0.50); /* teal renforcé */
+  col += mix(vec3(0.910, 0.353, 0.110), vec3(0.184, 0.749, 0.659), cool * (0.32 + 0.26 * narrow))
+    * 0.24 * glow(q, c2, 0.62 * coolR); /* orange profond → turquoise */
+  col += mix(vec3(0.910, 0.157, 0.094), vec3(0.757, 0.549, 1.000), cool * (0.42 + 0.22 * narrow))
+    * 0.17 * glow(q, c3, 0.55 * coolR); /* rouge → violet #c18cff */
+  col += vec3(0.184, 0.749, 0.659) * (0.13 + (0.09 + 0.10 * narrow) * cool)
+    * glow(q, c4, 0.50 * coolR); /* teal renforcé */
 
   // Lumière du pointeur : discrète, elle lit comme le halo curseur qui
   // se réfracte dans la profondeur.
