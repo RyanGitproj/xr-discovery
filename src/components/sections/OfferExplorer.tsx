@@ -173,6 +173,10 @@ export function OfferExplorer() {
           animate="visible"
           exit={{ opacity: 0, transition: { duration: 0.18 } }}
         >
+          <m.p variants={packVariants} className={styles.panelIntro}>
+            {offersSection.panelIntroPrefix}{" "}
+            <strong className={styles.panelIntroOffer}>{activeOffer.name}</strong>
+          </m.p>
           <m.p variants={packVariants} className={styles.tagline}>
             {activeOffer.tagline}
           </m.p>

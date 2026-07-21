@@ -131,6 +131,9 @@ export const offersSection = {
     "Choisissez votre secteur — chaque offre se décline en trois packs. Tarifs « à partir de », sur devis selon lieu, durée et options.",
   selectorLabel: "Choisissez votre secteur",
   hint: "Cliquez sur un secteur — les packs s'adaptent.",
+  /** Lead du panneau packs — nomme l'offre active (au lieu d'une accroche
+      vague) : le {offre} est remplacé par le nom du secteur choisi. */
+  panelIntroPrefix: "Voici les packs pour",
   pricePrefix: "à partir de",
   cta: "Choisir ce pack",
 } as const;

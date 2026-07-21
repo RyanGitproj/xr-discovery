@@ -49,8 +49,15 @@
     0 calc(100% - 10px),
     0 10px
   );
-  background: var(--glass-fill);
-  box-shadow: inset 0 0 0 1px var(--glass-stroke);
+  /* Socle quasi opaque (pas le verre 0.2) : les tuiles sont les stars du
+     funnel, la lisibilité prime sur la transparence (retour terrain 21/07). */
+  background: color-mix(in srgb, var(--color-bg-raised) 92%, transparent);
+
+  /* Bord brillant aux couleurs de l'offre — INSET uniquement : le clip-path
+     chanfreiné rognerait toute lueur extérieure. Liseré net + halo interne. */
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--offer-accent, var(--color-accent)) 60%, transparent),
+    inset 0 0 14px color-mix(in srgb, var(--offer-accent, var(--color-accent)) 14%, transparent);
   color: var(--color-ink-muted);
   cursor: pointer;
   transition:
@@ -62,7 +69,9 @@
 
 .tile:hover {
   color: var(--color-ink);
-  box-shadow: inset 0 0 0 1px var(--glass-edge);
+  box-shadow:
+    inset 0 0 0 1px var(--offer-accent, var(--color-accent)),
+    inset 0 0 16px color-mix(in srgb, var(--offer-accent, var(--color-accent)) 22%, transparent);
 }
 
 /* Lift au survol (pointeurs à hover seulement) : renforce « c'est cliquable ». */
@@ -74,8 +83,11 @@
 
 .tileActive {
   color: var(--color-ink);
-  background: color-mix(in srgb, var(--offer-accent, var(--color-accent)) 10%, var(--glass-tint));
-  box-shadow: inset 0 0 0 1px var(--offer-accent, var(--color-accent));
+  /* Accent de l'offre sur fond OPAQUE (mélangé au voile 6 % il disparaissait). */
+  background: color-mix(in srgb, var(--offer-accent, var(--color-accent)) 18%, var(--color-bg-raised));
+  box-shadow:
+    inset 0 0 0 1px var(--offer-accent, var(--color-accent)),
+    inset 0 0 18px color-mix(in srgb, var(--offer-accent, var(--color-accent)) 28%, transparent);
 }
 
 .tileIcon {
@@ -102,16 +114,31 @@
   color: var(--offer-accent, var(--color-accent-hot));
 }
 
-/* Accroche brochure de l'offre active — le contexte que portait l'ancien
-   bloc « besoin » de la section Audience. */
-.tagline {
+/* Lead du panneau : nomme l'offre choisie (au lieu d'une accroche vague). */
+.panelIntro {
   margin-inline: auto;
   margin-top: 2rem;
   max-width: 42rem;
   text-align: center;
   font-family: var(--font-display);
-  font-size: 1.125rem;
-  font-weight: 500;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+.panelIntroOffer {
+  color: var(--offer-accent, var(--color-accent));
+  font-weight: 700;
+}
+
+/* Accroche brochure de l'offre active, en sous-ligne du lead. */
+.tagline {
+  margin-inline: auto;
+  margin-top: 0.5rem;
+  max-width: 42rem;
+  text-align: center;
+  font-size: 1rem;
+  color: var(--color-ink-muted);
   text-wrap: balance;
 }
 
