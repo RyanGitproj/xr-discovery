@@ -140,16 +140,19 @@ export function DiveSection() {
           />
         </StageLayer>
 
-        {/* Univers révélé (fond de la fin) — bas fondu, jamais de coupure */}
+        {/* Univers révélé (fond de la fin) — bas fondu, jamais de coupure.
+            <picture> art-directed : variante portrait ≤ 767px (volutes froides
+            dans le cadre), paysage au-delà. Natif = une seule image chargée. */}
         <StageLayer {...STORY.universe} className={styles.universeLayer}>
-          <Image
-            src={diveImages.universe.src}
-            alt=""
-            fill
-            unoptimized
-            sizes="100vw"
-            className={styles.imgFull}
-          />
+          <picture>
+            <source
+              media="(max-width: 767px)"
+              srcSet={diveImages.universeMobile.src}
+              width={diveImages.universeMobile.width}
+              height={diveImages.universeMobile.height}
+            />
+            <img src={diveImages.universe.src} alt="" loading="lazy" className={styles.imgFull} />
+          </picture>
         </StageLayer>
 
         {/* Braises montant dans l'univers révélé */}

@@ -77,6 +77,15 @@ export const diveImages = {
     width: 2000,
     height: 1250,
   },
+  /** Variante PORTRAIT : les volutes froides restent dans le cadre mobile
+      (le cover du paysage 2000×1250 ampute les flancs). Art-direction via
+      <picture> (≤ 767px), DiveSection. */
+  universeMobile: {
+    src: "/images/dive/dive-universe-mobile.webp",
+    alt: "",
+    width: 1080,
+    height: 1920,
+  },
   lensGlow: {
     src: "/images/dive/dive-lens-glow.webp",
     alt: "",
