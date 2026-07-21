@@ -1,5 +1,5 @@
 /* Bouton secondaire angulaire v3 : ticket-lite (coins coupés, sans encoches)
-   en verre — bord en inset shadow (un border serait coupé par le clip). */
+   en verre, avec bord en inset shadow (un border serait coupé par le clip). */
 .button {
   display: inline-flex;
   min-height: 2.75rem;

@@ -14,7 +14,7 @@ type FigureProps = {
   fill?: boolean;
   /**
    * Profondeur parallax [-1, 1] : l'image glisse dans son cadre au scroll
-   * (ParallaxLayer mode inset — sur-échelle auto, bords jamais découverts).
+   * (ParallaxLayer mode inset : sur-échelle auto, bords jamais découverts).
    * Toute la logique motion est déléguée à la primitive fx.
    */
   parallax?: number;
@@ -23,7 +23,7 @@ type FigureProps = {
 
 /**
  * Visuel de section : réserve son ratio (zéro CLS), cadre verre discret.
- * Sert les placeholders SVG comme les photos finales — remplacer le fichier
+ * Sert les placeholders SVG comme les photos finales. Remplacer le fichier
  * et l'extension dans src/config/images.ts suffit, aucun composant à toucher.
  */
 export function Figure({
@@ -35,7 +35,7 @@ export function Figure({
   className,
 }: FigureProps) {
   /* unoptimized : les .webp du manifeste sont déjà générés aux dimensions
-     et à la compression exactes du brief (docs/images-brief.md) — le
+     et à la compression exactes du brief (docs/images-brief.md) ; le
      ré-encodage à la volée n'apporte rien et son endpoint casse sous la
      rafale du premier chargement (13 images en erreur constatées). */
   const img = (

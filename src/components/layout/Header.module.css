@@ -33,7 +33,7 @@
 }
 
 /* Lockup officiel : la hauteur pilote, la largeur suit le ratio (~3,9:1).
-   Mobile plus bas — la barre 390px doit loger logo + CTA sur une ligne. */
+   Plus bas sur mobile : la barre 390px doit loger logo + CTA sur une ligne. */
 .logoImg {
   height: 2rem;
   width: auto;

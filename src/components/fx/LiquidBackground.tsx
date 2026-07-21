@@ -5,7 +5,7 @@ import { Embers } from "./Embers";
 import styles from "./LiquidBackground.module.css";
 
 /**
- * Fond liquide global (v2) — nappes de lumière qui dérivent dans un champ
+ * Fond liquide global (v2) : nappes de lumière qui dérivent dans un champ
  * de distorsion, rendues par un fragment shader WebGL (aucune dépendance).
  * Interaction signature : le pointeur éclaire la profondeur avec inertie
  * (desktop), le scroll « remue » le liquide (mobile & desktop).
@@ -106,7 +106,7 @@ export function LiquidBackground() {
     <div aria-hidden="true" className={styles.root}>
       <canvas ref={canvasRef} className={styles.canvas} />
       {/* Braises d'ambiance globales (v3) : présence vivante permanente
-          derrière TOUTES les sections — les sections à motifs propres
+          derrière TOUTES les sections ; les sections à motifs propres
           (Sparkles/Meteors/champs) se superposent naturellement devant. */}
       <Embers count={18} />
     </div>
@@ -173,15 +173,15 @@ void main() {
 
   // Dérive de température au scroll (nuance chaud/froid, 20/07) : le fond se
   // rafraîchit doucement au cœur du parcours (offres → déploiement) puis
-  // revient au chaud. Gaussienne centrée ~mi-page, amplitude faible — c'est
-  // une nuance d'ambiance, pas une bascule. Chaud (cool≈0) en haut/bas.
+  // revient au chaud. Gaussienne centrée ~mi-page, amplitude faible (une
+  // nuance d'ambiance, pas une bascule). Chaud (cool≈0) en haut/bas.
   float cool = exp(-pow((s - 6.0) / 4.5, 2.0));
 
   // Viewport étroit (mobile) : les nappes froides, plus larges que l'écran,
   // se diluaient en teinte noyée dans l'orange (retour Ryan 21/07). On
   // resserre leurs halos, on renforce leur amplitude et on garantit un
   // plancher de froid ÉLEVÉ et permanent sur petit écran (visible sur TOUTE
-  // la hauteur, pas seulement au pic mi-page — 2e retour Ryan). La braise
+  // la hauteur, pas seulement au pic mi-page ; 2e retour Ryan). La braise
   // reste dominante : la nappe c1 ne refroidit jamais.
   float narrow = smoothstep(0.85, 0.5, aspect);
   cool = max(cool, narrow * 0.52);

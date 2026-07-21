@@ -15,7 +15,7 @@ const VALID_LEAD: Lead = {
   fonction: "",
 };
 
-describe("leadSchema — cohérence secteur/pack", () => {
+describe("leadSchema : cohérence secteur/pack", () => {
   it("accepte un pack vide (« je ne sais pas encore »)", () => {
     expect(leadSchema.safeParse(VALID_LEAD).success).toBe(true);
   });

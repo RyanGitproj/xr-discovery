@@ -1,8 +1,8 @@
-/* Mosaïque « moments XR » (v3 single-view) — 6 tuiles en 2 rangées de
+/* Mosaïque « moments XR » (v3 single-view) : 6 tuiles en 2 rangées de
    largeurs inégales (5/4/3 puis 3/4/5 en miroir) sur 12 colonnes :
    asymétrie éditoriale sans trou, hauteur totale pilotée par le viewport.
-   Les images sont recadrées par object-fit cover (Figure en mode fill) —
-   fini le ratio carré intrinsèque qui imposait 3 rangées d'un écran. */
+   Les images sont recadrées par object-fit cover (Figure en mode fill).
+   Fini le ratio carré intrinsèque qui imposait 3 rangées d'un écran. */
 
 .section {
   composes: shell chapter from "./section.module.css";

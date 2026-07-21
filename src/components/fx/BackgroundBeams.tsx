@@ -11,7 +11,7 @@ type BackgroundBeamsProps = {
 };
 
 /**
- * Faisceaux SVG animés en fond (CSS pur — un segment lumineux voyage le long
+ * Faisceaux SVG animés en fond (CSS pur : un segment lumineux voyage le long
  * de chaque courbe via stroke-dashoffset, pathLength normalisé à 100).
  * Même courbe en S translatée par index, rails statiques dessous.
  */

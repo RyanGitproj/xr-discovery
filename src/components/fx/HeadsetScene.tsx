@@ -11,7 +11,7 @@ import styles from "./HeadsetScene.module.css";
 const AMBER = "#ffc24d";
 const ORANGE = "#f5661e";
 const RED = "#e82818";
-const TEAL = "#2fbfa8"; /* contre-jour froid — la pointe turquoise */
+const TEAL = "#2fbfa8"; /* contre-jour froid : la pointe turquoise */
 
 type Choreography = {
   progress: MotionValue<number>;
@@ -32,7 +32,7 @@ function ramp(p: number, p0: number, p1: number, a: number, b: number) {
 /**
  * Rig : lit la progression du scroll (et le gyro) à chaque frame et joue la
  * mise du casque. Trois temps : (1) la FAÇADE (capteurs, logo Meta) fait face
- * au spectateur, au loin ; (2) le casque s'approche et PIVOTE de 180° — on le
+ * au spectateur, au loin ; (2) le casque s'approche et PIVOTE de 180°, on le
  * retourne vers soi pour découvrir les lentilles ; (3) plongée dans les
  * œilletons (z file vers la caméra à z=4, centré entre les deux lentilles).
  * Aucun état React : mutation directe de l'objet three. Le relais plein écran
@@ -73,7 +73,7 @@ type HeadsetSceneProps = Choreography & {
 };
 
 /**
- * Scène WebGL du casque (Immersion v2.1) — react-three-fiber. Vrai Meta
+ * Scène WebGL du casque (Immersion v2.1) en react-three-fiber. Vrai Meta
  * Quest 3 (GLB Sketchfab CC-BY optimisé, chargé en Suspense), réflexions par
  * Lightformers locaux (pas d'HDR distant). Fond transparent : le
  * LiquidBackground / l'univers respirent derrière. Lazy-montée près du
@@ -101,7 +101,7 @@ export function HeadsetScene({ progress, tiltX, tiltY, dpr = 1.5, active = true 
         <directionalLight position={[2, 3, 4]} intensity={1.1} color="#ffe9d6" />
         <pointLight position={[-3.2, -1, 2.5]} intensity={40} distance={14} color={ORANGE} />
         <pointLight position={[3.2, 1.4, 1.5]} intensity={34} distance={14} color={TEAL} />
-        {/* Cubemap de réflexions rendu UNE fois (frames={1}) — glossy néon
+        {/* Cubemap de réflexions rendu UNE fois (frames={1}) : glossy néon
             sur la visière, sans HDR distant. */}
         <Environment resolution={128} frames={1}>
           <Lightformer intensity={2.4} color={AMBER} position={[-3, 1, 3]} scale={[5, 5, 1]} />

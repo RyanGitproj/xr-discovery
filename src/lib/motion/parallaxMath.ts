@@ -1,6 +1,6 @@
 /**
  * Moteur pur du système parallax (Immersion v2.1) : bornes, clamps et
- * keyframes vivent ici pour être testés sans DOM — ParallaxLayer ne fait
+ * keyframes vivent ici pour être testés sans DOM ; ParallaxLayer ne fait
  * qu'appliquer ces valeurs à des MotionValues.
  *
  * Convention de profondeur : depth ∈ [-1, 1]. Négatif = lointain (le calque
@@ -24,7 +24,7 @@ export const INSET_RANGE_MAX = 10;
 
 /**
  * Progression où tous les calques sont alignés (déplacement nul) :
- * 0.5 = scène centrée dans le viewport (défaut — l'utilisateur voit la
+ * 0.5 = scène centrée dans le viewport (défaut : l'utilisateur voit la
  * composition exacte du design au moment où il la regarde) ; 0 = scène déjà
  * en place au chargement (hero épinglé en haut : aucun décalage au premier
  * rendu, LCP intact).
@@ -73,8 +73,9 @@ export function insetKeyframes(
 
 /**
  * Sur-échelle du mode inset : le débattement max est |depth| × range % de la
- * hauteur ; l'échelle ajoute exactement ce débord de chaque côté — les bords
- * de l'image ne se découvrent jamais dans leur cadre overflow:hidden.
+ * hauteur ; l'échelle ajoute exactement ce débord de chaque côté, si bien
+ * que les bords de l'image ne se découvrent jamais dans leur cadre
+ * overflow:hidden.
  */
 export function insetScale(depth: number, rangePct: number = INSET_RANGE_DEFAULT): number {
   return 1 + (2 * Math.abs(clampDepth(depth)) * clampInsetRange(rangePct)) / 100;

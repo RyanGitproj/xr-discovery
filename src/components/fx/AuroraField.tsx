@@ -8,7 +8,7 @@ type AuroraFieldProps = {
 
 /**
  * Nappes lumineuses qui dérivent lentement en fond (Famille A).
- * Gradients pré-floutés animés en transform uniquement — jamais de filter.
+ * Gradients pré-floutés animés en transform uniquement (jamais de filter).
  */
 export function AuroraField({ intensity = "ambient", className }: AuroraFieldProps) {
   return (

@@ -1,7 +1,7 @@
 /**
  * Filtre SVG global de réfraction (couche 4 du liquid glass, chap. 5.2).
  * Monté une fois dans le layout ; consommé par .glass-panel--liquid via
- * @supports (backdrop-filter: url(#liquid-refract)) — Chromium uniquement.
+ * @supports (backdrop-filter: url(#liquid-refract)), sur Chromium uniquement.
  */
 export function LiquidRefractFilter() {
   return (

@@ -12,7 +12,7 @@ const HeadsetScene = dynamic(() => import("./HeadsetScene").then((m) => m.Headse
   ssr: false,
 });
 
-/** Capacité WebGL — invariante, détectée une fois (hydration-safe via
+/** Capacité WebGL, invariante et détectée une fois (hydration-safe via
  * useSyncExternalStore : true côté serveur, valeur réelle au client). */
 let cachedWebGL: boolean | null = null;
 function webglSnapshot(): boolean {
@@ -58,9 +58,9 @@ type HeadsetSceneLazyProps = {
 
 /**
  * Monte la scène 3D UNIQUEMENT près du viewport (IntersectionObserver, ~1
- * écran de marge) — diffère le chunk three.js hors first-view — et coupe son
- * frameloop quand elle sort de l'écran (zéro GPU au repos). Sans WebGL : image
- * 2D de repli. Le fallback reduced-motion est géré en amont (DiveSection ne
+ * écran de marge), ce qui diffère le chunk three.js hors first-view, et coupe
+ * son frameloop quand elle sort de l'écran (zéro GPU au repos). Sans WebGL :
+ * image 2D de repli. Le fallback reduced-motion est géré en amont (DiveSection ne
  * monte pas ScrollStage sous reduced-motion).
  */
 export function HeadsetSceneLazy({ progress, tiltX, tiltY, dpr }: HeadsetSceneLazyProps) {

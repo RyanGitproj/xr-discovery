@@ -5,8 +5,8 @@ import { cx } from "@/lib/cx";
 import { pseudoRandom } from "@/lib/pseudoRandom";
 import { useOffscreenPause } from "@/lib/motion/useOffscreenPause";
 
-/* Braises : dominante chaude + pointes froides (turquoise, violet) — casse
-   la monotonie orange pour que le second accent froid paraisse natif. */
+/* Braises : dominante chaude + pointes froides (turquoise, violet), de quoi
+   casser la monotonie orange pour que le second accent froid paraisse natif. */
 const COLORS = ["#ffc24d", "#f5661e", "#f5431c", "#e82818", "#2fbfa8", "#c18cff"];
 
 type EmbersProps = {
@@ -17,7 +17,7 @@ type EmbersProps = {
 
 /**
  * Braises montantes (v3) : points incandescents qui s'élèvent en scintillant
- * et dérivent latéralement — remplace les éclats bokeh froids de la scène de
+ * et dérivent latéralement. Remplace les éclats bokeh froids de la scène de
  * plongée. Positions/durées déterministes (pseudoRandom, zéro mismatch SSR),
  * transform + opacity uniquement, pause hors écran (useOffscreenPause).
  * Sous prefers-reduced-motion : braises figées discrètes (fx-neon.css).

@@ -18,12 +18,12 @@ import styles from "./DiveSection.module.css";
  * est une VRAIE scène 3D (react-three-fiber, `HeadsetSceneLazy`) : il approche,
  * pivote et présente ses lentilles qui engloutissent l'écran (mise du casque) ;
  * un voile + un embrasement PLEIN ÉCRAN prennent le relais et fondent vers
- * l'univers VR. Données pures — la mécanique 2D vit dans StageLayer, la 3D
+ * l'univers VR. Données pures : la mécanique 2D vit dans StageLayer, la 3D
  * dans HeadsetScene.
  */
 const STORY = {
   /* Mascotte officielle en filigrane derrière le casque 3D (~35 %, décision
-     Ryan 18/07) — fondue AVANT le voile de mise du casque. */
+     Ryan 18/07), fondue AVANT le voile de mise du casque. */
   mascotte: { at: [0, 0.5, 0.62], opacity: [0.35, 0.35, 0], tiltRange: 6 },
   /* Braises d'avant-plan : le calque translate au scroll pendant que chaque
      braise monte en propre (double mouvement) ; s'efface à la mise du casque. */
@@ -90,7 +90,7 @@ function RevealCopy() {
   );
 }
 
-/** Reduced-motion : toute la scène à plat (image 2D) — rien n'est imposé. */
+/** Reduced-motion : toute la scène à plat (image 2D), rien n'est imposé. */
 function StaticFallback() {
   return (
     <div className={styles.fallback}>
@@ -119,7 +119,7 @@ function StaticFallback() {
 }
 
 /**
- * Scène immersive « plongée Quest 3 » (Immersion v2.1) — l'interaction
+ * Scène immersive « plongée Quest 3 » (Immersion v2.1), l'interaction
  * signature de la page. Le scroll reste natif/Lenis : la scène ne fait que
  * lire la progression (déterministe, bidirectionnelle). Le casque 3D est
  * lazy-monté près du viewport (chunk three.js hors first-view).
@@ -128,7 +128,7 @@ export function DiveSection() {
   return (
     <section className={cx("fx-section", styles.section)}>
       <ScrollStage screens={3} fallback={<StaticFallback />} stageClassName={styles.stageBg}>
-        {/* Mascotte en filigrane — tout au fond, derrière le casque 3D */}
+        {/* Mascotte en filigrane, tout au fond derrière le casque 3D */}
         <StageLayer {...STORY.mascotte} className={styles.mascotteLayer}>
           <Image
             src={diveImages.mascotte.src}
@@ -140,7 +140,7 @@ export function DiveSection() {
           />
         </StageLayer>
 
-        {/* Univers révélé (fond de la fin) — bas fondu, jamais de coupure.
+        {/* Univers révélé (fond de la fin) : bas fondu, jamais de coupure.
             <picture> art-directed : variante portrait ≤ 767px (volutes froides
             dans le cadre), paysage au-delà. Natif = une seule image chargée. */}
         <StageLayer {...STORY.universe} className={styles.universeLayer}>
@@ -160,12 +160,12 @@ export function DiveSection() {
           <Embers count={20} />
         </StageLayer>
 
-        {/* Casque 3D — s'estompe une fois l'écran englouti */}
+        {/* Casque 3D, qui s'estompe une fois l'écran englouti */}
         <StageLayer {...STORY.headset}>
           <HeadsetLayer />
         </StageLayer>
 
-        {/* Braises d'avant-plan (chassées pendant l'approche) — assez
+        {/* Braises d'avant-plan (chassées pendant l'approche) : assez
             présentes pour inviter au scroll, sans voler la scène 3D */}
         <StageLayer {...STORY.embersFront}>
           <Embers count={34} />

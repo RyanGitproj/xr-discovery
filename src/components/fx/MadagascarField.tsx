@@ -29,7 +29,7 @@ type MadagascarFieldProps = {
  * Constellation en forme de Madagascar : au chargement les points dispersés
  * convergent vers la silhouette de l'île (morph CSS one-shot), puis la chaîne
  * de côte s'allume et les signaux comète la parcourent. Même vie que
- * NeuralField (classes neural-* de fx-neon.css) ; layout déterministe —
+ * NeuralField (classes neural-* de fx-neon.css) ; layout déterministe, donc
  * aucun mismatch SSR. Sous prefers-reduced-motion : île directement formée.
  */
 export function MadagascarField({
@@ -111,7 +111,7 @@ export function MadagascarField({
       </g>
       {points.map((point, i) => {
         // Seuls les points intérieurs pulsent : la côte reste allumée en
-        // continu — silhouette stable et 78 → 14 animations de paint.
+        // continu, d'où une silhouette stable et 78 → 14 animations de paint.
         const isCoast = i < contourPoints;
         return (
           <g

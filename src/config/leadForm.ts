@@ -4,7 +4,7 @@ import type { Lead } from "@/lib/validations/lead";
 /**
  * Libellés français du formulaire court « qui conclut » (3 étapes :
  * secteur/pack → projet → coordonnées). Les VALEURS vivent dans
- * lib/validations/lead.ts (schéma unique) — ici uniquement la présentation.
+ * lib/validations/lead.ts (schéma unique) ; ici, uniquement la présentation.
  */
 
 export const SECTEUR_LABELS: Record<Lead["secteur"], string> = {
@@ -12,7 +12,7 @@ export const SECTEUR_LABELS: Record<Lead["secteur"], string> = {
   autre: "Autre secteur",
 };
 
-/** Option « pack » vide — le visiteur ne s'engage sur aucun format. */
+/** Option « pack » vide : le visiteur ne s'engage sur aucun format. */
 export const PACK_NONE_LABEL = "Je ne sais pas encore";
 
 export const OBJECTIF_LABELS: Record<Lead["objectif"], string> = {
@@ -30,7 +30,7 @@ export const BUDGET_LABELS: Record<Lead["budget"], string> = {
   "a-definir": "À définir ensemble",
 };
 
-/** Libellés nus — l'obligatoire est marqué par « * » (prop `required` des
+/** Libellés nus. L'obligatoire est marqué par « * » (prop `required` des
     champs), jamais par une mention entre parenthèses. */
 export const FIELD_LABELS: Record<keyof Lead, string> = {
   secteur: "Vous êtes",

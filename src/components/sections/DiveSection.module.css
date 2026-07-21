@@ -7,7 +7,7 @@
 }
 
 /* L'écran épinglé reste transparent : le LiquidBackground global respire
-   derrière la scène — l'univers révélé s'y raccorde (bords fondus #0d0706). */
+   derrière la scène, et l'univers révélé s'y raccorde (bords fondus #0d0706). */
 .stageBg {
   background: transparent;
 }
@@ -59,7 +59,7 @@
   margin-top: 0.75rem;
 }
 
-/* Transition « on met le casque » — PLEIN VIEWPORT (remplace l'ancien halo
+/* Transition « on met le casque », en PLEIN VIEWPORT (remplace l'ancien halo
    borné). Voile sombre bref (casque sur les yeux) puis embrasement lumineux
    qui inonde l'écran et fond vers l'univers. Tokenisés, opacity/scale only. */
 .veil {
@@ -68,8 +68,8 @@
   background: var(--color-bg-deep);
 }
 
-/* « Boum magique » iridescent : cœur blanc → turquoise → violet (vrais froids)
-   — un éclat d'énergie magique qui tranche sur l'embrasement braise, plutôt
+/* « Boum magique » iridescent : cœur blanc → turquoise → violet (vrais froids).
+   Un éclat d'énergie magique qui tranche sur l'embrasement braise, plutôt
    qu'un flash chaud de plus. */
 .bloom {
   position: absolute;
@@ -83,7 +83,7 @@
   );
 }
 
-/* Mascotte officielle en filigrane derrière le casque 3D — intensité pilotée
+/* Mascotte officielle en filigrane derrière le casque 3D. Intensité pilotée
    par le storyboard (0.35), fondue avant le voile. */
 .mascotteLayer {
   place-items: center;
@@ -98,7 +98,7 @@
   transform: translateY(4svh);
 }
 
-/* Calque image plein cadre (univers révélé) — auto-portant : remplit le
+/* Calque image plein cadre (univers révélé), auto-portant : remplit le
    StageLayer positionné, cover, comme le faisait next/image `fill`. */
 .imgFull {
   position: absolute;
@@ -109,7 +109,7 @@
 }
 
 /* Le bas de l'univers FOND vers le décor global (pas de coupure nette avec
-   la section suivante) — masque statique sur le calque, quel que soit
+   la section suivante), via un masque statique sur le calque, quel que soit
    l'asset. Doublé par la consigne « bords fondus » du brief Codex v3. */
 .universeLayer {
   mask-image: linear-gradient(180deg, black 78%, transparent 100%);
@@ -126,7 +126,7 @@
   height: auto;
 }
 
-/* Pill de permission gyroscope (iOS) — discrète, jamais une modale. */
+/* Pill de permission gyroscope (iOS) : discrète, jamais une modale. */
 .gyroPill {
   position: absolute;
   right: 1.25rem;

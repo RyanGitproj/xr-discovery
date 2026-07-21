@@ -1,6 +1,6 @@
 /* Point capitale + ondes radar. Animations uniquement sous no-preference :
    l'état de base EST l'état final (cœur allumé, glow statique, ondes
-   invisibles) — fallback prefers-reduced-motion par construction. Tout est
+   invisibles), d'où un fallback prefers-reduced-motion par construction. Tout est
    composité (opacity + scale sur des éléments HTML). */
 
 .ping {

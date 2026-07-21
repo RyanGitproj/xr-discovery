@@ -18,7 +18,7 @@ type ParallaxSceneContextValue = {
 
 const ParallaxSceneContext = createContext<ParallaxSceneContextValue | null>(null);
 
-/** null hors de toute ParallaxScene — ParallaxLayer passe alors en standalone. */
+/** null hors de toute ParallaxScene, auquel cas ParallaxLayer passe en standalone. */
 export function useParallaxScene(): ParallaxSceneContextValue | null {
   return useContext(ParallaxSceneContext);
 }
@@ -27,7 +27,7 @@ type ParallaxSceneProps = {
   /** Fenêtre d'observation framer-motion. Défaut : toute la traversée du
       viewport. Hero épinglé en haut : ["start start", "end start"]. */
   offset?: ScrollOffset;
-  /** Voir ParallaxNeutral — 0.5 (défaut) ou 0 pour une scène en place au
+  /** Voir ParallaxNeutral : 0.5 (défaut) ou 0 pour une scène en place au
       chargement. */
   neutral?: ParallaxNeutral;
   className?: string;
@@ -41,7 +41,7 @@ const DEFAULT_OFFSET: ScrollOffset = ["start end", "end start"];
  * la scène dans le viewport et la partage aux ParallaxLayer enfants. Pose
  * data-active (IntersectionObserver ±160px) pour que le CSS n'arme
  * will-change que près du viewport. Sous prefers-reduced-motion : simple
- * conteneur, aucun contexte — les calques restent à leur position de design.
+ * conteneur, aucun contexte, et les calques restent à leur position de design.
  */
 export function ParallaxScene({
   offset = DEFAULT_OFFSET,

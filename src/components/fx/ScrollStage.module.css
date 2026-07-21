@@ -8,7 +8,7 @@
 
 /* JAMAIS de contain/overflow sur .wrapper : un containment ancêtre tue le
    position:sticky (piège documenté dans StickyScrollReveal). Le containment
-   vit ici, sur l'écran épinglé — et AUCUN backdrop-filter à l'intérieur
+   vit ici, sur l'écran épinglé, et AUCUN backdrop-filter à l'intérieur
    (contain:paint forme une backdrop root). */
 .stage {
   position: sticky;

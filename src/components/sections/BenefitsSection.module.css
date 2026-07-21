@@ -13,7 +13,7 @@
 }
 
 /* Layout éditorial (lg) : paires miroir 5/7 puis 7/5, décalages verticaux
-   et radii variés — même langage que la section Publics. */
+   et radii variés, dans le même langage que la section Publics. */
 .b1 {
   composes: rTight from "./section.module.css";
 }

@@ -12,7 +12,7 @@ type EnterRiseProps = {
 
 /**
  * Apparition chronométrée (fade + légère montée), pour les mises en scène à
- * timeline — contrairement à Reveal, déclenché au scroll. Utilise `translate`
+ * timeline, là où Reveal se déclenche au scroll. Utilise `translate`
  * (pas `transform`) : composable avec un enfant animé en transform. Sous
  * prefers-reduced-motion : contenu directement en place.
  */

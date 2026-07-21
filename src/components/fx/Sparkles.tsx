@@ -5,7 +5,7 @@ import { cx } from "@/lib/cx";
 import { pseudoRandom } from "@/lib/pseudoRandom";
 import { useOffscreenPause } from "@/lib/motion/useOffscreenPause";
 
-/* Palette v3 : ambre, rouge, flamme, blanc chaud, dominante chaude — plus une
+/* Palette v3 : ambre, rouge, flamme, blanc chaud, dominante chaude, plus une
    pointe de froid (turquoise + violet) pour nuancer sans virer arc-en-ciel. */
 const COLORS = ["#ffc24d", "#e82818", "#f5431c", "#fff4e8", "#2fbfa8", "#c18cff"];
 
@@ -16,13 +16,13 @@ type SparklesProps = {
 };
 
 /**
- * Étincelles qui scintillent (v1.2) — positions et cadences déterministes,
+ * Étincelles qui scintillent (v1.2) : positions et cadences déterministes,
  * scale + opacity uniquement. Statiques à 55 % sous reduced-motion.
  */
 export function Sparkles({ count = 14, className }: SparklesProps) {
   const ref = useRef<HTMLDivElement>(null);
 
-  // Scintillement continu : pause hors écran (client assumé — le gain RSC
+  // Scintillement continu : pause hors écran (client assumé, car le gain RSC
   // est marginal devant le coût paint mesuré des champs toujours animés).
   useOffscreenPause(ref);
 

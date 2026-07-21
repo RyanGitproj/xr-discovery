@@ -13,7 +13,7 @@ type PackCardProps = {
   pack: OfferPack;
   pricePrefix: string;
   cta: string;
-  /** Effet de bord du CTA (sélection secteur + pack, tracking) — le scroll
+  /** Effet de bord du CTA (sélection secteur + pack, tracking) ; le scroll
       vers le formulaire est porté par le bouton lui-même. */
   onChoose: () => void;
 };
@@ -21,7 +21,7 @@ type PackCardProps = {
 /**
  * Card de pack : GlassPanel en TiltCard sous GeoFrame, pack vedette avec
  * chamfer élargi + trace + glow, prix en DecryptNumber (révélation
- * déchiffrement — un compteur croissant ferait « grimper » le prix).
+ * déchiffrement, car un compteur croissant ferait « grimper » le prix).
  */
 export function PackCard({ pack, pricePrefix, cta, onChoose }: PackCardProps) {
   const featured = pack.featured === true;

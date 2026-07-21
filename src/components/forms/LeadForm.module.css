@@ -13,7 +13,7 @@
   gap: clamp(0.625rem, 1.5svh, 1rem);
 }
 
-/* Étape coordonnées : 2 colonnes pour tenir sans scroll — PC ET mobile.
+/* Étape coordonnées : 2 colonnes pour tenir sans scroll, PC ET mobile.
    minmax(0, 1fr) : le PhoneInput (flex de la lib) ferait déborder une
    colonne 1fr (min-width auto des items de grille). */
 .fieldsTwoCol {
@@ -23,7 +23,7 @@
 }
 
 /* Mobile : email + téléphone gardent la pleine largeur (champs critiques,
-   le PhoneInput a besoin de place) — 6 champs → 4 rangées. Sur desktop, la
+   le PhoneInput a besoin de place), d'où 6 champs → 4 rangées. Sur desktop, la
    place ne manque pas : ils reprennent le flux 2 colonnes (3 rangées). */
 .spanFullMobile {
   grid-column: 1 / -1;

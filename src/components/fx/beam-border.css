@@ -1,4 +1,4 @@
-/* BeamBorder — trait lumineux qui parcourt le contour (zéro JS, chap. 4.1). */
+/* BeamBorder : trait lumineux qui parcourt le contour (zéro JS, chap. 4.1). */
 
 @property --angle {
   syntax: "<angle>";
@@ -8,7 +8,7 @@
 
 .beam-border {
   position: relative;
-  border-radius: 0; /* v3 : cards angulaires — plus de rayon sur les cadres */
+  border-radius: 0; /* v3 : cards angulaires, fini le rayon sur les cadres */
 }
 
 .beam-border::before {

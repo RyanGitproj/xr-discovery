@@ -14,8 +14,8 @@ export type SubmitLeadResult = { ok: false; error: string };
  * client, persistance Supabase (funnel_xr_discovery_leads, service_role),
  * cookie httpOnly 30 min pour /merci, puis redirection. L'attribution
  * invalide est ignorée (jamais bloquante) ; sans configuration Supabase le
- * lead est loggé (mode maquette) ; un insert REFUSÉ remonte au visiteur —
- * on ne perd pas un lead en silence.
+ * lead est loggé (mode maquette) ; un insert REFUSÉ remonte au visiteur,
+ * pour ne jamais perdre un lead en silence.
  */
 export async function submitLead(
   input: unknown,
@@ -23,7 +23,7 @@ export async function submitLead(
 ): Promise<SubmitLeadResult | undefined> {
   const parsed = leadSchema.safeParse(input);
   if (!parsed.success) {
-    return { ok: false, error: "Certaines réponses sont invalides — vérifiez le formulaire." };
+    return { ok: false, error: "Certaines réponses sont invalides. Vérifiez le formulaire." };
   }
 
   const attribution = attributionSchema.safeParse(attributionInput);
@@ -31,14 +31,14 @@ export async function submitLead(
 
   const supabase = getSupabaseServerClient();
   if (supabase === null) {
-    // Maquette : persistance non configurée (voir TODO.md) — lead loggé.
-    console.info("[lead] Supabase non configuré — lead reçu :", row);
+    // Maquette : persistance non configurée (voir TODO.md), on logge le lead.
+    console.info("[lead] Supabase non configuré, lead reçu :", row);
   } else {
     const inserted = await insertLead(supabase, row);
     if (!inserted) {
       return {
         ok: false,
-        error: "Impossible d'enregistrer votre demande — réessayez dans un instant.",
+        error: "Impossible d'enregistrer votre demande. Réessayez dans un instant.",
       };
     }
   }

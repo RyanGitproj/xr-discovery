@@ -2,7 +2,7 @@
  * Point de sortie UNIQUE des events dataLayer (funnel_start, lead_submit…).
  * GTM n'est pas encore chargé (chantier gtm-tracking-setup quand l'ID
  * conteneur existera) : pousser dans window.dataLayer sans GTM est inoffensif
- * et ne pose aucun cookie — les events seront repris tels quels par le
+ * et ne pose aucun cookie. Les events seront repris tels quels par le
  * conteneur le jour venu. No-op côté serveur.
  */
 

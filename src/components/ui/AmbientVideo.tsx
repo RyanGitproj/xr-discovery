@@ -28,7 +28,7 @@ export function AmbientVideo({ video, soundOnLabel, soundOffLabel, className }: 
   const [muted, setMuted] = useState(true);
   const { poster } = video;
 
-  // Lecture pilotée par la visibilité (écran + onglet) — jamais sous
+  // Lecture pilotée par la visibilité (écran + onglet), mais jamais sous
   // reduced-motion (le fallback poster/contrôles prend le relais).
   useEffect(() => {
     const el = ref.current;

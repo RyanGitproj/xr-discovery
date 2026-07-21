@@ -15,10 +15,10 @@ type TapHintProps = {
 };
 
 /**
- * Main « qui tape » (famille C — hint pédagogique one-shot) : icône pointer
+ * Main « qui tape » (famille C, hint pédagogique one-shot) : icône pointer
  * + anneau d'impulsion rejoué à chaque incrément de tapCount. Purement
  * décorative : aria-hidden, aucun événement capté. Le parent la positionne
- * (wrapper absolu) et pilote sa timeline — sous prefers-reduced-motion, le
+ * (wrapper absolu) et pilote sa timeline. Sous prefers-reduced-motion, le
  * parent ne la rend simplement pas.
  */
 export function TapHint({ visible, tapCount, className }: TapHintProps) {

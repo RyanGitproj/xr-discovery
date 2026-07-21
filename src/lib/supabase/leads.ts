@@ -3,7 +3,7 @@ import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 /**
- * Ligne de `public.funnel_xr_discovery_leads` — miroir de
+ * Ligne de `public.funnel_xr_discovery_leads`, miroir de
  * supabase/schema.sql, hors colonnes gérées par la base (id, created_at,
  * lead_status). Optionnels absents = null (jamais de chaîne vide en base).
  */

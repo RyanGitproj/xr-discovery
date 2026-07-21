@@ -1,4 +1,4 @@
-/* Fond liquide global (v2) — monté une seule fois dans le layout, fixé
+/* Fond liquide global (v2), monté une seule fois dans le layout et fixé
    derrière tout le site. Le dégradé CSS statique sert à la fois de premier
    rendu (avant l'hydratation), de fallback sans WebGL et d'état
    prefers-reduced-motion : la page est complète sans le canvas. */

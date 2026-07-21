@@ -1,8 +1,8 @@
-/* Socle commun des sections (v2) — composé par les modules via `composes`.
+/* Socle commun des sections (v2), composé par les modules via `composes`.
    Uniquement des tokens de globals.css, aucune valeur en dur. */
 
 /* Padding vertical viewport-fluide (--section-pad-y) : dense sur écrans
-   bas, aéré sur écrans hauts, borné en rem — le mobile n'est pas un
+   bas, aéré sur écrans hauts, borné en rem. Le mobile n'est pas un
    desktop étiré. */
 .shell {
   position: relative;
@@ -11,8 +11,8 @@
 
 /* Chapitre « single view » : sur desktop assez haut, la section occupe le
    viewport restant sous le header et centre son contenu. Sous 900px de
-   haut (laptops 1366×768), fallback assumé : bande compacte qui scrolle —
-   le contenu n'est jamais étiré ni tronqué. Ne JAMAIS composer sur les
+   haut (laptops 1366×768), fallback assumé : bande compacte qui scrolle,
+   sans jamais étirer ni tronquer le contenu. Ne JAMAIS composer sur les
    sections sticky (Dive, Deployment). */
 .chapter {
   position: relative;
@@ -47,7 +47,7 @@
   max-width: 72rem;
 }
 
-/* Langage de formes v3 : cards angulaires (radius 0 partout) — la variété
+/* Langage de formes v3 : cards angulaires (radius 0 partout). La variété
    par surface viendra des chanfreins GeoFrame, posés au cas par cas. Ces
    deux classes restent des points d'accroche (aujourd'hui neutres). */
 .rTight {
@@ -64,7 +64,7 @@
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  /* Teinte d'humeur de la section (data-mood) — chaud par défaut. */
+  /* Teinte d'humeur de la section (data-mood), chaud par défaut. */
   color: var(--section-accent, var(--color-accent));
 }
 
@@ -93,7 +93,7 @@
 .icon {
   width: 1.25rem;
   height: 1.25rem;
-  /* Suit l'humeur de la section (data-mood) — chaud par défaut. */
+  /* Suit l'humeur de la section (data-mood), accent chaud par défaut. */
   color: var(--section-accent, var(--color-accent));
 }
 

@@ -25,7 +25,7 @@ type ScrollStageContextValue = {
 
 const ScrollStageContext = createContext<ScrollStageContextValue | null>(null);
 
-/** null hors de tout ScrollStage — StageLayer reste alors statique. */
+/** null hors de tout ScrollStage ; StageLayer reste alors statique. */
 export function useScrollStage(): ScrollStageContextValue | null {
   return useContext(ScrollStageContext);
 }
@@ -45,9 +45,9 @@ type ScrollStageProps = {
 
 /**
  * Scrollytelling épinglé (Immersion v2.1) : wrapper de N écrans, écran sticky
- * qui joue le storyboard des StageLayer enfants au rythme du scroll —
+ * qui joue le storyboard des StageLayer enfants au rythme du scroll,
  * bidirectionnel et déterministe par construction (aucun état, remonter
- * rejoue l'état exact), et AUCUN ralentissement de la molette : la scène ne
+ * rejoue l'état exact), sans AUCUN ralentissement de la molette : la scène ne
  * fait que lire la progression. Fournit aussi le gyroscope aux calques
  * (tiltRange) et l'état de permission à la section (pill iOS).
  */

@@ -4,9 +4,9 @@ export type Vec2 = { readonly x: number; readonly y: number };
  * Contour simplifié de Madagascar (135 sommets, île principale
  * uniquement). Dérivé de Natural Earth 1:50m admin-0 countries (domaine
  * public, naturalearthdata.com), simplifié par Douglas-Peucker. Projection
- * plate carrée corrigée cos(-18.8° — latitude moyenne), y vers
+ * plate carrée corrigée cos(-18.8°, la latitude moyenne), y vers
  * le bas (convention SVG). Normalisé à hauteur 1 : y ∈ [0, 1],
- * x ∈ [0, MADAGASCAR_ASPECT] — les distances sont isotropes.
+ * x ∈ [0, MADAGASCAR_ASPECT], de sorte que les distances sont isotropes.
  */
 export const MADAGASCAR_OUTLINE: readonly Vec2[] = [
   { x: 0.4401, y: 0.0261 },
@@ -152,6 +152,6 @@ export const MADAGASCAR_ASPECT = 0.5064;
 /**
  * Antananarivo (lat −18.8792, lon 47.5079) projetée dans le repère du contour
  * ci-dessus (même pipeline : projection cos(lat moyenne) + normalisation par
- * la bbox du polygone simplifié — vérifié par régénération à l'identique).
+ * la bbox du polygone simplifié, vérifié par régénération à l'identique).
  */
 export const ANTANANARIVO: Vec2 = { x: 0.2977, y: 0.504 };

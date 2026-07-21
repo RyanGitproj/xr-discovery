@@ -8,7 +8,7 @@ import styles from "./ArgumentSection.module.css";
 
 /**
  * Section 6 du blueprint : l'argumentaire commercial en TextScrollReveal
- * (chaque mot s'allume au fil du scroll — unique occurrence de la page),
+ * (chaque mot s'allume au fil du scroll, unique occurrence de la page),
  * guillemets géants en accent 10 %, options en pills glass, visuel signature.
  */
 export function ArgumentSection() {

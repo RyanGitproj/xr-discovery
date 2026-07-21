@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 
 /**
- * Les 8 offres sectorielles et leurs 21 packs — SOURCE DE VÉRITÉ : les
+ * Les 8 offres sectorielles et leurs 21 packs. SOURCE DE VÉRITÉ : les
  * brochures officielles docs/Offres/*.pdf (prix, contenus, badges).
  * Les ids (offres ET packs) alimentent l'enum Zod du formulaire et les
  * colonnes `secteur`/`pack` de funnel_xr_discovery_leads : NE JAMAIS les
@@ -44,7 +44,7 @@ export type OfferPack = {
 
 export type Offer = {
   id: OfferId;
-  /** Nom complet — libellé du formulaire et lecture des leads. */
+  /** Nom complet : sert de libellé au formulaire et à la lecture des leads. */
   name: string;
   /** Libellé compact des tuiles du sélecteur. */
   shortName: string;
@@ -441,12 +441,12 @@ export function offerPriceFrom(offer: Offer): number {
   return Math.min(...offer.packs.map((pack) => pack.price));
 }
 
-/** Libellés du champ « secteur » du formulaire — dérivés, jamais dupliqués. */
+/** Libellés du champ « secteur » du formulaire, dérivés et jamais dupliqués. */
 export const OFFER_LABELS = Object.fromEntries(
   OFFERS.map((offer) => [offer.id, offer.name]),
 ) as Record<OfferId, string>;
 
-/** Ids de packs (uniques globalement — invariant testé) : enum Zod du champ « pack ». */
+/** Ids de packs (unicité globale, invariant testé) : enum Zod du champ « pack ». */
 export const ALL_PACK_IDS: readonly string[] = OFFERS.flatMap((offer) =>
   offer.packs.map((pack) => pack.id),
 );

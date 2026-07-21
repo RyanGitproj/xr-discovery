@@ -6,11 +6,11 @@ let client: SupabaseClient | null = null;
 let warned = false;
 
 /**
- * Client Supabase serveur — clé secrète (service_role) : elle bypasse la RLS,
+ * Client Supabase serveur, clé secrète (service_role) : elle bypasse la RLS,
  * la table étant deny-all pour tous les autres rôles. Singleton mémoïsé ;
  * l'ABSENCE de configuration n'est pas mémoïsée (les env peuvent être
  * rechargées en dev). Renvoie null si les variables manquent : mode maquette,
- * les appelants dégradent proprement — jamais de crash.
+ * les appelants dégradent proprement, sans jamais crasher.
  */
 export function getSupabaseServerClient(): SupabaseClient | null {
   if (client !== null) return client;
@@ -21,7 +21,7 @@ export function getSupabaseServerClient(): SupabaseClient | null {
     if (!warned) {
       warned = true;
       console.warn(
-        "[supabase] SUPABASE_URL / SUPABASE_SECRET_KEY absents — persistance des leads désactivée (mode maquette).",
+        "[supabase] SUPABASE_URL / SUPABASE_SECRET_KEY absents : persistance des leads désactivée (mode maquette).",
       );
     }
     return null;

@@ -37,7 +37,7 @@ type OrientationEventClass = typeof DeviceOrientationEvent & {
   requestPermission?: () => Promise<"granted" | "denied">;
 };
 
-/** Capacité de l'environnement — invariante pendant la vie de la page. */
+/** Capacité de l'environnement, invariante pendant la vie de la page. */
 type TiltEnv = "ssr" | "none" | "permission" | "auto";
 
 let cachedEnv: TiltEnv | null = null;
@@ -65,7 +65,7 @@ type TiltInteraction = "idle" | "granted" | "denied";
  * springs à ~60 Hz, zéro re-render React. Neutre calibré sur les premières
  * lectures (deviceTiltMath). Inerte sous prefers-reduced-motion et sur les
  * appareils sans capteur. Le statut est DÉRIVÉ au rendu (capacité via
- * useSyncExternalStore, hydration-safe) — seuls les callbacks d'événements
+ * useSyncExternalStore, hydration-safe). Seuls les callbacks d'événements
  * écrivent l'état.
  */
 export function useDeviceTilt(options?: { maxDeg?: number }): DeviceTilt {
@@ -97,8 +97,8 @@ export function useDeviceTilt(options?: { maxDeg?: number }): DeviceTilt {
     detachRef.current = () => window.removeEventListener("deviceorientation", onOrientation);
   }, [maxDeg, xRaw, yRaw]);
 
-  // Android/desktop (pas de permission) : sonde le support réel — un capteur
-  // présent émet dans la seconde. Tout setState vit dans les callbacks.
+  // Android/desktop (pas de permission) : sonde le support réel (un capteur
+  // présent émet dans la seconde). Tout setState vit dans les callbacks.
   useEffect(() => {
     if (reduce || env !== "auto") {
       return () => {

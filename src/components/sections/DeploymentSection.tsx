@@ -11,12 +11,12 @@ import { useMinWidth } from "@/lib/motion/useMinWidth";
 import { deploymentSection } from "@/config/content";
 import styles from "./DeploymentSection.module.css";
 
-/** Breakpoint du bascule Sticky/TracingBeam — DOIT suivre le module CSS. */
+/** Breakpoint de la bascule Sticky/TracingBeam, qui DOIT suivre le module CSS. */
 const DESKTOP_MIN_WIDTH = 1024;
 
 const STEPS = deploymentSection.steps.map(({ title, body }) => ({ title, body }));
 
-/** Un hue par étape — le visuel épinglé change de couleur en avançant. */
+/** Un hue par étape : le visuel épinglé change de couleur en avançant. */
 const STEP_HUES = [styles.hueCyan, styles.hueHot, styles.hueViolet, styles.huePink, styles.hueCyan];
 
 /**
@@ -24,7 +24,7 @@ const STEP_HUES = [styles.hueCyan, styles.hueHot, styles.hueViolet, styles.huePi
  * StickyScrollReveal (visuel épinglé, étapes qui s'activent). Mobile :
  * TracingBeam vertical simple. FOCAL : la tête lumineuse du faisceau.
  * Les deux variantes ne cohabitent que le temps de l'hydratation (SSR :
- * le CSS masque l'inutile) — ensuite une seule reste montée, son double
+ * le CSS masque l'inutile) ; ensuite une seule reste montée, car son double
  * suivi de scroll était le 1er foyer de frames longues du perf-check.
  */
 export function DeploymentSection() {
@@ -56,7 +56,7 @@ export function DeploymentSection() {
 /**
  * Panneau et NeuralField PERSISTANTS entre les étapes : seul le bloc
  * icône/titre est remonté (Reveal key). L'ancien remount intégral recréait
- * tout le champ de neurones à chaque étape — 1er foyer de frames longues
+ * tout le champ de neurones à chaque étape, 1er foyer de frames longues
  * mesuré au motion-perf-check.
  */
 function StepVisual({ active }: { active: number }) {

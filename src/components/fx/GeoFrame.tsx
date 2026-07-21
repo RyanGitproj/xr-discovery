@@ -14,12 +14,12 @@ type GeoFrameProps = {
   /** Profondeur des encoches latérales (shape="ticket"). */
   notch?: number;
   /**
-   * Matériau : verre liquide propre, aplat (CTA orange), ou « frame » —
+   * Matériau : verre liquide propre, aplat (CTA orange), ou « frame », sans
    * aucun fill : le contenu (ex. GlassPanel existant) est clippé à la forme
    * et l'arête SVG remplace sa bordure rectangulaire.
    */
   variant?: "glass" | "solid" | "frame";
-  /** Faisceau qui parcourt le contour — RÉSERVÉ aux éléments focaux. */
+  /** Faisceau qui parcourt le contour, RÉSERVÉ aux éléments focaux. */
   trace?: boolean;
   className?: string;
   /** Classe du conteneur de contenu (padding, etc.). */
@@ -79,7 +79,7 @@ const round = (v: number) => Math.round(v * 10) / 10;
 /**
  * Cadre géométrique HUD (v3) : verre liquide (ou aplat) découpé en forme
  * chanfreinée par clip-path, ceint d'une ARÊTE LUMINEUSE dessinée en SVG qui
- * suit exactement le polygone — un `border` CSS serait coupé par le clip.
+ * suit exactement le polygone, car un `border` CSS serait coupé par le clip.
  * Le polygone px est mesuré (ResizeObserver) et PARTAGÉ entre le clip-path et
  * le tracé SVG (échelle 1:1, stroke non-scalé). Avant mesure / sans JS : repli
  * verre à coins arrondis. `trace` (focal only) fait courir un reflet le long
@@ -139,7 +139,7 @@ export function GeoFrame({
         >
           <defs>
             {/* Couleurs surchargeables par custom properties (--geo-edge-c1/c2/c3,
-                cf. accents d'offre) — fallbacks = comète de marque. */}
+                cf. accents d'offre) ; fallbacks = comète de marque. */}
             <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="var(--geo-edge-c1, var(--color-fx-cyan))" />
               <stop offset="52%" stopColor="var(--geo-edge-c2, var(--color-accent))" />

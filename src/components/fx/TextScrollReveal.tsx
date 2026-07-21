@@ -12,7 +12,7 @@ type TextScrollRevealProps = {
 /**
  * L'argumentaire se révèle mot par mot au fil du scroll : chaque mot passe
  * de 15 % à 100 % d'opacité (Famille C). UNE SEULE occurrence par page.
- * Bidirectionnel et déterministe — remonter rejoue l'état exact.
+ * Bidirectionnel et déterministe : remonter rejoue l'état exact.
  */
 export function TextScrollReveal({ text, className }: TextScrollRevealProps) {
   const ref = useRef<HTMLParagraphElement>(null);

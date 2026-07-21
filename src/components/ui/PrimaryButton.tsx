@@ -9,7 +9,7 @@ type PrimaryButtonProps = {
   children: React.ReactNode;
 };
 
-/** Bouton plein sobre (contrôles du formulaire) — le spectacle reste aux ShimmerCTA. */
+/** Bouton plein sobre (contrôles du formulaire) ; le spectacle reste aux ShimmerCTA. */
 export function PrimaryButton({
   type = "button",
   onClick,

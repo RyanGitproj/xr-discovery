@@ -17,8 +17,8 @@ type MagneticButtonProps = {
 
 /**
  * Le CTA attire légèrement le curseur puis revient en ressort (Famille B).
- * RÉSERVÉ aux 2 CTA principaux (hero, CTA final) — partout, l'effet devient
- * nauséeux. Souris uniquement, inerte sur tactile et en reduced-motion.
+ * RÉSERVÉ aux 2 CTA principaux (hero, CTA final) : appliqué partout, l'effet
+ * devient nauséeux. Souris uniquement, inerte sur tactile et en reduced-motion.
  */
 export function MagneticButton({ className, children }: MagneticButtonProps) {
   const ref = useRef<HTMLDivElement>(null);

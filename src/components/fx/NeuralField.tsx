@@ -38,7 +38,7 @@ function buildGraph(count: number): { nodes: Node[]; links: Link[] } {
 /**
  * Réseau de neurones lumineux (v1.2) : nœuds qui pulsent (opacity), signaux
  * multicolores voyageant le long d'un lien sur quatre (stroke-dashoffset).
- * Layout déterministe — aucun mismatch SSR.
+ * Layout déterministe : aucun mismatch SSR.
  */
 export function NeuralField({ nodes = 22, className }: NeuralFieldProps) {
   const gradientId = useId();

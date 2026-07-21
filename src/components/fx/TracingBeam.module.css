@@ -78,7 +78,7 @@
 
 .num {
   margin-right: 0.5rem;
-  /* Couleur cyclée par position (rythme chaud/froid) — cycle nth-child ci-dessous. */
+  /* Couleur cyclée par position (rythme chaud/froid) via le cycle nth-child ci-dessous. */
   color: var(--num-color, var(--color-accent-hot));
   font-variant-numeric: tabular-nums;
 }

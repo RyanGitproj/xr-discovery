@@ -11,7 +11,7 @@
    coup de scroll, pas après un écran de vide.
    Le contenu se centre dans 100svh ALORS QUE le header fixed (4rem) masque
    le haut : pour un équilibre perçu sous la navbar, padding-top ≈
-   padding-bottom + 4rem — pas plus, sinon le contenu coule sous le centre. */
+   padding-bottom + 4rem, pas plus, sinon le contenu coule sous le centre. */
 .grid {
   margin-inline: auto;
   display: grid;
@@ -82,7 +82,7 @@
   }
 }
 
-/* Plan de profondeur : plaque absolue pleine scène — les enfants gardent
+/* Plan de profondeur : plaque absolue pleine scène. Les enfants gardent
    leur positionnement en % du carré, le plan entier porte le parallax. */
 .plane {
   position: absolute;

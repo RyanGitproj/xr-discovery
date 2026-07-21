@@ -1,15 +1,15 @@
 /* Buste holographique. État de base (hors media query) = état final :
    figure semi-transparente aux couleurs d'origine, scanlines statiques,
-   split RGB permanent léger — fallback prefers-reduced-motion par
-   construction. Les filter/mask/blend sont STATIQUES (rasterisés une
+   split RGB permanent léger ; le fallback prefers-reduced-motion existe
+   par construction. Les filter/mask/blend sont STATIQUES (rasterisés une
    fois) : les animations ne touchent que opacity/translate, les couches
    restent compositées. */
 
 .root {
   --holo-src: url("/images/hologramme.webp");
 
-  /* Durée partagée par les keyframes du glitch — doit rester commune
-     pour la synchro ; surchargeable (démo accélérée sur /fx-lab). */
+  /* Durée partagée par les keyframes du glitch : elle doit rester
+     commune pour la synchro ; surchargeable (démo accélérée sur /fx-lab). */
   --holo-glitch-dur: 3s;
 
   position: relative;
@@ -22,7 +22,7 @@
   inset: 0;
 
   /* Fond enchaîné dans la lumière : la coupe nette du bas du buste (image
-     source) se dissout — l'hologramme semble émerger du faisceau. Masque
+     source) se dissout et l'hologramme semble émerger du faisceau. Masque
      statique, rasterisé une fois (le float composité ne repeint pas). */
   mask: linear-gradient(to bottom, black 80%, transparent 98%);
 }
@@ -35,7 +35,7 @@
 
 /* Couleurs d'origine de l'image conservées (choix DA : l'orange néon fait
    le point chaud de la page face à la scène cyan). Seuls les fantômes du
-   glitch sont teintés — c'est l'aberration chromatique du split RGB. */
+   glitch sont teintés (l'aberration chromatique du split RGB). */
 .figure {
   composes: layer;
   opacity: 0.92;
@@ -60,7 +60,7 @@
 }
 
 /* Déchirures : bandes horizontales de la figure (clip-path statique) qui
-   sautent latéralement pendant l'accroc — invisibles le reste du temps. */
+   sautent latéralement pendant l'accroc, invisibles le reste du temps. */
 .sliceHigh {
   composes: layer;
   clip-path: inset(18% 0 66% 0);
@@ -154,7 +154,7 @@
   }
 
   /* Fantômes : split permanent léger qui flambe modérément pendant
-     l'accroc — opacité seule, l'offset est la translate statique. */
+     l'accroc, en opacité seule (l'offset est la translate statique). */
   @keyframes holo-ghost-cyan {
     0%,
     87.9%,

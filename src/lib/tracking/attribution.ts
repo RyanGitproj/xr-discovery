@@ -2,8 +2,8 @@
  * Attribution premier-touchpoint : UTM, click-ids (gclid/fbclid) et
  * paramètres d'annonce passés en query string par les campagnes (modèles
  * d'URL Meta/Google : {{ad.id}}, {{campaign.name}}…), plus document.referrer.
- * Capturée UNE fois par session dans sessionStorage — jamais écrasée, le
- * premier touchpoint prime — puis jointe au lead à la soumission (validée
+ * Capturée UNE fois par session dans sessionStorage (jamais écrasée, le
+ * premier touchpoint prime), puis jointe au lead à la soumission (validée
  * côté serveur par attributionSchema).
  */
 
@@ -47,7 +47,7 @@ export function captureAttribution(): void {
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   } catch {
     // sessionStorage indisponible (navigation privée stricte…) : le lead
-    // partira sans attribution — jamais bloquant.
+    // partira sans attribution, ce n'est jamais bloquant.
   }
 }
 

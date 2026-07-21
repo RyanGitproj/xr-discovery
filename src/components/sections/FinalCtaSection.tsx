@@ -13,7 +13,7 @@ import styles from "./FinalCtaSection.module.css";
 /**
  * Vitrine vidéo de clôture : la carte HUD lumineuse (Background Beams +
  * Sparkles + Meteors) encadre la démo casque (portrait, autoplay muet en
- * boucle). Le bouton « devis » a été retiré — le formulaire suit
+ * boucle). Le bouton « devis » a été retiré puisque le formulaire suit
  * immédiatement (LeadFormSection) ; le titre garde l'accroche.
  */
 export function FinalCtaSection() {

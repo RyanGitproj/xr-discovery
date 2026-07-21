@@ -18,8 +18,8 @@ import type { TextSegment } from "@/components/fx/TextGenerate";
 import { OFFERS } from "@/config/offers";
 
 /**
- * Contenu de la landing multi-offres (8 univers — voir config/offers.ts pour
- * le catalogue). SOURCE DE VÉRITÉ : les brochures docs/Offres/*.pdf et les
+ * Contenu de la landing multi-offres (8 univers, catalogue dans
+ * config/offers.ts). SOURCE DE VÉRITÉ : les brochures docs/Offres/*.pdf et les
  * infographies XR dans docs/content/. RÈGLES : aucun texte ni prix en dur
  * dans les sections ; prix toujours « à partir de » ; ne jamais avancer un
  * chiffre ou un engagement absent de ces sources.
@@ -65,8 +65,8 @@ export const reassuranceItems: readonly ReassuranceItem[] = [
 ];
 
 /**
- * Scène immersive « plongée Quest 3 » (Immersion v2.1) — textes seuls, le
- * storyboard vit dans DiveSection. « Meta Quest 3 » : usage descriptif du
+ * Scène immersive « plongée Quest 3 » (Immersion v2.1). Ici les textes
+ * seuls : le storyboard vit dans DiveSection. « Meta Quest 3 » : usage descriptif du
  * matériel réellement déployé (décision produit), AUCUN logo dans les
  * visuels (docs/images-dive-brief.md). Claims strictement repris du hero et
  * du bandeau de réassurance.
@@ -75,7 +75,7 @@ export const diveSection = {
   kicker: "L'expérience",
   title: "Mettez le casque",
   intro:
-    "Meta Quest 3 — 10 casques autonomes dernière génération, animés par une équipe XR expérimentée.",
+    "Meta Quest 3 : 10 casques autonomes dernière génération, animés par une équipe XR expérimentée.",
   reveal: {
     title: "Un autre monde s'ouvre à vos visiteurs",
     body: "Des expériences immersives choisies pour votre public : vos visiteurs plongent, votre lieu attire, on parle de vous.",
@@ -119,7 +119,7 @@ export const benefitsSection = {
   presta: {
     kicker: "La prestation",
     title: "Clé en main, de bout en bout",
-    body: "Brief opérationnel, déplacement, installation, 10 casques VR dernière génération, animateurs XR et gestion des flux de participants — vous n'avez rien à gérer.",
+    body: "Brief opérationnel, déplacement, installation, 10 casques VR dernière génération, animateurs XR et gestion des flux de participants : vous n'avez rien à gérer.",
   },
 } as const;
 
@@ -128,10 +128,10 @@ export const offersSection = {
   kicker: "Nos offres",
   title: "Huit univers, trois formats chacun",
   subtitle:
-    "Choisissez votre secteur — chaque offre se décline en trois packs. Tarifs « à partir de », sur devis selon lieu, durée et options.",
+    "Choisissez votre secteur, chaque offre se décline en trois packs. Tarifs « à partir de », sur devis selon lieu, durée et options.",
   selectorLabel: "Choisissez votre secteur",
-  hint: "Cliquez sur un secteur — les packs s'adaptent.",
-  /** Lead du panneau packs — nomme l'offre active (au lieu d'une accroche
+  hint: "Cliquez sur un secteur et les packs s'adaptent.",
+  /** Lead du panneau packs. Il nomme l'offre active (au lieu d'une accroche
       vague) : le {offre} est remplacé par le nom du secteur choisi. */
   panelIntroPrefix: "Voici les packs pour",
   pricePrefix: "à partir de",
@@ -159,7 +159,7 @@ export const objectionsSection = {
     {
       question: "Est-ce accessible à tout le monde ?",
       answer:
-        "Oui : aucune connaissance technique n'est nécessaire — visiteurs, collaborateurs, élèves ou clients, chacun est accueilli, équipé et guidé par un animateur XR.",
+        "Oui, aucune connaissance technique n'est nécessaire. Visiteurs, collaborateurs, élèves ou clients : chacun est accueilli, équipé et guidé par un animateur XR.",
     },
     {
       question: "Le format est-il sécurisé ?",
@@ -190,7 +190,7 @@ export type DeployStep = {
   body: string;
 };
 
-/** Les 5 étapes « Déploiement XR » — déroulé commun aux 8 offres (brochures). */
+/** Les 5 étapes « Déploiement XR », déroulé commun aux 8 offres (brochures). */
 export const deploymentSection = {
   kicker: "Déploiement XR",
   title: "Cinq étapes, zéro friction",
@@ -213,7 +213,7 @@ export const deploymentSection = {
     {
       icon: Users,
       title: "Animation encadrée",
-      body: "Accueil, découverte, gestion des flux — l'expérience est guidée de bout en bout.",
+      body: "Accueil, découverte, gestion des flux : l'expérience est guidée de bout en bout.",
     },
     {
       icon: BarChart3,
@@ -226,7 +226,7 @@ export const deploymentSection = {
 export const finalCtaSection = {
   title: "Créez l'événement avec la VR",
   subtitle:
-    "Une immersion Meta Quest 3 comme si vous y étiez — le formulaire de devis est juste en dessous.",
+    "Une immersion Meta Quest 3 comme si vous y étiez. Le formulaire de devis est juste en dessous.",
   soundOnLabel: "Activer le son",
   soundOffLabel: "Couper le son",
 } as const;
@@ -235,8 +235,8 @@ export const footerContent = {
   baseline:
     "La découverte VR qui se déplace jusqu'à vous : animations immersives, culture & éducation, marketing immersif et captation 360, en expériences clés en main.",
   universesTitle: "Nos 8 univers",
-  /** Dérivé du catalogue — les 8 offres sont toutes servies par la landing. */
+  /** Dérivé du catalogue : les 8 offres sont toutes servies par la landing. */
   universes: OFFERS.map((offer) => offer.name),
   contactTitle: "Contact",
-  mentions: "© 2026 XR Technology — Antananarivo, Madagascar",
+  mentions: "© 2026 XR Technology · Antananarivo, Madagascar",
 } as const;

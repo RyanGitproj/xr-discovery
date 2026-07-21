@@ -1,10 +1,10 @@
-/* Morph de formation de la constellation Madagascar — uniquement la couche
+/* Morph de formation de la constellation Madagascar, limité à la couche
    position/apparition (transform + opacity). La « vie » du réseau (pulse,
    comètes) reste portée par les classes globales neural-* de fx-neon.css,
    déjà neutralisées sous prefers-reduced-motion. Les animations ci-dessous
    ne sont déclarées que sous no-preference : hors media query, l'état de
-   base EST l'état final (île formée, liens visibles) — le fallback
-   reduced-motion existe par construction. */
+   base EST l'état final (île formée, liens visibles), si bien que le
+   fallback reduced-motion existe par construction. */
 
 .field {
   pointer-events: none;
@@ -21,7 +21,8 @@
 }
 
 /* Points de côte : allumés en continu, pas de pulse (contrairement aux
-   .neural-node intérieurs) — silhouette stable, paint au repos. */
+   .neural-node intérieurs), pour une silhouette stable et un paint au
+   repos. */
 .coastNode {
   opacity: 0.85;
 }
@@ -29,7 +30,7 @@
 /* Hors écran (classe posée par IntersectionObserver, pattern GlassPanel) :
    visibility coupe le paint/raster du SVG (mesuré : ~+8 ms/frame sinon,
    même hors viewport), la pause fige les animations pour que le morph
-   reprenne où il en était au retour — le rootMargin de 160px rend la
+   reprenne où il en était au retour ; le rootMargin de 160px rend la
    réapparition invisible. */
 .field:global(.is-offscreen) {
   visibility: hidden;

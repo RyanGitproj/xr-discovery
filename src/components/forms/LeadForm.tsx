@@ -45,7 +45,7 @@ const SECTEUR_OPTIONS = [
 
 /**
  * Garde anti double-clic : le bouton submit REMPLACE « Continuer » au même
- * endroit à l'écran — le 2e clic d'un double-clic atterrirait dessus et
+ * endroit à l'écran : le 2e clic d'un double-clic atterrirait dessus et
  * déclencherait la validation de l'étape à peine affichée (erreurs
  * prématurées). Toute soumission dans cette fenêtre après une navigation
  * d'étape est ignorée (pattern éprouvé sur le funnel CVM/MLR).
@@ -53,7 +53,7 @@ const SECTEUR_OPTIONS = [
 const NAV_GUARD_MS = 500;
 
 /**
- * Formulaire court « qui conclut » : 3 étapes — secteur + pack (icônes des
+ * Formulaire court « qui conclut » en 3 étapes : secteur + pack (icônes des
  * offres), projet (objectif, budget, période, participants), puis
  * coordonnées (email et téléphone international obligatoires). Même schéma
  * Zod que le serveur ; l'attribution premier-touchpoint (UTM/pub) est
@@ -76,7 +76,7 @@ export function LeadForm() {
   } = useForm<Lead>({
     resolver: standardSchemaResolver(leadSchema),
     // onSubmit (pas onTouched) : avec un resolver, toute validation déclenchée
-    // au blur remonte les erreurs de TOUT le schéma — des champs jamais
+    // au blur remonte les erreurs de TOUT le schéma : des champs jamais
     // touchés s'affichaient en erreur pendant la saisie. Ici rien ne s'affiche
     // avant « Continuer » (trigger par étape), puis re-validation au change.
     mode: "onSubmit",
@@ -120,7 +120,7 @@ export function LeadForm() {
   const fieldError = (field: keyof Lead) => errors[field]?.message;
 
   /** register + effacement immédiat : en mode onSubmit la validation ne court
-      qu'au « Continuer » — un champ DÉJÀ en erreur re-valide dès sa
+      qu'au « Continuer » ; un champ DÉJÀ en erreur re-valide dès sa
       correction (trigger ciblé, ne touche pas aux autres champs). */
   const registerField = (field: keyof Lead) =>
     register(field, {
@@ -130,7 +130,7 @@ export function LeadForm() {
     });
 
   /** Changement de secteur : un pack déjà coché qui n'appartient pas au
-      nouveau secteur est remis à « je ne sais pas encore » — reset synchrone
+      nouveau secteur est remis à « je ne sais pas encore » : reset synchrone
       dans le onChange, aucune course avec le préremplissage. */
   const registerSecteur = register("secteur", {
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -153,7 +153,7 @@ export function LeadForm() {
       : [
           ...getOffer(secteurValue).packs.map((pack) => ({
             value: pack.id,
-            label: `${pack.name} — ${offersSection.pricePrefix} ${formatAriary(pack.price)}`,
+            label: `${pack.name} · ${offersSection.pricePrefix} ${formatAriary(pack.price)}`,
             accent: secteurValue,
           })),
           { value: "", label: PACK_NONE_LABEL, accent: secteurValue },

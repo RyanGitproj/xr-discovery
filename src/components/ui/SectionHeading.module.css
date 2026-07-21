@@ -49,9 +49,9 @@
   }
 }
 
-/* Mobile : l'en-tête compact se réduit au titre seul — le StepIndicator et
-   le titre d'étape portent déjà le contexte, chaque ligne compte pour que
-   le formulaire tienne dans l'écran. */
+/* Mobile : l'en-tête compact se réduit au titre seul, car le StepIndicator
+   et le titre d'étape portent déjà le contexte, et chaque ligne compte pour
+   que le formulaire tienne dans l'écran. */
 @media (max-width: 639px) {
   .compact .kicker,
   .compact .subtitle {

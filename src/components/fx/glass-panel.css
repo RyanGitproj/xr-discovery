@@ -1,6 +1,6 @@
 /* Transparent glass: the background remains visible and is blurred.
    No white gradient or sheen is layered over the surface.
-   v3 : cards ANGULAIRES — border-radius à 0 (directive « plus de radius sur
+   v3 : cards ANGULAIRES, border-radius à 0 (directive « plus de radius sur
    les cards ») ; le matériau (flou/bordure/ombre) est inchangé. Les coins
    chanfreinés se font via GeoFrame, au cas par cas. */
 .glass-panel {

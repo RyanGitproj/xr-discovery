@@ -5,7 +5,7 @@ import { cx } from "@/lib/cx";
 import { useOffscreenPause } from "@/lib/motion/useOffscreenPause";
 
 type GlassPanelProps = ComponentPropsWithoutRef<"div"> & {
-  /** Réfraction C4 (Chromium, @supports) — réserver aux grands panneaux. */
+  /** Réfraction C4 (Chromium, @supports), à réserver aux grands panneaux. */
   liquid?: boolean;
   /** Blur 12px au lieu de var(--glass-blur) (navbar, éléments fins). */
   thin?: boolean;

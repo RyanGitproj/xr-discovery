@@ -16,7 +16,7 @@ type StageLayerProps = {
   y?: readonly number[];
   x?: readonly number[];
   scale?: readonly number[];
-  /** Autorisée ici (décor de scène) — jamais sur un contenu porteur seul. */
+  /** Autorisée ici (décor de scène), mais jamais sur un contenu porteur seul. */
   opacity?: readonly number[];
   /** Contribution gyroscope en px à ±1 (x plein, y à demi). Défaut 0. */
   tiltRange?: number;
@@ -45,7 +45,7 @@ function assertTracks(at: readonly number[], tracks: Record<string, readonly num
  * Calque d'un ScrollStage : timeline déclarative {at → y/x/scale/opacity}
  * mappée sur la progression partagée (useTransform), plus une contribution
  * gyroscope optionnelle. Le storyboard est de la DONNÉE passée par la
- * section — la primitive reste générique (même contrat que
+ * section, et la primitive reste générique (même contrat que
  * StickyScrollReveal(steps)).
  */
 export function StageLayer({

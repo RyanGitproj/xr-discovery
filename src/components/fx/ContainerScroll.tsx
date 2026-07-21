@@ -12,7 +12,7 @@ type ContainerScrollProps = {
 
 /**
  * Le visuel se redresse en entrant dans le viewport : rotateX 12° → 0,
- * scale 0.96 → 1 (Famille C — « écran qui se déploie »). Pour du parallaxe
+ * scale 0.96 → 1 (Famille C, « écran qui se déploie »). Pour du parallaxe
  * multi-couches (autorisé depuis Immersion v2.1), voir ParallaxScene/Layer.
  */
 export function ContainerScroll({ className, children }: ContainerScrollProps) {

@@ -1,4 +1,4 @@
-/* Famille A — lumière & matière ambiantes (chap. 4).
+/* Famille A : lumière & matière ambiantes (chap. 4).
    Règle : transform + opacity UNIQUEMENT, cycles >= 22 s, opacité < 15 %. */
 
 /* Calque d'effet : couche décorative qui remplit son parent sans capter
@@ -182,7 +182,8 @@
 }
 
 /* Halo pulsé SANS forme (radial elliptique, pas de box arrondie) : rien ne
-   peut dépasser des découpes du ticket clippé — compatible toute géométrie.
+   peut dépasser des découpes du ticket clippé, donc compatible avec toute
+   géométrie.
    Ellipses en closest-side / rayons ≤ moitié : le fondu se termine DANS la
    boîte du ::before (des rayons en % se résolvent sur la dimension ENTIÈRE
    → une ellipse trop large se fait trancher net sur les bords de la boîte). */
@@ -408,13 +409,13 @@
   }
 }
 
-/* Apparition scrubée par le scroll (scroll-driven animation NATIVE —
+/* Apparition scrubée par le scroll (scroll-driven animation NATIVE,
    fondation v2) : fondu + montée PENDANT l'entrée dans le viewport,
    réversible en remontant, compositor-only, zéro JS. Progressive
    enhancement : sans support navigateur ou sous reduced-motion, l'état de
    base reste pleinement visible (aucun état caché par défaut). Si l'élément
-   a aussi un parallax, emboîter cette classe DANS le ParallaxLayer — deux
-   transforms séparés, jamais fusionnés (règle ParallaxLayer). */
+   a aussi un parallax, emboîter cette classe DANS le ParallaxLayer afin de
+   garder deux transforms séparés, jamais fusionnés (règle ParallaxLayer). */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .scroll-reveal {

@@ -27,13 +27,13 @@ next-env.d.ts
 /coverage
 .vercel
 
-# Assistant IA (Claude / Codex) — jamais versionné
+# Assistant IA (Claude / Codex), jamais versionné
 CLAUDE.md
 TODO.md
 SKILLS.md
 .claude/
 .agents/
 
-# docs internes (skills, briefs IA, direction artistique, contenus sources)
-# — jamais versionnés
+# docs internes (skills, briefs IA, direction artistique, contenus sources),
+# jamais versionnés
 /docs/

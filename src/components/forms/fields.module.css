@@ -63,7 +63,7 @@
 }
 
 /* --offer-accent : posé par data-offer-accent sur le label (options secteur
-   et pack) — fallback = accent de marque, comportement inchangé ailleurs. */
+   et pack). Fallback = accent de marque, comportement inchangé ailleurs. */
 .card:hover {
   border-color: color-mix(in srgb, var(--offer-accent, var(--color-accent)) 62%, transparent);
 }
@@ -161,7 +161,7 @@
   color: var(--color-ink);
 }
 
-/* Budget (5 options courtes) : 3 colonnes dès le mobile — une rangée de
+/* Budget (5 options courtes) : 3 colonnes dès le mobile, soit une rangée de
    moins dans un formulaire qui doit tenir dans l'écran. */
 .grid3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));

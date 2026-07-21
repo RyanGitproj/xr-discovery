@@ -9,11 +9,11 @@ import { LeadConversionTracker } from "@/components/tracking/LeadConversionTrack
 import styles from "./merci.module.css";
 
 export const metadata: Metadata = {
-  title: "Merci — XR VR Discovery",
+  title: "Merci | XR VR Discovery",
   robots: { index: false, follow: false },
 };
 
-/** Confirmation post-soumission — accessible uniquement avec le cookie httpOnly (30 min). */
+/** Confirmation post-soumission, accessible uniquement avec le cookie httpOnly (30 min). */
 export default async function MerciPage() {
   const cookieStore = await cookies();
   if (cookieStore.get("xr_lead") === undefined) redirect("/");

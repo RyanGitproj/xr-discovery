@@ -24,7 +24,7 @@ type DecryptNumberProps = {
  * Révélation « déchiffrement » (Famille C, focal, once) : les chiffres
  * apparaissent brouillés puis se résolvent de gauche à droite vers la
  * valeur. Contrairement à un compteur croissant, aucun montant intermédiaire
- * n'est jamais affiché — pas d'effet « le prix grimpe ». Seuls les chiffres
+ * n'est jamais affiché, donc pas d'effet « le prix grimpe ». Seuls les chiffres
  * sont brouillés (par d'autres chiffres, en tabular-nums) : séparateurs et
  * unité restent stables, zéro décalage de layout. SSR, lecteurs d'écran et
  * reduced-motion : valeur finale directe.

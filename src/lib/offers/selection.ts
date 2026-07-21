@@ -7,7 +7,7 @@ import type { OfferId } from "@/config/offers";
  * Sélection « Choisir ce pack » partagée entre la section Offres et le
  * formulaire (présélection secteur + pack). Store module-scope minimal :
  * les deux seuls consommateurs sont des client components montés en
- * permanence sur la page — pas besoin de context ni de lib d'état.
+ * permanence sur la page, donc pas besoin de context ni de lib d'état.
  * null tant qu'aucun CTA de pack n'a été cliqué (formulaire vierge).
  */
 

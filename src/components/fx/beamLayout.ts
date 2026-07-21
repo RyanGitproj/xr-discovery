@@ -22,8 +22,8 @@ const round = (v: number) => Math.round(v * 100) / 100;
 /**
  * Boîte et clip-path d'un cône de projection : pointe en bas (apex, largeur
  * `apexWidth`), bord haut large. Entrées et boîte en % du conteneur
- * positionné ; clip-path en % de la boîte. Arrondi 2 décimales — déterministe,
- * aucun mismatch SSR.
+ * positionné ; clip-path en % de la boîte. L'arrondi à 2 décimales garantit
+ * un résultat déterministe, sans mismatch SSR.
  */
 export function beamLayout(apex: Vec2, top: BeamTop, apexWidth = 3): BeamLayout {
   const left = Math.min(top.x - top.width / 2, apex.x - apexWidth / 2);

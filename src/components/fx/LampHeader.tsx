@@ -7,7 +7,7 @@ type LampHeaderProps = {
 
 /**
  * Titre de section éclairé par le haut : ligne lumineuse + cônes coniques
- * + halo (CSS pur, statique — le reveal vient de la section qui compose).
+ * + halo (CSS pur, statique ; le reveal vient de la section qui compose).
  */
 export function LampHeader({ className, children }: LampHeaderProps) {
   return (

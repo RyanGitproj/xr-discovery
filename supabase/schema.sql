@@ -1,9 +1,9 @@
--- Leads du funnel XR VR Discovery (landing multi-offres — 8 secteurs).
+-- Leads du funnel XR VR Discovery (landing multi-offres, 8 secteurs).
 -- À exécuter dans le SQL editor Supabase.
 -- Base existante : appliquer supabase/migrations/*.sql au lieu de ce fichier.
 --
 -- Sécurité : RLS activée SANS policy = deny-all pour anon/authenticated.
--- Seules les Server Actions écrivent, via la clé secrète (service_role) —
+-- Seules les Server Actions écrivent, via la clé secrète (service_role) ;
 -- le navigateur ne parle jamais à Supabase.
 
 create table public.funnel_xr_discovery_leads (
@@ -21,7 +21,7 @@ create table public.funnel_xr_discovery_leads (
   budget text not null,
   periode text not null,
 
-  -- Contact (étape 2) — telephone au format E.164 (+261…), email obligatoire
+  -- Contact (étape 2) : telephone au format E.164 (+261…), email obligatoire
   nom text not null,
   telephone text not null,
   email text not null,

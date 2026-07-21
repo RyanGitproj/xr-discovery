@@ -1,4 +1,4 @@
-/* Couche néon / holographique (évolution v1.2 — palette élargie).
+/* Couche néon / holographique (évolution v1.2, palette élargie).
    Toujours transform + opacity pour tout ce qui boucle ; les gradients
    animés (holo-text--live) sont limités à 1-2 éléments par page. */
 
@@ -97,7 +97,7 @@
   animation-delay: var(--ember-delay, 0s);
 }
 
-/* Montée + dérive latérale en 3 temps + flicker — transform/opacity only.
+/* Montée + dérive latérale en 3 temps + flicker, en transform/opacity only.
    -110vh : traverse tout l'écran épinglé quelle que soit sa hauteur. */
 @keyframes ember-rise {
   0% {

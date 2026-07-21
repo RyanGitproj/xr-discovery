@@ -82,7 +82,8 @@ export function isPointInPolygon(point: Vec2, polygon: readonly Vec2[]): boolean
 /**
  * `count` points intérieurs par rejection sampling déterministe (candidats
  * hachés dans la bbox, acceptés s'ils tombent dans le polygone). Garde-fou
- * `count * 50` essais — peut donc en rendre moins sur un polygone très creux.
+ * `count * 50` essais : la fonction peut donc en rendre moins sur un polygone
+ * très creux.
  */
 export function scatterInsidePolygon(
   polygon: readonly Vec2[],
@@ -111,7 +112,7 @@ export function scatterInsidePolygon(
 /**
  * Constellation « carte » : contour rééchantillonné relié en chaîne fermée
  * (la silhouette est garantie, aucune corde traversante), points intérieurs
- * raccrochés par proximité. Déterministe — aucun mismatch SSR.
+ * raccrochés par proximité. Déterministe, donc aucun mismatch SSR.
  */
 export function buildConstellation(options: ConstellationOptions): Constellation {
   const { polygon, contourCount, interiorCount, interiorReach, salt = 7 } = options;

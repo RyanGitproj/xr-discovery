@@ -45,11 +45,11 @@ function markDismissed(): void {
 
 /**
  * Démo guidée du sélecteur d'offres, en boucle « visite des 8 offres » : la
- * main TapHint fait le tour des tuiles (un tap ≈ 3,5 s, activation réelle —
+ * main TapHint fait le tour des tuiles (un tap ≈ 3,5 s, activation réelle :
  * les packs changent sous les yeux du visiteur) tant qu'aucune interaction
  * n'a eu lieu. Pause quand les tuiles sortent de l'écran ou pendant
  * `suspended` (survol des zones interactives), reprise là où le tour s'était
- * arrêté. `cancel()` — premier geste utilisateur — l'arrête définitivement
+ * arrêté. `cancel()` (premier geste utilisateur) l'arrête définitivement
  * pour la session.
  */
 export function useOfferDemo({
@@ -66,7 +66,7 @@ export function useOfferDemo({
   /** true = pause (survol du sélecteur ou des packs) ; reprise à false. */
   suspended: boolean;
   tileCount: number;
-  /** Tuile par index d'offre (callbacks STABLES — useCallback côté appelant). */
+  /** Tuile par index d'offre (callbacks STABLES, useCallback côté appelant). */
   getTile: (offerIndex: number) => HTMLButtonElement | undefined;
   /** Activation d'une offre SANS event de tracking ni écriture du store. */
   onDemoSelect: (offerIndex: number) => void;
@@ -74,7 +74,7 @@ export function useOfferDemo({
   const [state, setState] = useState<OfferDemoState>(IDLE);
   const timeouts = useRef<ReturnType<typeof setTimeout>[]>([]);
   const dismissed = useRef(false);
-  /** Prochaine tuile du tour — persiste entre pauses (reprise sans reset). */
+  /** Prochaine tuile du tour ; persiste entre pauses (reprise sans reset). */
   const nextIndex = useRef(1);
   const inView = useInView(wrapRef, { margin: "-120px" });
 
@@ -126,7 +126,7 @@ export function useOfferDemo({
   }, [inView, enabled, suspended, tileCount, getTile, onDemoSelect]);
 
   /** Premier geste utilisateur : la main disparaît IMMÉDIATEMENT (pas de
-      fondu — le retrait instantané répond au geste) et la démo est condamnée
+      fondu : le retrait instantané répond au geste) et la démo est condamnée
       pour la session. Idempotent. */
   const cancel = useCallback(() => {
     clearTimeline();

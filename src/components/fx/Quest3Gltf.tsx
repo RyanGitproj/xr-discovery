@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { useGLTF } from "@react-three/drei";
 import { Box3, Group, Mesh, MeshStandardMaterial, Vector3 } from "three";
 
-/** Meta Quest 3 réel — modèle Sketchfab CC-BY (AVILOV), optimisé meshopt + webp. */
+/** Meta Quest 3 réel : modèle Sketchfab CC-BY (AVILOV), optimisé meshopt + webp. */
 const MODEL_URL = "/models/quest3.glb";
 /** Largeur cible dans la scène (reprend l'empreinte de l'ancien modèle). */
 const TARGET_WIDTH = 2.3;
@@ -20,7 +20,7 @@ const ENV_MAP_INTENSITY = 1.4;
  * pour que le Rig et la chorégraphie de HeadsetScene restent inchangés
  * (group centré, largeur ~2.3, façade vers +Z). useGLTF configure le décodeur
  * meshopt embarqué (three-stdlib) ; Draco est désactivé (le modèle ne l'utilise
- * pas) — aucun fetch externe au runtime.
+ * pas), donc aucun fetch externe au runtime.
  */
 export function Quest3Gltf() {
   const { scene } = useGLTF(MODEL_URL, false);

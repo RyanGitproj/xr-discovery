@@ -11,7 +11,7 @@ const DURATION_S = 1.05;
 
 /**
  * Smooth scroll inertiel global (Immersion v2.1). Lenis pilote le scroll
- * NATIF : window.scrollY reste la source de vérité — les useScroll framer
+ * NATIF, et window.scrollY reste la source de vérité : les useScroll framer
  * (ScrollProgress, StickyScrollReveal…), position: sticky et l'uniform
  * u_scroll du LiquidBackground fonctionnent sans adaptation.
  *
@@ -20,7 +20,7 @@ const DURATION_S = 1.05;
  *   irremplaçable, l'immersion mobile passe par le gyroscope ;
  * - AUCUNE ancre d'URL (décision Ryan) : la navigation interne passe par des
  *   boutons + `scrollToSection` (lib/scrollToSection, fluide via l'instance
- *   enregistrée ici — Lenis lit LUI-MÊME le scroll-padding-top CSS). Seule
+ *   enregistrée ici ; Lenis lit LUI-MÊME le scroll-padding-top CSS). Seule
  *   ancre restante : le skip-link (contrat d'accessibilité natif) ;
  * - jamais instancié sous prefers-reduced-motion (scrollToSection bascule
  *   alors sur scrollIntoView natif), et détruit si la préférence change.

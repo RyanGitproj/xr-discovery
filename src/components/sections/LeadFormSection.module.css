@@ -1,7 +1,7 @@
 .section {
   composes: shell clipped chapter from "./section.module.css";
   /* Rythme « single view » STRICT : padding vertical plus serré que le
-     token global — l'étape la plus longue doit tenir dans un écran, PC
+     token global, car l'étape la plus longue doit tenir dans un écran, PC
      ET mobile. */
   --section-pad-y: clamp(1.25rem, 3svh, 4rem);
 }

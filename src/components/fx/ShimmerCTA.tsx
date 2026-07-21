@@ -10,7 +10,7 @@ type ShimmerCTAProps = {
   scrollTo?: string;
   type?: "button" | "submit";
   size?: "sm" | "md" | "xl";
-  /** false : pas de glow pulsé (navbar fixe — budget ambient). */
+  /** false : pas de glow pulsé (navbar fixe, budget ambient). */
   pulse?: boolean;
   className?: string;
   children: React.ReactNode;

@@ -16,17 +16,17 @@ import { pushDataLayerEvent } from "@/lib/tracking/gtm";
 import styles from "./OfferExplorer.module.css";
 
 /**
- * Interaction signature de la page : 8 tuiles secteur (pattern tabs —
+ * Interaction signature de la page : 8 tuiles secteur (pattern tabs :
  * commutateur de contenu, pas une saisie) pilotent les 3 packs affichés.
  * La tuile ACTIVE est un état local d'affichage ; la sélection ENGAGÉE
  * (secteur + pack → formulaire) n'est écrite qu'au clic « Choisir ce pack ».
- * Seule l'offre active est montée — jamais 24 cards.
+ * Seule l'offre active est montée, jamais 24 cards.
  */
 export function OfferExplorer() {
   const [activeId, setActiveId] = useState<OfferId>(OFFERS[0].id);
   // Souris sur les TUILES uniquement : un clic est imminent, la démo ne doit
   // pas changer la tuile sous le curseur. Le reste de la section ne suspend
-  // pas — un curseur simplement posé au milieu de la page (position naturelle
+  // pas : un curseur simplement posé au milieu de la page (position naturelle
   // au scroll molette) ne doit pas priver le visiteur de la démo.
   const [demoSuspended, setDemoSuspended] = useState(false);
   const tabRefs = useRef(new Map<OfferId, HTMLButtonElement>());
@@ -36,7 +36,7 @@ export function OfferExplorer() {
   const activeOffer = getOffer(activeId);
 
   // Démo guidée « visite des 8 offres » : activation réelle mais sans
-  // tracking ni écriture du store — boucle tant qu'aucune interaction,
+  // tracking ni écriture du store ; boucle tant qu'aucune interaction,
   // condamnée au premier geste utilisateur (cancelDemo).
   const getTile = useCallback((offerIndex: number) => {
     const offer = OFFERS[offerIndex];

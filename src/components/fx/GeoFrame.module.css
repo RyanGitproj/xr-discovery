@@ -38,7 +38,7 @@
 
 /* Variant frame : le contenu est clippé à la forme ; la bordure/ombre
    rectangulaire du GlassPanel enfant est neutralisée (l'arête SVG la
-   remplace) — son matériau verre (fill + blur) reste intact. */
+   remplace), mais son matériau verre (fill + blur) reste intact. */
 .contentClipped {
   height: 100%;
 }
@@ -56,7 +56,7 @@
   height: 100%;
   pointer-events: none;
   overflow: visible;
-  /* Halo néon statique (rasterisé une fois — pas d'animation de filter).
+  /* Halo néon statique (rasterisé une fois, sans animation de filter).
      --geo-halo : surcharge par accent d'offre, fallback accent de marque. */
   filter: drop-shadow(
     0 0 3px color-mix(in srgb, var(--geo-halo, var(--color-accent)) 55%, transparent)
@@ -69,7 +69,7 @@
 }
 
 /* Jointures RONDES : un miter déborde du sommet sous les transforms 3D
-   (tilt) — le rond ne peut géométriquement pas dépasser. */
+   (tilt), alors que le rond ne peut géométriquement pas dépasser. */
 .edgeLine,
 .edgeTrace {
   stroke-linejoin: round;

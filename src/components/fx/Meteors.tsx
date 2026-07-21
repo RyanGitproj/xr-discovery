@@ -15,7 +15,7 @@ type MeteorsProps = {
   className?: string;
 };
 
-/** Traits filants diagonaux rares (Famille A) — transform + opacity uniquement. */
+/** Traits filants diagonaux rares (Famille A), en transform + opacity uniquement. */
 export function Meteors({ count = 4, className }: MeteorsProps) {
   return (
     <div

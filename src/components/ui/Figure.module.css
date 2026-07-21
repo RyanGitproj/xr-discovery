@@ -37,9 +37,9 @@
 }
 
 /* Signature « scan holographique » (né sur /fx-lab) : au survol, une nappe
-   de lumière balaie la photo — chaque visuel est une projection, cohérent
-   avec la scène du hero. Transform + opacity uniquement ; coupé sur tactile
-   (Famille B) et sous prefers-reduced-motion. */
+   de lumière balaie la photo. Chaque visuel est ainsi une projection,
+   cohérent avec la scène du hero. Transform + opacity uniquement ; coupé sur
+   tactile (Famille B) et sous prefers-reduced-motion. */
 .figure::after {
   content: "";
   position: absolute;

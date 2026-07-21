@@ -4,7 +4,7 @@ type GridPulseProps = {
   /** ambient : respiration lente ; active : trame plus visible, statique. */
   intensity?: "ambient" | "active";
   /**
-   * Id du pattern SVG — composant serveur, donc pas de useId : chaque
+   * Id du pattern SVG. Composant serveur, donc pas de useId : chaque
    * instance d'une même page doit passer un id distinct (défaut réservé à
    * la première occurrence).
    */
@@ -14,7 +14,7 @@ type GridPulseProps = {
 
 /**
  * Trame circuit (lignes + angles droits + points) qui respire faiblement.
- * Motif signature des infographies — SVG pattern, opacité animée en CSS.
+ * Motif signature des infographies (SVG pattern, opacité animée en CSS).
  */
 export function GridPulse({
   intensity = "ambient",

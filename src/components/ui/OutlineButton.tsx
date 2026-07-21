@@ -15,7 +15,7 @@ type OutlineButtonProps = {
   children: React.ReactNode;
 };
 
-/** Bouton secondaire sur verre — canal WhatsApp, CTA des packs. */
+/** Bouton secondaire sur verre (canal WhatsApp, CTA des packs). */
 export function OutlineButton({ href, scrollTo, onClick, className, children }: OutlineButtonProps) {
   const classes = cx(styles.button, className);
   if (href !== undefined) {

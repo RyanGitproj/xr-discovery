@@ -10,11 +10,11 @@ type Option = {
   label: string;
   /** Id d'offre (data-offer-accent, cf. globals.css) : teinte l'état coché. */
   accent?: string;
-  /** Icône au-dessus du libellé (options secteur — mêmes que les tuiles d'offre). */
+  /** Icône au-dessus du libellé (options secteur, les mêmes que sur les tuiles d'offre). */
   icon?: LucideIcon;
 };
 
-/** Astérisque des champs obligatoires (convention * — jamais de mention
+/** Astérisque des champs obligatoires (convention *, jamais de mention
     entre parenthèses) ; le statut est porté aux AT par aria-required. */
 function RequiredMark() {
   return (
@@ -142,7 +142,7 @@ type PhoneFieldProps<T extends FieldValues> = {
 /**
  * Téléphone international (react-phone-number-input, intégration RHF
  * native) : indicatif Madagascar par défaut, valeur normalisée E.164
- * (+261…) — c'est ce format que valide le schéma Zod.
+ * (+261…), le format que valide le schéma Zod.
  */
 export function PhoneField<T extends FieldValues>({
   label,

@@ -4,7 +4,7 @@
   position: relative;
 }
 
-/* Calque du flux : wrapper transform DÉDIÉ — jamais fusionné avec un élément
+/* Calque du flux : wrapper transform DÉDIÉ, jamais fusionné avec un élément
    qui anime déjà son transform (TiltCard, EnterRise…) : les emboîter DANS le
    layer. Classe volontairement vide : c'est le crochet du will-change. */
 .layer {

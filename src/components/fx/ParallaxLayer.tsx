@@ -20,8 +20,8 @@ type ParallaxLayerProps = {
       positif = avant-plan qui devance. */
   depth: number;
   /** "flow" (défaut) : translation px dans le flux. "inset" : glissement en %
-      + sur-échelle auto dans un cadre overflow:hidden (image de Figure) —
-      les bords ne se découvrent jamais. */
+      + sur-échelle auto dans un cadre overflow:hidden (image de Figure), si
+      bien que les bords ne se découvrent jamais. */
   mode?: "flow" | "inset";
   /** Amplitude px à |depth| = 1 en mode flow (clampée [24, 160]). */
   range?: number;
@@ -37,10 +37,12 @@ type ParallaxLayerProps = {
 /**
  * Le SEUL traducteur profondeur → transform du système parallax (Immersion
  * v2.1). Wrapper m.div dédié : ne jamais le fusionner avec un élément qui
- * anime déjà son transform (TiltCard, EnterRise) — les emboîter dedans.
+ * anime déjà son transform (TiltCard, EnterRise). Emboîter plutôt ces
+ * éléments dedans.
  * Dans une ParallaxScene : consomme la progression partagée ; hors scène :
- * mesure sa propre traversée du viewport (standalone). Jamais d'opacité —
- * le contenu reste intégralement visible sans JS et sous reduced-motion.
+ * mesure sa propre traversée du viewport (standalone). Jamais d'opacité,
+ * pour que le contenu reste intégralement visible sans JS et sous
+ * reduced-motion.
  */
 export function ParallaxLayer({
   depth,
@@ -68,7 +70,7 @@ export function ParallaxLayer({
 
   // Inset coupé sur tactile (même logique que la Famille B, règle Motion) :
   // le micro-glissement d'image ne se perçoit pas au pouce et son coût
-  // composité pèse sur le budget mobile — l'immersion tactile passe par la
+  // composité pèse sur le budget mobile ; l'immersion tactile passe par la
   // plongée et le gyroscope. Le mode flow garde touchRange pour se doser.
   if (reduce || (mode === "inset" && !fine)) {
     return (

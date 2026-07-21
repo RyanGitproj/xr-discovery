@@ -4,7 +4,7 @@
 }
 
 /* Arête et halo GeoFrame teintés par l'offre active (cascade du tabpanel) ;
-   le stop central mixe avec l'accent de marque — le fil braise demeure. */
+   le stop central mixe avec l'accent de marque, le fil braise demeure. */
 .geo {
   --geo-edge-c1: var(--offer-accent, var(--color-fx-cyan));
   --geo-edge-c2: color-mix(in srgb, var(--offer-accent, var(--color-accent)) 55%, var(--color-accent));
@@ -21,7 +21,7 @@
   padding: 1.5rem;
 }
 
-/* Remplace le box-shadow du verre — glow teinté par l'offre active
+/* Remplace le box-shadow du verre par un glow teinté par l'offre active
    (même recette que --glow-featured, couleur pilotée par --offer-accent). */
 .panelFeatured {
   box-shadow:
@@ -30,7 +30,7 @@
     inset 0 1px 0 rgba(255, 150, 90, 0.14);
 }
 
-/* Badge vedette v3 : mini-ticket angulaire PLEIN (langage du CTA) — lisible
+/* Badge vedette v3 : mini-ticket angulaire PLEIN (langage du CTA), lisible
    par-dessus l'arête tracée, plus de pilule arrondie. */
 .badge {
   position: absolute;
@@ -95,7 +95,7 @@
 }
 
 /* Prix du pack vedette : accent d'offre plein (remplace le holo-text de
-   marque — la vedette reste marquée par badge, glow et élévation). */
+   marque, la vedette restant marquée par badge, glow et élévation). */
 .priceFeatured {
   color: var(--offer-accent, var(--color-accent-hot));
 }

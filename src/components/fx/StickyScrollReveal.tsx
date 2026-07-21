@@ -20,7 +20,7 @@ type StickyScrollRevealProps = {
 
 /**
  * Section épinglée : le visuel reste fixe pendant que les étapes défilent,
- * reliées par un faisceau vertical à tête lumineuse (FOCAL — blueprint §6.8).
+ * reliées par un faisceau vertical à tête lumineuse (FOCAL, blueprint §6.8).
  * Desktop uniquement (le parent rend TracingBeam en mobile). Hauteur totale
  * <= 300vh, index actif au breakpoint le plus proche : bidirectionnel et
  * déterministe. ATTENTION : aucun ancêtre overflow/contain, sinon le sticky

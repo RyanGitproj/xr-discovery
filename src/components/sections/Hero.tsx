@@ -22,7 +22,7 @@ import { ANTANANARIVO } from "@/lib/geo/madagascar";
 import { toViewPct } from "@/lib/geo/madagascarView";
 import styles from "./Hero.module.css";
 
-/** Antananarivo en % du stage — source du faisceau de projection. */
+/** Antananarivo en % du stage, source du faisceau de projection. */
 const TANA = toViewPct(ANTANANARIVO);
 /** Bord haut du faisceau : remonte dans le buste (bas du buste ≈ 44,6 %) pour
  * que le faisceau suive l'hologramme au lieu de décrocher sous ses pieds. */
@@ -72,7 +72,7 @@ export function Hero() {
   );
 }
 
-/** Amplitude commune des plans du hero — débattement contenu, la scène
+/** Amplitude commune des plans du hero : débattement contenu, la scène
     reste lisible pendant toute la sortie du viewport. */
 const STAGE_RANGE = 56;
 
@@ -83,7 +83,7 @@ const STAGE_RANGE = 56;
  * HoloFigure), au centre d'orbites. Labels HUD (NumberTicker). Timeline :
  * projectionTimeline.ts.
  *
- * Profondeur (Immersion v2.1) : 4 plans parallax — un plan = un groupe
+ * Profondeur (Immersion v2.1) : 4 plans parallax ; un plan = un groupe
  * GÉOMÉTRIQUE : constellation + ping + faisceau restent solidaires (l'apex
  * du faisceau EST le point d'Antananarivo), le buste devance, les HUD
  * flottent en avant-plan.

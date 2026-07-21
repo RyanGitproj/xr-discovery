@@ -12,7 +12,7 @@ export function registerLenis(instance: Lenis | null): void {
  * ni dans les liens ni dans la barre d'adresse). Fluide via Lenis quand il
  * est actif ; sous prefers-reduced-motion : scrollIntoView natif instantané
  * (le scroll-padding-top CSS place la cible sous la navbar dans les deux
- * cas). Le focus suit la cible — la navigation clavier repart de la section.
+ * cas). Le focus suit la cible et la navigation clavier repart de la section.
  */
 export function scrollToSection(id: string): void {
   const target = document.getElementById(id);
@@ -23,7 +23,7 @@ export function scrollToSection(id: string): void {
   target.focus({ preventScroll: true });
 }
 
-/** Retour en haut de page (logo) — même politique sans hash. */
+/** Retour en haut de page (logo), même politique sans hash. */
 export function scrollToTop(): void {
   if (lenis) lenis.scrollTo(0);
   else window.scrollTo(0, 0);

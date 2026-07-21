@@ -1,13 +1,13 @@
 /**
  * Moteur pur du gyroscope (Immersion v2.1) : normalisation et calibration
- * testables sans DOM — useDeviceTilt ne fait qu'appliquer ces fonctions aux
+ * testables sans DOM ; useDeviceTilt ne fait qu'appliquer ces fonctions aux
  * événements deviceorientation.
  */
 
 export const TILT_MAX_DEG_DEFAULT = 18;
 /** Un téléphone tenu en main tremble : ±2° autour du neutre = immobile. */
 export const TILT_DEADZONE_DEG = 2;
-/** Le neutre est la moyenne des premières lectures — un téléphone se tient
+/** Le neutre est la moyenne des premières lectures, car un téléphone se tient
  * incliné, pas à plat. */
 export const TILT_CALIBRATION_SAMPLES = 20;
 

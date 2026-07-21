@@ -1,4 +1,4 @@
-/* Famille B — effets curseur (chap. 4). Variables CSS pilotées en rAF,
+/* Famille B : effets curseur (chap. 4). Variables CSS pilotées en rAF,
    zéro re-render React. Tout est inerte sur pointer: coarse (usePointerFine). */
 
 /* ---- GlowCursor : halo global qui suit le curseur ---- */

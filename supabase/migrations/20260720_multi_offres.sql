@@ -1,6 +1,6 @@
 -- Multi-offres (2026-07-20) : le formulaire enregistre désormais le secteur
 -- (8 offres + 'autre') et le pack envisagé, à la place de type_organisation.
--- À exécuter dans le SQL editor Supabase AVANT de déployer le code — le
+-- À exécuter dans le SQL editor Supabase AVANT de déployer le code, car le
 -- nouveau code n'écrit plus type_organisation.
 
 alter table public.funnel_xr_discovery_leads

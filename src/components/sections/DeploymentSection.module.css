@@ -51,7 +51,7 @@
   height: 4rem;
 }
 
-/* Un hue par étape — halos dérivés des tokens fx (filter statique, jamais animé). */
+/* Un hue par étape, avec halos dérivés des tokens fx (filter statique, jamais animé). */
 .hueCyan {
   color: var(--color-accent-cool);
   filter: drop-shadow(0 0 24px color-mix(in srgb, var(--color-accent-cool) 70%, transparent));

@@ -7,17 +7,17 @@ import { OFFER_IDS, getOffer } from "@/config/offers";
  * libellés vivent dans config/leadForm.ts.
  */
 
-/** Les 8 offres (ids de config/offers.ts) + « autre » — valeurs DB `secteur`. */
+/** Les 8 offres (ids de config/offers.ts) + « autre » : les valeurs DB `secteur`. */
 export const SECTEUR_VALUES = [...OFFER_IDS, "autre"] as const;
 export const OBJECTIF_VALUES = ["trafic", "notoriete", "lancement", "contenu-social"] as const;
 export const BUDGET_VALUES = ["moins-2m", "2-4m", "4-8m", "plus-8m", "a-definir"] as const;
 
-/** E.164 — le format que produit PhoneField (react-phone-number-input). */
+/** E.164, le format que produit PhoneField (react-phone-number-input). */
 const PHONE_E164_REGEX = /^\+[1-9]\d{6,14}$/;
 
 const leadObject = z.object({
   secteur: z.enum(SECTEUR_VALUES, "Indiquez votre secteur."),
-  /** Optionnel ("" = pas encore choisi) — cohérence secteur/pack en superRefine. */
+  /** Optionnel ("" = pas encore choisi) ; la cohérence secteur/pack se joue en superRefine. */
   pack: z.string(),
   objectif: z.enum(OBJECTIF_VALUES, "Choisissez votre objectif principal."),
   budget: z.enum(BUDGET_VALUES, "Choisissez une fourchette de budget."),
@@ -32,7 +32,7 @@ const leadObject = z.object({
     .min(1, "Indiquez votre numéro de téléphone.")
     .regex(PHONE_E164_REGEX, "Numéro invalide."),
   email: z.string().trim().min(1, "Indiquez votre email.").pipe(z.email("Email invalide.")),
-  /** Optionnel — chiffres uniquement, converti en integer (ou null) en base. */
+  /** Optionnel. Chiffres uniquement, converti en integer (ou null) en base. */
   participants: z
     .string()
     .trim()
@@ -44,7 +44,7 @@ const leadObject = z.object({
 
 /**
  * Garde serveur : un pack renseigné doit appartenir au secteur choisi
- * (l'UI l'empêche déjà — cette voie ne se prend qu'en soumission forgée).
+ * (l'UI l'empêche déjà : cette voie ne se prend qu'en soumission forgée).
  */
 export const leadSchema = leadObject.superRefine((lead, ctx) => {
   if (lead.pack === "") return;
@@ -59,7 +59,7 @@ export type Lead = z.infer<typeof leadSchema>;
 
 /**
  * Attribution premier-touchpoint jointe au lead (lib/tracking/attribution.ts).
- * Validée CÔTÉ SERVEUR uniquement — jamais bloquante : invalide = ignorée.
+ * Validée CÔTÉ SERVEUR uniquement et jamais bloquante : invalide = ignorée.
  * Clés inconnues retirées par z.object (strip par défaut).
  */
 const attributionValue = z.string().max(200).optional();

@@ -11,7 +11,7 @@
   position: relative;
 }
 
-/* Sélecteur : 8 tuiles toutes visibles — 2 colonnes mobile, 4 desktop
+/* Sélecteur : 8 tuiles toutes visibles, en 2 colonnes mobile et 4 desktop
    (jamais de scroller horizontal : la découvrabilité prime). */
 .selector {
   margin-top: 0.875rem;
@@ -32,7 +32,7 @@
 }
 
 /* Tuile angulaire (langage v3, cf. iconBadge) : le bord vit en inset
-   box-shadow — un border serait rogné par le clip-path. */
+   box-shadow, car un border serait rogné par le clip-path. */
 .tile {
   display: flex;
   flex-direction: column;
@@ -53,7 +53,7 @@
      funnel, la lisibilité prime sur la transparence (retour terrain 21/07). */
   background: color-mix(in srgb, var(--color-bg-raised) 92%, transparent);
 
-  /* Bord brillant aux couleurs de l'offre — INSET uniquement : le clip-path
+  /* Bord brillant aux couleurs de l'offre, en INSET uniquement : le clip-path
      chanfreiné rognerait toute lueur extérieure. Liseré net + halo interne. */
   box-shadow:
     inset 0 0 0 1px color-mix(in srgb, var(--offer-accent, var(--color-accent)) 60%, transparent),

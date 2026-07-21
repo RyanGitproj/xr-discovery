@@ -5,7 +5,7 @@ import { objectionsSection } from "@/config/content";
 import styles from "./ObjectionsSection.module.css";
 
 /**
- * Section 7 du blueprint : accordéon sobre — PAS d'effet ici, zone de
+ * Section 7 du blueprint : accordéon sobre, PAS d'effet ici. Zone de
  * réassurance (on calme le jeu volontairement). <details> natif : clavier
  * et lecteurs d'écran gratuits, pas de backdrop-filter (budget préservé).
  */

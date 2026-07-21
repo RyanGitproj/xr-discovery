@@ -4,8 +4,8 @@ import styles from "./ReassuranceBar.module.css";
 
 /**
  * Section 2 du blueprint : les 5 marqueurs du pied des infographies.
- * v2 : bande STATIQUE (le marquee défilant est abandonné) — les preuves
- * se lisent d'un coup d'œil, icônes lucide multicolores.
+ * v2 : bande STATIQUE (le marquee défilant est abandonné) pour que les
+ * preuves se lisent d'un coup d'œil, icônes lucide multicolores.
  */
 export function ReassuranceBar() {
   const glows = [
